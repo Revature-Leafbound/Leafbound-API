@@ -2,7 +2,6 @@ package com.leafbound.models;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
