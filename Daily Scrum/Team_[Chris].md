@@ -25,7 +25,7 @@ _**Members**_: Chris, Jorge G., Jose, Michael, Julian, Joachim
 
 3. **Agenda:**
     - important changes or suggestions that  need to be discussed as a team, etc..
-    - Feel free to message into your team Discord/Slack/communication-platform or DM Jorge for anything you want to discuss for the day's Sprint OR mention it at the start of the meeting.
+    - Feel free to message into your team Discord/Slack/communication-platform or DM Jose for anything you want to discuss for the day's Sprint OR mention it at the start of the meeting.
 
 4. **What do you want to accomplish by our next sprint?**
     - _*Jose will assign Issues and create milestones to each team member according to this list._
