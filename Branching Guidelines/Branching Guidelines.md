@@ -9,7 +9,7 @@
 3. Create a branch from your assigned issue. Details can be found [here](#creating-a-branch-for-your-assigned-issue)
 4. As soon as you're done creating your branch, create a draft pull request. Click [here](#creating-a-draft-pull-request) for more details.
 5. If you're working on a branch, and changes were made to dev...
-    - After you've done a `git pull` in your local repo, switch to your branch and do a `git merge dev`. For details, click [here](#if-you-created-a-branch-and-updates-in-dev-were-made-merge)
+    - After you've done a `git pull` in your local repo on the dev branch, switch to your branch and do a `git merge dev`. For details, click [here](#if-you-created-a-branch-and-updates-in-dev-were-made-merge)
 6. When you're finished with your code, navigate back to your pull request and select "**Ready to review**". Remember to assign your *team lead, Calvin, and Levi* as Reviewers. Team Leads will go through and review your code, makde any comments or suggestions, and will have a merge party to merge your code into our dev branch!
 
 ### Important Reminders:
