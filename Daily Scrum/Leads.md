@@ -1,13 +1,20 @@
 # Project 3: *Leads*
 
 
-**Project Deadline:** June 23rd, 2022
+**Project Deadline:** June 23rd, 2022 (Presentation Day)
+**Code Freeze**: June 21st, 2022
 
 _**Leads**_: Calvin, Chris, Dhruv, Levi
 
 **Sprint Times:** Every day; Weekends TBD
 
 <br>
+<hr>
+
+### TOC:
+- Daily Meetings:
+    - [6/10/22](#61022)
+
 <hr>
 
 ### Daily Meeting Format:
@@ -29,3 +36,82 @@ _**Leads**_: Calvin, Chris, Dhruv, Levi
 4. **What do you want to accomplish by our next sprint?**
     - _*Levi will assign Issues and create milestones to each team member according to this list._
     - Milestones, individual tasks, and reminders
+
+<hr>
+
+### 6/10/22
+
+**Agenda:**
+- [x] *Branching: Feature -> Dev -> Main*
+    - Leads will adjust their group's Pull Request targets to their feature branch. These branches will then be merged into dev when they are completed.
+    - Levi:
+        - [ ] Create issues for each feature.
+        - [ ] Update the Branching Guidelines specifically for the Leads.
+
+<br>
+
+- [x] *General Structure for each Day*
+    1. Non-project plans/Azhya's plans
+    2. General whole batch announcements/topics that need to be covered together
+    3. Individual team breakout rooms (Daily Standup + Paired Programming)
+    4. Meeting with Leads (Leads Standup + Merge Party)
+    5. Meet with Azhya
+
+<br>
+
+- [x] *General Timeline for Leafbound*
+    1. CI/CD - 6/13
+    2. BE Finish Deadline - 6/15
+        - Merge features into DEV on 6/15
+    3. BE Testing Finish + Bugs - 6/17
+        - Unit tests
+        - Enpoint testing using Postman
+            - installed Spring Fox, so Swagger annotations will be created authomatically and we can copy that script and put it into Postman to test our endpoints. As long as it's done correctly.
+    4. FE Finish (6/17)
+        - FE should be happening simultaneously
+        - FE: Calvin, Levi, Santi, Jorge A., Markus, Michael (?)
+    5. FE Testing (6/21)
+    6. Presentation prep/runthrough
+        - Anyone who doesn't have a task and would like to help create presentation
+        - double check to update README.md, START.md's for both repos
+<br>
+
+**Tasks**
+Levi:
+- [ ] Create milestones
+- [ ] Create features issues
+- [ ] Update branching guidelines
+- [ ] Create issues for Team CaLe
+    - Jorge A. and Jose will use the current assignments to create issues during Git training
+
+Chris:
+- [ ] Start.md for BE
+
+[Click here to return to TOC](#toc)
+<hr>
+
+
+**Team CaLe:**
+- model - Adam
+- repository - Yugal
+- service - Jacob Shaw
+- controller - Patrick Miller
+- test - Adam
+- JWT - Jacob
+
+**Dhruv**
+1. Jorge A. - FE
+2. Enock -repo/service
+3. Santiago - FE
+4. Vidya - service
+5. Patrick Y. -models
+6. Markus - FE
+
+**Chris**
+1. Jorge G. - BE, Model & Service
+2. Jose - FE
+3. Michael - FE
+4. Julian - Repository
+5. Joachim - Testing
+
+
