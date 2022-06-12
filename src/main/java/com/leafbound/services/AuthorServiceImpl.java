@@ -18,14 +18,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Autowired
     AuthorRepository authorRepository;
 
-    /*
-     * Auto-generated methods
-     * save() (insert)
-     * update() (update)
-     * delete() (delete)
-     * findAll() (select all)
-     * findById() (select by id)
-     */
+    @Override
     public boolean add(Author author) {
         // This line would return the newly created author; we want a boolean.
         // return authorRepository.save(author);
@@ -37,6 +30,7 @@ public class AuthorServiceImpl implements AuthorService {
         return (primaryKey > 0) ? true : false;
     }
 
+    @Override
     public Author getById(int id) {
         // The default method form Jpa returns an Optional<Object>
         Optional<Author> author = authorRepository.findById(id);
@@ -49,14 +43,17 @@ public class AuthorServiceImpl implements AuthorService {
         }
     }
 
+    @Override
     public List<Author> getAll() {
         return null;
     }
 
+    @Override
     public boolean edit() {
         return false;
     }
 
+    @Override
     public boolean remove() {
         return false;
     }

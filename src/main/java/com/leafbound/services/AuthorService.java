@@ -11,14 +11,7 @@ import com.leafbound.models.Author;
 @Service
 @Transactional
 public interface AuthorService {
-    /*
-     * Auto-generated methods
-     * save() (insert)
-     * update() (update)
-     * delete() (delete)
-     * findAll() (select all)
-     * findById() (select by id)
-     */
+
     public boolean add(Author author);
 
     public Author getById(int id);
