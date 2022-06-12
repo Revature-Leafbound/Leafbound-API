@@ -27,8 +27,8 @@ _**Leads**_: Levi, Jorge A., Jose
     - Feel free to message into your team Discord/Slack/communication-platform or DM Levi for anything you want to discuss for the day's Sprint OR mention it at the start of the meeting.
 
 4. **What do you want to accomplish by our next sprint?**
-    - _*Levi will assign Issues and create milestones to each team member according to this list._
-    - Milestones, i
+    - _*Levi/Jose/Jorge will assign Issues and create milestones to each team member according to this list._
+
 
 <br>
 <hr>
