@@ -11,6 +11,15 @@ _**Members**_: Chris, Jorge G., Jose, Michael, Julian, Joachim
 <br>
 <hr>
 
+### Table of Contents
+- [Daily Meeting Format](#daily-meeting-format)
+- [Meeting Template](#joses-sprint-meeting-template)
+- Meeting Notes
+    - 
+
+<br>
+<hr>
+
 ### Daily Meeting Format:
 
 > ##### _NOTE_: This format is adjustable and SHOULD be adjusted based on the needs of your team. Feel free to communicate your suggestions so that you can make this meeting as efficient as possible!
@@ -30,3 +39,74 @@ _**Members**_: Chris, Jorge G., Jose, Michael, Julian, Joachim
 4. **What do you want to accomplish by our next sprint?**
     - _*Jose will assign Issues and create milestones to each team member according to this list._
     - Milestones, individual tasks, and reminders
+
+<br>
+<hr>
+
+### Jose's Sprint Meeting Template
+<br>
+Chris, Jorge G., Jose, Michael, Julian, Joachim
+### Sprint #: XX/XX/XXXX
+
+1. Team Lead Announcements
+2. **Progress Check** 
+    - Joachim: 
+        - [ ] 
+        - [ ] 
+    - Jorge G.: 
+        - [ ] 
+        - [ ] 
+    - Jose:
+        - [ ] 
+        - [ ] 
+    - Michael:
+        - [ ] 
+        - [ ] 
+    - Chris:
+        - [ ] 
+        - [ ] 
+    - Julian:
+        - [ ] 
+        - [ ] 
+    <br> </br>
+
+3. **Any issues?**
+    - [ ] 
+ <br> </br>
+
+4. **Agenda**
+    - [ ] 
+    - [ ] 
+ <br> </br>
+
+5. **Issues/Tasks** 
+    - Chris: 
+        - [ ] 
+        - [ ] 
+    - Jorge G.: 
+        - [ ] 
+        - [ ] 
+    - Jose:
+        - [ ] 
+        - [ ] 
+    - Michael:
+        - [ ] 
+        - [ ] 
+    - Joachim:
+        - [ ] 
+        - [ ] 
+    - Julian:
+        - [ ] 
+        - [ ] 
+    - _Reminders: Topics to understand and implement:_
+        - [ ] 
+        - [ ] 
+        - [ ] 
+ <br> </br>
+
+
+[Return to: _Table of Contents_](#table-of-contents)
+
+<br>
+<hr>
+

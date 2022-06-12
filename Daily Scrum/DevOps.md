@@ -28,4 +28,14 @@ _**Leads**_: Levi, Jorge A., Jose
 
 4. **What do you want to accomplish by our next sprint?**
     - _*Levi will assign Issues and create milestones to each team member according to this list._
-    - Milestones, individual tasks, and reminders
+    - Milestones, i
+
+<br>
+<hr>
+
+### Meeting: 6/12/22
+Issues can be created in a variety of ways, so you can choose the most convenient method for your workflow. For example, you can create an issue from a repository, an item in a task list, a note in a project, a comment in an issue or pull request, a specific line of code, or a URL query.
+- want to be as specific as possible (aka for one prpose). We're using issues to create branches, and ideally, for every branch, we want them to adjust at most 2 files (like Service and ServiceImpl).
+- if they're going to end up sw
+
+Reference for creating an issue: https://docs.github.com/en/issues/tracking-your-work-with-issues/quickstart
