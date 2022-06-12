@@ -26,12 +26,20 @@ public class AuthorServiceImpl implements AuthorService {
      * findById() (select by id)
      */
     public boolean add(Author author) {
-        return authorRepository.save(author);
-    };
+        // This line would return the newly created author. We only wnat to return a
+        // boolean.
+        // return authorRepository.save(author);
+
+        // Create a new author and obtain the primary key.
+        int primaryKey = authorRepository.save(author).getId();
+
+        // Return true if the primary key is greater than 0, otherwise, return false.
+        return (primaryKey > 0) ? true : false;
+    }
 
     public Author getById() {
         return null;
-    };
+    }
 
     public List<Author> getAll() {
         return null;
