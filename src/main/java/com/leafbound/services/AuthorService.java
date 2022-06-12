@@ -21,7 +21,7 @@ public interface AuthorService {
      */
     public boolean add(Author author);
 
-    public Author getById();
+    public Author getById(int id);
 
     public List<Author> getAll();
 

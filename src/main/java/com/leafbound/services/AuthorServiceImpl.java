@@ -1,6 +1,7 @@
 package com.leafbound.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -26,8 +27,7 @@ public class AuthorServiceImpl implements AuthorService {
      * findById() (select by id)
      */
     public boolean add(Author author) {
-        // This line would return the newly created author. We only wnat to return a
-        // boolean.
+        // This line would return the newly created author; we want a boolean.
         // return authorRepository.save(author);
 
         // Create a new author and obtain the primary key.
@@ -37,8 +37,16 @@ public class AuthorServiceImpl implements AuthorService {
         return (primaryKey > 0) ? true : false;
     }
 
-    public Author getById() {
-        return null;
+    public Author getById(int id) {
+        // The default method form Jpa returns an Optional<Object>
+        Optional<Author> author = authorRepository.findById(id);
+
+        // If the author is present, return it, otherwise, return null.
+        if (author.isPresent()) {
+            return author.get();
+        } else {
+            throw new IllegalArgumentException("Author not found.");
+        }
     }
 
     public List<Author> getAll() {
