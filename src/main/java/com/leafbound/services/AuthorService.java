@@ -19,7 +19,7 @@ public interface AuthorService {
      * findAll() (select all)
      * findById() (select by id)
      */
-    public boolean add();
+    public boolean add(Author author);
 
     public Author getById();
 
