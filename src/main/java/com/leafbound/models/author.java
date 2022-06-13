@@ -30,6 +30,12 @@ public class Author {
     String name;
 
     /**
+     * 
+     */
+    public Author() {
+    }
+
+    /**
      * @param name
      */
     public Author(String name) {

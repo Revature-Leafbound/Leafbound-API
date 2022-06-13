@@ -47,11 +47,12 @@ public class AuthorController {
             service.add(author);
 
             // Return a success message
-            // return new ResponseEntity<>("Author created successfully.", HttpStatus.OK);
+            return new ResponseEntity<>("Author created successfully.", HttpStatus.OK);
             // } else {
 
             // Return an error message
-            return new ResponseEntity<>("You are not an authorized to complete this task.", HttpStatus.UNAUTHORIZED);
+            // return new ResponseEntity<>("You are not an authorized to complete this
+            // task.", HttpStatus.UNAUTHORIZED);
             // }
         } catch (Exception e) {
             return new ResponseEntity<>("Not yet implemented.", HttpStatus.NOT_IMPLEMENTED);
