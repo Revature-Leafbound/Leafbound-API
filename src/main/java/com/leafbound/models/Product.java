@@ -19,7 +19,7 @@ import lombok.Data;
 @Entity
 @Table(name="products")
 @Data
-@ApiModel(value="prodcuts", description="book_description")
+@ApiModel(value="products", description="book_description")
 public class Product {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
