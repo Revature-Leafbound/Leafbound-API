@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +22,7 @@ import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = { "*" })
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("/api/v1")
 @Api(value = "Author Controller", tags = "AUTHOR_TAG") // TODO: Figure out the tag thing
 public class AuthorController {
 
@@ -57,7 +59,7 @@ public class AuthorController {
     }
 
     @ApiOperation(value = "Get an author by ID", notes = "Get an author by ID")
-    @PostMapping(path = "/author/id")
+    @GetMapping(path = "/author/{id}")
     public @ResponseBody AuthorDTO getById(@RequestParam int id) {
         logger.info("Getting author by ID: " + id);
 
@@ -66,7 +68,7 @@ public class AuthorController {
     }
 
     @ApiOperation(value = "Get all authors", notes = "Get all authors")
-    @PostMapping(path = "/author/all")
+    @GetMapping(path = "/authors")
     public @ResponseBody Iterable<AuthorDTO> getAll() {
         logger.info("Getting all authors");
 
@@ -74,6 +76,8 @@ public class AuthorController {
         return service.getAll();
     }
 
+    @ApiOperation(value = "Get all authors", notes = "Get all authors")
+    @PostMapping(path = "/author/{id}")
     public ResponseEntity<String> updateAuthor(@RequestParam int id, @RequestBody AuthorDTO author) {
         logger.info("Updating author: " + author);
         try {
@@ -100,6 +104,8 @@ public class AuthorController {
         }
     }
 
+    @ApiOperation(value = "Get all authors", notes = "Get all authors")
+    @DeleteMapping(path = "/author/{id}")
     public ResponseEntity<String> deleteAuthor(@RequestParam int id) {
         logger.info("Deleting author with ID: " + id);
         try {
