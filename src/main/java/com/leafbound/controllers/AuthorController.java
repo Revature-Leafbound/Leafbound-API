@@ -78,7 +78,7 @@ public class AuthorController {
         return service.getAll();
     }
 
-    @ApiOperation(value = "Update author by id", notes = "Update author by provided ID")
+    @ApiOperation(value = "Update author by id", notes = "Update author by provided IDit ")
     @PostMapping(path = "/author/{id}")
     public ResponseEntity<String> update(@PathVariable int id, @RequestBody AuthorDTO author) {
         logger.info("Updating author: " + author);
