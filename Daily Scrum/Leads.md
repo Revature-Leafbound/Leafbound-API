@@ -132,11 +132,3 @@ Additional Topics for tomorrow:
 6. Working on the Swagger Docs tags (description is depreciated)
 7. Postman can be created [api docs link](http://localhost:8080/v2/api-docs)
     - Quick demo
-
-
-Agenda tomorrow:
-1. Go to GitHub and make sure you're receiving email notifications for whatever you're mentioned in.
-2. Make sure you have accepted the invitation to these repositories so that 1) Jorge, Jose and myself can go ahead and assign you to issues but 2) so you can access this stuff. Everyone should have been invited.
-3. If you do a pull request and you need help, this is how you should do it.
-4. In terms of feature branching, Dhruv and KrolPower have the power to merge directly into their feature branches and you shoul pull down from that.
-5. We will prioritize your schedule to the best of our ability. If there are other things going on, please don't hesitate to let us know. On that note, we had some miscommunication on Friday that could have been handled better on our part. Our goal is to make it so that we can get as much work done as possible during work hours, but we also have to work around non-project Revature events. So in light of what happened on Friday, I just wanted to clarify. Azhya will represent Revature and Revature's schedule, and we will represent the project schedule.
