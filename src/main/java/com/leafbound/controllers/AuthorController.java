@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api/v1")
-@Api(value = "Author Controller", tags = "AUTHOR_TAG") // TODO: Figure out the tag thing
+@Api(value = "Author Collection", tags = "AUTHOR_TAG") // TODO: Figure out the tag thing
 public class AuthorController {
 
     @Autowired
@@ -61,7 +62,7 @@ public class AuthorController {
 
     @ApiOperation(value = "Get an author by ID", notes = "Get an author by ID")
     @GetMapping(path = "/author/{id}")
-    public @ResponseBody AuthorDTO getById(@RequestParam int id) {
+    public @ResponseBody AuthorDTO readById(@PathVariable int id) {
         logger.info("Getting author by ID: " + id);
 
         // Return the author
@@ -70,16 +71,16 @@ public class AuthorController {
 
     @ApiOperation(value = "Get all authors", notes = "Get all authors")
     @GetMapping(path = "/authors")
-    public @ResponseBody Iterable<AuthorDTO> getAll() {
+    public @ResponseBody Iterable<AuthorDTO> readAll() {
         logger.info("Getting all authors");
 
         // Return all authors
         return service.getAll();
     }
 
-    @ApiOperation(value = "Get all authors", notes = "Get all authors")
+    @ApiOperation(value = "Update author by id", notes = "Update author by provided ID")
     @PostMapping(path = "/author/{id}")
-    public ResponseEntity<String> updateAuthor(@RequestParam int id, @RequestBody AuthorDTO author) {
+    public ResponseEntity<String> update(@PathVariable int id, @RequestBody AuthorDTO author) {
         logger.info("Updating author: " + author);
         try {
             // Get the requesting user's information from the token
@@ -105,9 +106,9 @@ public class AuthorController {
         }
     }
 
-    @ApiOperation(value = "Get all authors", notes = "Get all authors")
+    @ApiOperation(value = "Delete author by ID", notes = "Get all authors")
     @DeleteMapping(path = "/author/{id}")
-    public ResponseEntity<String> deleteAuthor(@RequestParam int id) {
+    public ResponseEntity<String> delete(@PathVariable("id") int id) {
         logger.info("Deleting author with ID: " + id);
         try {
             // Get the requesting user's information from the token
