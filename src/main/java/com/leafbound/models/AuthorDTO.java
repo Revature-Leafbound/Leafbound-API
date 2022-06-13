@@ -38,9 +38,31 @@ public class AuthorDTO {
      * @see java.lang.Object#toString()
      */
 
+    /**
+     * 
+     */
+    public AuthorDTO() {
+    }
+
+    /**
+     * @param name
+     */
+    public AuthorDTO(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "AuthorDTO [id=" + id + ", name=" + name + "]";
+    }
+
+    /**
+     * @param id
+     * @param name
+     */
+    public AuthorDTO(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
 }
