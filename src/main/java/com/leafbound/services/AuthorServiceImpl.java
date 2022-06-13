@@ -24,8 +24,6 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public boolean add(AuthorDTO authorDto) {
-        // This line would return the newly created author; we want a boolean.
-        // return authorRepository.save(author);
 
         // Pull fields from the DTO
         String name = authorDto.getName();
@@ -42,6 +40,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public AuthorDTO getById(int id) {
+
         // The default method form Jpa returns an Optional<Object>
         Optional<Author> optional = authorRepository.findById(id);
 
@@ -67,6 +66,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public List<AuthorDTO> getAll() {
+
         // Find all the authors.
         List<Author> authors = authorRepository.findAll();
 
@@ -87,6 +87,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public boolean edit(int id, AuthorDTO author) {
+
         // Get the optional<Author> from the repository.
         Optional<Author> optional = authorRepository.findById(id);
 
@@ -111,6 +112,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public boolean remove(int id) {
+
         // Get the optional<Author> from the repository.
         Optional<Author> optional = authorRepository.findById(id);
 
