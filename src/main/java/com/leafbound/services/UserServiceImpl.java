@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,8 @@ import com.leafbound.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService{
+	
+	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
 	
 	@Autowired
 	private UserRepository repository;
@@ -24,48 +27,45 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User getUserById(UUID id) {
-		
-		return repository.findById(id).orElseThrow(() -> 
-		new IllegalArgumentException("User not found"));
-		
-//		Optional<User> optional = repository.findById(id);
-//		
-//		
-//		if (optional.isPresent()) {
-//			User user = optional.get();
-//			return user;
-//		} else {
-//			throw new IllegalArgumentException("User not found");
-//		}
+		return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override
 	public boolean updateUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		User target = this.getUserById(user.getId());
+		target.setFirstName(user.getFirstName());
+		target.setLastName(user.getLastName());
+		target.setPassword(user.getPassword());
+		target.setEmail(user.getEmail());
+		target.setRoleId(user.getRoleId());
+		target.setSettingsId(user.getSettingsId());
+		return (repository.save(target) != null) ? true : false;
 	}
 
 	@Override
-	public boolean deleteUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteUser(UUID id) {
+		try {
+		this.getUserById(id);
+		repository.deleteById(id);
+		} catch (IllegalArgumentException e) {
+			logger.warn("Unable to delete user: " + e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public User login(User user) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public User Register(User user) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
