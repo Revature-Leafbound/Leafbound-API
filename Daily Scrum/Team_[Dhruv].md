@@ -10,6 +10,12 @@ _**Members**_: Dhruv, Jorge A., Enock, Santiago, Patrick Y., Vidya, Markus
 <br>
 <hr>
 
+### Table of Contents
+- [Daily Meeting Format](#daily-meeting-format)
+- [Meeting Template](#jorges-sprint-meeting-template)
+- Meeting Notes
+    - 
+
 ### Daily Meeting Format:
 
 > ##### _NOTE_: This format is adjustable and SHOULD be adjusted based on the needs of your team. Feel free to communicate your suggestions so that you can make this meeting as efficient as possible!
@@ -29,3 +35,75 @@ _**Members**_: Dhruv, Jorge A., Enock, Santiago, Patrick Y., Vidya, Markus
 4. **What do you want to accomplish by our next sprint?**
     - _*Jorge A. will assign Issues and create milestones to each team member according to this list._
     - Milestones, individual tasks, and reminders
+
+### Jorge's Sprint Meeting Template
+<br>
+
+### Sprint #: XX/XX/XXXX
+1. Team Lead Announcements
+2. **Progress Check**
+    - Markus:
+        - [ ] 
+        - [ ] 
+    - Vidya:
+        - [ ] 
+        - [ ] 
+    - Patrick Y.:
+        - [ ] 
+        - [ ] 
+    - Santiago:
+        - [ ] 
+        - [ ] 
+    - Enock:
+        - [ ] 
+        - [ ] 
+    - Jorge A.:
+        - [ ] 
+        - [ ] 
+    - Dhruv:
+        - [ ] 
+        - [ ] 
+<br> </br>
+
+3. **Any issues?**
+    - [ ] 
+ <br> </br>
+
+4. **Agenda**
+    - [ ] 
+    - [ ] 
+ <br> </br>
+
+5. **Issues/Tasks** 
+    - Markus:
+        - [ ] 
+        - [ ] 
+    - Vidya:
+        - [ ] 
+        - [ ] 
+    - Patrick Y.:
+        - [ ] 
+        - [ ] 
+    - Santiago:
+        - [ ] 
+        - [ ] 
+    - Enock:
+        - [ ] 
+        - [ ] 
+    - Jorge A.:
+        - [ ] 
+        - [ ] 
+    - Dhruv:
+        - [ ] 
+        - [ ] 
+    - _Reminders: Topics to understand and implement:_
+        - [ ] 
+        - [ ] 
+        - [ ] 
+ <br> </br>
+
+
+[Return to: _Table of Contents_](#table-of-contents)
+
+<br>
+<hr>
