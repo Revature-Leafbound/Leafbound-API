@@ -18,7 +18,7 @@ public interface AuthorService {
 
     public List<Author> getAll();
 
-    public boolean edit();
+    public boolean edit(Author author);
 
     public boolean remove();
 }

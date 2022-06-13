@@ -49,8 +49,27 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public boolean edit() {
-        return false;
+    public boolean edit(Author author) {
+        // Get the optional<Author> from the repository.
+        Optional<Author> optional = authorRepository.findById(author.getId());
+
+        // Check if the author is present.
+        if (optional.isPresent()) {
+            // Get the author from the optional.
+            Author target = optional.get();
+
+            // Update the DB version of author with the changes
+            target.setName(author.getName());
+
+            // Commit the changes to the DB.
+            authorRepository.save(target);
+
+            // Return true.
+            return true;
+        } else {
+            // Throw exception if the author is not found.
+            throw new IllegalArgumentException("Author not found.");
+        }
     }
 
     @Override
