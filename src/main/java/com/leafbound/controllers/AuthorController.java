@@ -100,4 +100,30 @@ public class AuthorController {
         }
     }
 
+    public ResponseEntity<String> deleteAuthor(@RequestParam int id) {
+        logger.info("Deleting author with ID: " + id);
+        try {
+            // Get the requesting user's information from the token
+            // UserJwtDTO userDTO = jwtService.getDTO(authorization.replace("Bearer ", ""));
+
+            // Check if the user is an admin
+            // if(userDTO.getRole().equals("admin")){
+
+            // Delete the author
+            service.remove(id);
+
+            // Return a success message
+            return new ResponseEntity<>("Author deleted successfully.", HttpStatus.OK);
+            // } else {
+
+            // Return an error message
+            // return new ResponseEntity<>("You are not an authorized to complete this
+            // task.", HttpStatus.UNAUTHORIZED);
+            // }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Not yet implemented.",
+                    HttpStatus.NOT_IMPLEMENTED);
+        }
+    }
+
 }
