@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.leafbound.models.Author;
+import com.leafbound.models.AuthorDTO;
 import com.leafbound.repositories.AuthorRepository;
 
 @Service
@@ -21,11 +22,17 @@ public class AuthorServiceImpl implements AuthorService {
     private static final String AUTHOR_NOT_FOUND = "Author not found.";
 
     @Override
-    public boolean add(Author author) {
+    public boolean add(AuthorDTO authorDto) {
         // This line would return the newly created author; we want a boolean.
         // return authorRepository.save(author);
 
-        // Create a new author and obtain the primary key.
+        // Pull fields from the DTO
+        String name = authorDto.getName();
+
+        // Create a new author
+        Author author = new Author(name);
+
+        // Save the new author and obtain the primary key.
         int primaryKey = authorRepository.save(author).getId();
 
         // Return true if the primary key is greater than 0, otherwise, return false.
@@ -54,7 +61,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public boolean edit(int id, Author author) {
+    public boolean edit(int id, AuthorDTO author) {
         // Get the optional<Author> from the repository.
         Optional<Author> optional = authorRepository.findById(id);
 
