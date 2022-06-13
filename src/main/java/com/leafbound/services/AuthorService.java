@@ -15,9 +15,9 @@ public interface AuthorService {
 
     public boolean add(AuthorDTO authorDto);
 
-    public Author getById(int id);
+    public AuthorDTO getById(int id);
 
-    public List<Author> getAll();
+    public List<AuthorDTO> getAll();
 
     public boolean edit(int id, AuthorDTO authorDto);
 
