@@ -19,6 +19,10 @@
 3. ALWAYS create your branch from your assigned issue. If one isn't made, reach out to Levi, Jorge A., or Jose (depending on whoever's on your team).
 4. Feel free to reach out if you have any questions!
 
+### Team Leads:
+- [Changing base branch to feature branch on pull requests](#changing-base-branch-to-feature-branch)
+- [Reviewing Pull Requests](#reviewing-pull-requests)
+
 
 <br>
 <hr>
@@ -91,7 +95,7 @@
 <hr>
 
 
-### If you created a branch, and updates in dev were made... merge.
+### If you created a branch, and updates in dev branch were made... merge.
 1. Save and `git commit` or `git stash` your work on the branch you're working on.
 2. `git switch dev`
 3. `git pull`.
@@ -101,58 +105,53 @@
 <br>
 <hr>
 
+### If you created a branch, and updates in the feature branch were made... merge.
+1. Save and `git commit` or `git stash` your work on the branch you're working on.
+2. `git switch feature-branch-name`
+3. `git pull`.
+4. `git switch (branch you want to keep working on)` (this will return you to the branch you're working on.)
+5. `git merge feature-branch-name` -> (if needed) `:wq`
+    - This will merge the updates from the feature branch to the branch that you're currently in so that you can work with the most recent changes.
+
+<br>
+<hr>
+
 ### How to mark or ask for help using Github
-- the issue template that was created OR using pull request labels
+- Using pull requests labels and comments
 - be specific
+<br>
+<hr>
 
+## For Team Leads
+### Changing base branch to feature branch:
+Individual branches -> Feature branches -> Dev -> Main <br>
+1. Go to your team member's specific pull request
+![Changing base branch](./Imgs/PR_Feature.png)
+2. Select **Edit** on the right hand side.
+3. Change the "**base: dev**" to your feature branch.
+4. Select **Save**.
 
-## For Team Leads (UNFINISHED)
+When you go ahead and merge your team's work, it should now merge into your feature branch.
 
-### Changing base branch to feature branch on Github pull requests
-Gitflow is going to be individual branches for team work stemming from a specific feature. merge that all into that feature branch. then merge that feature into dev.
-
-go into pull requests, and switch the base branch of your team mates to your feature branch. Your feature branch should be created with the issue Levi created.
-
-
-
-### Reviewing Pull Requests
-
-
-
-### Merge parties
-
+<br>
+<hr>
 
 ### Reviewing Pull Requests
 1. When a team member creates a pull request, and assigns you as a reviewer, you will
     1. receive an email notification and
-    2. will have a notification near the top of your screen when you access our Amplifier remote repo.
+    2. will have a notification near the top of your screen when you access our Leafbound-API/Leafbound remote repo.
 2. Go to that pull request.
     - If there is an icon at the top of your screen that asks you to review changes, select it. Otherwise...
 3. In that pull request (which you have been assigned to review), go to the "Files Changed" tab.
-![Files Changed](./images/1..png)
+![Files Changed](./Imgs/1..png)
 4. Review the files.
-![Reviewing](./images/2..png)
+![Reviewing](./Imgs/2..png)
     - **Red highlight** = what was changed ; **Green highlight** = New changes
     - While reviewing, if you notice a mistake or want to comment on a specific line, hover over that line and select the blue plus symbol (on the left side of your screen) to "Add a Comment" or "Start a review".
         - **Start a review**: Use this when you have several files to review with multiple comments. The notifications the assignee will receive (when you're done reviewing) will compile all of your review comments into a single email, instead of an emailing the assignee for every single comment.
 5. Once you're finished reviewing, select "Review changes" at the top right corner of your screen.
-![Review Chnages](./images/3..png)
+![Review Chnages](./Imgs/3..png)
 - Write any overarching comments you have and either "**Approve**" or "**Request changes**".
     - *Approve* if all of the changes that were made are good to go.
     - *Request changes* if changes need to be made.
 6. Remember to select "**Submit review**" to complete your review.
-
-<br>
-
-</br>
-<hr>
-
-### Merging into the dev branch
-![Merging into dev](./images/4..png)
-1. If this hasn't been done already, make sure to comment "Closes #(the number of the issue)".
-    - For your reference: The branch that you're going to be merging will have the number of the issue on it.
-2. If all the changes made have no conflict with the dev branch, go ahead and **Merge pull request**.
-3. If there are conflicting branches that need to be resolved before merging, talk to Calvin.
-4. Once you have finished merging, there should be an option to delete that branch. Go ahead and delete.
-
-**If you're ever unsure, please feel free to reach out to Calvin.
