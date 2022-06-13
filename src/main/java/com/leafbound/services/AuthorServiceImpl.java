@@ -16,7 +16,9 @@ import com.leafbound.repositories.AuthorRepository;
 public class AuthorServiceImpl implements AuthorService {
 
     @Autowired
-    AuthorRepository authorRepository;
+    private AuthorRepository authorRepository;
+
+    private static final String AUTHOR_NOT_FOUND = "Author not found.";
 
     @Override
     public boolean add(Author author) {
@@ -41,7 +43,7 @@ public class AuthorServiceImpl implements AuthorService {
             return author.get();
         } else {
             // Throw exception if the author is not found.
-            throw new IllegalArgumentException("Author not found.");
+            throw new IllegalArgumentException(AUTHOR_NOT_FOUND);
         }
     }
 
@@ -71,7 +73,7 @@ public class AuthorServiceImpl implements AuthorService {
             return true;
         } else {
             // Throw exception if the author is not found.
-            throw new IllegalArgumentException("Author not found.");
+            throw new IllegalArgumentException(AUTHOR_NOT_FOUND);
         }
     }
 
@@ -92,7 +94,7 @@ public class AuthorServiceImpl implements AuthorService {
             return true;
         } else {
             // Throw exception if the author is not found.
-            throw new IllegalArgumentException("Author not found.");
+            throw new IllegalArgumentException(AUTHOR_NOT_FOUND);
         }
     }
 }
