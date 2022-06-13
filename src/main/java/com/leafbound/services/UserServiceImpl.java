@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean createUser(User user) {
 		UUID pk = repository.save(user).getId();
-		return (pk != null) ? true : false;
+		return (pk != null);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService{
 		target.setEmail(user.getEmail());
 		target.setRoleId(user.getRoleId());
 		target.setSettingsId(user.getSettingsId());
-		return (repository.save(target) != null) ? true : false;
+		return (repository.save(target) != null);
 	}
 
 	@Override
