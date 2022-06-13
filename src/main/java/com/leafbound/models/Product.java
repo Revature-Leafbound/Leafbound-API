@@ -25,71 +25,77 @@ public class Product {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	  @ApiModelProperty(name="id", 
-	    notes="an Integer value that serves as the unique identier for any comments entity",
+	    notes="an Integer value that serves as the unique identier for any product entity",
 	    required = true,
 	    value = "1")
 		private int id;
 	
-	@OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "author_id", referencedColumnName = "id")
-	private Author author; 
+	@Column(name="author", nullable=false)
+	  @ApiModelProperty(name="author", 
+	    notes="an String value that serves as the author name of the product",
+	    required = true,
+	    value = "1")//may need to change value
+	private String author; 
 	
-	@OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "publisher_id", referencedColumnName = "id")
-	private Publisher publisher;
+	@Column(name="publisher", nullable=false)
+	  @ApiModelProperty(name="publisher", 
+	    notes="an String value that serves as the publisher name of the product",
+	    required = true,
+	    value = "1")//may need to change value
+	private String publisher;
 	
 	@Column(name="isbn", nullable=false)
 	  @ApiModelProperty(name="isbn", 
-	    notes="an Integer value that serves as the unique identier for any comments entity",//notes will change on each column
+	    notes="a String that serves as the ISBN for the product",
 	    required = true,
 	    value = "1")//may need to change value
 	private String isbn;
 	
 	@Column(name="genre", nullable=false)
 	  @ApiModelProperty(name="genre", 
-	    notes="an Integer value that serves as the unique identier for any comments entity",
+	  	notes="a String that serves as the genre tag for the product",
 	    required = true,
 	    value = "1")
 	private String genre;
 	
 	@Column(name="title", nullable=false)
 	  @ApiModelProperty(name="title", 
-	    notes="an Integer value that serves as the unique identier for any comments entity",
+	    notes="a String that serves as the title of the product",
 	    required = true,
 	    value = "1")
 	private String title;
 	
 	@Column(name="lang", nullable=false)
 	  @ApiModelProperty(name="lang", 
-	    notes="an Integer value that serves as the unique identier for any comments entity",
+	    notes="a String that serves as the language tag for the product",
 	    required = true,
 	    value = "1")
 	private String language;
 	
 	@Column(name="published_date", nullable=false)
 	  @ApiModelProperty(name="published_date", 
-	    notes="an Integer value that serves as the unique identier for any comments entity",
+	    notes="a LocalDate that serves as the published date of the product",
 	    required = true,
 	    value = "1")
 	private LocalDate published_date;
 	
 	@Column(name="edition", nullable=false)
 	  @ApiModelProperty(name="edition", 
-	    notes="an Integer value that serves as the unique identier for any comments entity",
+	    notes="a String that serves as the edition version of the product",
 	    required = true,
 	    value = "1")
 	private String edition;
 	
 	@Column(name="description", nullable=false)
 	  @ApiModelProperty(name="description", 
-	    notes="an Integer value that serves as the unique identier for any comments entity",
+	    notes="a String that serves as the product description",
 	    required = true,
 	    value = "1")
 	private String description;
 	
 	@Column(name="list_price", nullable=false)
 	  @ApiModelProperty(name="list_price", 
-	    notes="an Integer value that serves as the unique identier for any comments entity",
+	    notes="a double precision floating point that serves as the list price of the product",
 	    required = true,
 	    value = "1")
 	private double list_price;
@@ -98,7 +104,7 @@ public class Product {
 		super();
 	}
 
-	public Product(Author author, Publisher publisher, String isbn, String genre, String title, String language,
+	public Product(String author, String publisher, String isbn, String genre, String title, String language,
 			LocalDate published_date, String edition, String description, double list_price) {
 		super();
 		this.author = author;
@@ -113,7 +119,7 @@ public class Product {
 		this.list_price = list_price;
 	}
 
-	public Product(int id, Author author, Publisher publisher, String isbn, String genre, String title, String language,
+	public Product(int id, String author, String publisher, String isbn, String genre, String title, String language,
 			LocalDate published_date, String edition, String description, double list_price) {
 		super();
 		this.id = id;
