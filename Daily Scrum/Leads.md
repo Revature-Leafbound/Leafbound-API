@@ -66,7 +66,7 @@ _**Leads**_: Calvin, Chris, Dhruv, Levi
     3. BE Testing Finish + Bugs - 6/17
         - Unit tests
         - Enpoint testing using Postman
-            - installed Spring Fox, so Swagger annotations will be created authomatically and we can copy that script and put it into Postman to test our endpoints. As long as it's done correctly.
+            - installed Spring Fox, so Swagger annotations will be created automatically and we can copy that script and put it into Postman to test our endpoints. As long as it's done correctly.
     4. FE Finish (6/17)
         - FE should be happening simultaneously
         - FE: Calvin, Levi, Santi, Jorge A., Markus, Michael (?)
@@ -91,13 +91,6 @@ Chris:
 <hr>
 
 
-**Team CaLe:**
-- model - Adam
-- repository - Yugal
-- service - Jacob Shaw
-- controller - Patrick Miller
-- test - Adam
-- JWT - Jacob
 
 **Dhruv**
 1. Jorge A. - FE

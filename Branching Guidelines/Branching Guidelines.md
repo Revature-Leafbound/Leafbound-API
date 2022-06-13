@@ -25,8 +25,7 @@
 
 
 ### git pull
-1. `cd name_of_repo`
-2. Confirm you're in the _dev_ branch. If not, commit or stash your changes in the branch you're in, and `git switch dev` (switch your branch to dev).
+1. Confirm you're in the _dev_ branch. If not, `git commit` or `git stash` your changes in the branch you're in, and `git switch dev` (switch your branch to dev).
 3. `git pull`.
     - This will fetch and download content from a remote repository and immediately update the local repository to match that content.
 
@@ -97,13 +96,31 @@
 2. `git switch dev`
 3. `git pull`.
 4. `git switch (branch you want to keep working on)` : Return to the branch you're working on.
-5. `git merge` -> (if needed) `:wq`
+5. `git merge dev` -> (if needed) `:wq`
     - This will merge the updates from the dev branch to the branch that you're currently in so that you can work with the most recent changes.
 <br>
 <hr>
 
+### How to mark or ask for help using Github
+- the issue template that was created OR using pull request labels
+- be specific
 
-(IGNORE THE STUFF BELOW PLZ)
+
+## For Team Leads
+
+### Changing base branch to feature branch on Github pull requests
+Gitflow is going to be individual branches for team work stemming from a specific feature. merge that all into that feature branch. then merge that feature into dev.
+
+go into pull requests, and switch the base branch of your team mates to your feature branch. Your feature branch should be created with the issue Levi created.
+
+
+
+### Reviewing Pull Requests
+
+
+
+### Merge parties
+
 
 ### Reviewing Pull Requests
 1. When a team member creates a pull request, and assigns you as a reviewer, you will
