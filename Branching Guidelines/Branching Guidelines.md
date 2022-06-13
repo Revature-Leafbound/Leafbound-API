@@ -106,7 +106,7 @@
 - be specific
 
 
-## For Team Leads
+## For Team Leads (UNFINISHED)
 
 ### Changing base branch to feature branch on Github pull requests
 Gitflow is going to be individual branches for team work stemming from a specific feature. merge that all into that feature branch. then merge that feature into dev.
