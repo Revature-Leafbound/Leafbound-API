@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin(origins = { "http://localhost:8080" })
 @RestController
 @RequestMapping("/api/v1")
-@Api(value = "Author Collection", tags = "AUTHOR_TAG") // TODO: Figure out the tag thing
+@Api(value = "Author Collection", tags = "AUTHOR COLLECTION")
 public class AuthorController {
 
     @Autowired
@@ -31,30 +31,19 @@ public class AuthorController {
 
     private static Logger logger = Logger.getLogger(AuthorController.class);
 
-    // TODO: Implement JWT after JWT service is created.
     @ApiOperation(value = "Create a new author", notes = "Add a new author to the DB")
     @PostMapping(path = "/author")
     public ResponseEntity<String> create(@RequestBody AuthorDTO author) {
         logger.info("Creating author: " + author);
         try {
-            // Get the requesting user's information from the token
-            // UserJwtDTO userDTO = jwtService.getDTO(authorization.replace("Bearer ", ""));
-
-            // Check if the user is an admin
-            // if(userDTO.getRole().equals("admin")){
-
             // Create the author
             service.add(author);
 
             // Return a success message
             return new ResponseEntity<>("Author created successfully.", HttpStatus.OK);
-            // } else {
 
-            // Return an error message
-            // return new ResponseEntity<>("You are not an authorized to complete this
-            // task.", HttpStatus.UNAUTHORIZED);
-            // }
         } catch (Exception e) {
+            // TODO: handle exceptions
             return new ResponseEntity<>("Not yet implemented.", HttpStatus.NOT_IMPLEMENTED);
         }
     }
@@ -82,51 +71,30 @@ public class AuthorController {
     public ResponseEntity<String> update(@PathVariable int id, @RequestBody AuthorDTO author) {
         logger.info("Updating author: " + author);
         try {
-            // Get the requesting user's information from the token
-            // UserJwtDTO userDTO = jwtService.getDTO(authorization.replace("Bearer ", ""));
-
-            // Check if the user is an admin
-            // if(userDTO.getRole().equals("admin")){
 
             // Update the author
             service.edit(id, author);
 
             // Return a success message
             return new ResponseEntity<>("Author updated successfully.", HttpStatus.OK);
-            // } else {
-
-            // Return an error message
-            // return new ResponseEntity<>("You are not an authorized to complete this
-            // task.", HttpStatus.UNAUTHORIZED);
-            // }
         } catch (Exception e) {
+            // TODO: handle exceptions
             return new ResponseEntity<>("Not yet implemented.",
                     HttpStatus.NOT_IMPLEMENTED);
         }
     }
 
-    @ApiOperation(value = "Delete author by ID", notes = "Get all authors")
+    @ApiOperation(value = "Delete author by ID", notes = "Delete an author")
     @DeleteMapping(path = "/author/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") int id) {
         logger.info("Deleting author with ID: " + id);
         try {
-            // Get the requesting user's information from the token
-            // UserJwtDTO userDTO = jwtService.getDTO(authorization.replace("Bearer ", ""));
-
-            // Check if the user is an admin
-            // if(userDTO.getRole().equals("admin")){
 
             // Delete the author
             service.remove(id);
 
             // Return a success message
             return new ResponseEntity<>("Author deleted successfully.", HttpStatus.OK);
-            // } else {
-
-            // Return an error message
-            // return new ResponseEntity<>("You are not an authorized to complete this
-            // task.", HttpStatus.UNAUTHORIZED);
-            // }
         } catch (Exception e) {
             return new ResponseEntity<>("Not yet implemented.",
                     HttpStatus.NOT_IMPLEMENTED);

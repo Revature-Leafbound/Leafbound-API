@@ -6,7 +6,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.leafbound.models.Author;
 import com.leafbound.models.AuthorDTO;
 
 @Service
