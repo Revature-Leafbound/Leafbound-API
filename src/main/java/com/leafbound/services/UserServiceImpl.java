@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User Register(User user) {
+	public User register(User user) {
 		return null;
 	}
 
