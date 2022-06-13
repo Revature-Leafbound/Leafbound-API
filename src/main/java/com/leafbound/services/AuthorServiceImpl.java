@@ -1,5 +1,6 @@
 package com.leafbound.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.leafbound.models.Author;
+import com.leafbound.models.AuthorDTO;
 import com.leafbound.repositories.AuthorRepository;
 
 @Service
@@ -21,11 +23,17 @@ public class AuthorServiceImpl implements AuthorService {
     private static final String AUTHOR_NOT_FOUND = "Author not found.";
 
     @Override
-    public boolean add(Author author) {
+    public boolean add(AuthorDTO authorDto) {
         // This line would return the newly created author; we want a boolean.
         // return authorRepository.save(author);
 
-        // Create a new author and obtain the primary key.
+        // Pull fields from the DTO
+        String name = authorDto.getName();
+
+        // Create a new author
+        Author author = new Author(name);
+
+        // Save the new author and obtain the primary key.
         int primaryKey = authorRepository.save(author).getId();
 
         // Return true if the primary key is greater than 0, otherwise, return false.
@@ -33,14 +41,24 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author getById(int id) {
+    public AuthorDTO getById(int id) {
         // The default method form Jpa returns an Optional<Object>
-        Optional<Author> author = authorRepository.findById(id);
+        Optional<Author> optional = authorRepository.findById(id);
 
         // If the author is present, return it, otherwise, return null.
-        if (author.isPresent()) {
-            // Return the author
-            return author.get();
+        if (optional.isPresent()) {
+
+            // Get the author from the Optional<Object>
+            Author author = optional.get();
+
+            // Create a new DTO
+            AuthorDTO authorDto = new AuthorDTO();
+            authorDto.setId(author.getId());
+            authorDto.setName(author.getName());
+
+            // Return the DTO
+            return authorDto;
+
         } else {
             // Throw exception if the author is not found.
             throw new IllegalArgumentException(AUTHOR_NOT_FOUND);
@@ -48,13 +66,27 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<Author> getAll() {
-        // Find and return all the authors.
-        return authorRepository.findAll();
+    public List<AuthorDTO> getAll() {
+        // Find all the authors.
+        List<Author> authors = authorRepository.findAll();
+
+        // Create a new list of DTOs.
+        List<AuthorDTO> authorDtos = new ArrayList<>();
+
+        // Loop through the authors and create DTOs.
+        for (Author author : authors) {
+            AuthorDTO authorDto = new AuthorDTO();
+            authorDto.setId(author.getId());
+            authorDto.setName(author.getName());
+            authorDtos.add(authorDto);
+        }
+
+        // Return the list of DTOs.
+        return authorDtos;
     }
 
     @Override
-    public boolean edit(int id, Author author) {
+    public boolean edit(int id, AuthorDTO author) {
         // Get the optional<Author> from the repository.
         Optional<Author> optional = authorRepository.findById(id);
 
