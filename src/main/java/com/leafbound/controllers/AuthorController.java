@@ -105,7 +105,7 @@ public class AuthorController {
         }
     }
 
-    @ApiOperation(value = "Delete author by ID", notes = "Get all authors")
+    @ApiOperation(value = "Delete author by ID", notes = "Delete an author")
     @DeleteMapping(path = "/author/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") int id) {
         logger.info("Deleting author with ID: " + id);
