@@ -39,8 +39,7 @@ public class UserDTO {
      * @param roleId
      * @param settingsId
      */
-    public UserDTO(UUID id, String firstName, String lastName, String password, String email, int roleId,
-            int settingsId) {
+    public UserDTO(UUID id, String firstName, String lastName, String password, String email, int roleId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
