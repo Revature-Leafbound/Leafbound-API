@@ -90,7 +90,7 @@ public class ProductControllerTest {
 	@Order(1)
 	@DisplayName("1. AppContext Sanity Test")
 	public void contextLoads() throws Exception {
-		assertThat(productController).inNotNull();
+		assertThat(productController).isNotNull();
 		assertThat(pserv).isNotNull();
 	}
 	
