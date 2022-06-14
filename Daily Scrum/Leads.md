@@ -15,6 +15,7 @@ _**Leads**_: Calvin, Chris, Dhruv, Levi
 - Daily Meetings:
     - [6/10/22](#61022)
     - [6/13/22](#61322)
+    - [6/14/22](#meeting-61422)
 
 <hr>
 
@@ -207,3 +208,76 @@ Agenda:
 - Pathing for API: Queries vs Path : **Path**
 - Branching and keeping track of features
 
+<hr>
+
+### Meeting 6/14/22
+
+**Progress Check**
+Calvin:
+- Style Guide Meeting
+    - **Logo Decision:** Patrick's design, incorporating Calvin's idea of having a logo without words
+        - Patrick will finish this up; Adam is planning to finish his design and will present it tomorrow so we can vote again
+    - **Color Palette** Adam's
+    - Incoporating MUI
+    - Roboto
+- Updated User to not include Settings table - there's no security to it; it's a good user experience
+- Service & JWT
+- UserDTO implemented (Service and Controller layer will take care of that)
+    - you will be logged in after registering; no additional checks to be logged into the site
+
+Dhruv:
+- BE: Finished Carts (Patrick just needs to push it)
+- Enock will be working on Carts testing
+- BE: Orders
+    - Everything is done except for controllers (Jorge has been assigned)
+    - once this is finished, Dhruv will assign Enock (if finished today) or himself for testing
+- FE: Markus and Santi will push code
+    - Markus needs to change his code from JS to Angular
+
+Jose:
+- Finished Products BE
+- Looking into testing
+- Client Message Utils - need to be able to send products back
+    - So far, from what we've been taught, we've been returning strings
+    - how do we test returning an actual item? -> Render some dummy data and you could also implement an H2 database to use in your unit tests
+- FE: Michael has started looking at it again, and Jose will also jump on that as well
+- Jorge G. is succeeding Jose (potentially FE testing, but BE for now)
+
+
+**Agenda:**
+- Welcome Jose!
+- Environment variables:
+    - export Leafbound_DB_URL=jdbc:postgresql://localhost:5432/postgres
+    - export Leafbound_DB_User=postgres
+    - export Leafbound_DB_Password=postgres
+    - export Leafbound_JWT_Secret=iyvbunoimokg[20upo8yi7gyvhbjknlm[p-=o0987ytfghvbjkgjhoi
+    - there should be a way for us to put this into AWS directly (into production) and not change anything in our code
+- Has material UI - Santiago can do a pull request straight to dev to add MUI for everyone(?)
+- Make sure everyone is good on pulling down FE repo, running `npm install`
+- Products: Creating the thumbnail
+    - in terms of scrolling, displaying, etc. team leads can decide together
+    - one big list scroll up and down vs. ribbons
+    - filter list, or automatically populate on one genre, etc.
+    - main page with top sellers, etc.
+- FE issues: Site Map
+    - Navigation bar based on the state of the application - Levi
+    - Login - Levi
+    - Register - Calvin
+    - Home: View Products (page with a preset amount of products, and once that works, we can add stretch goals) - Jose & Michael
+    - Cart - Markus
+    - Checkout - Santiago
+    - Past Orders/Transactions - select all by ID for orders table - Jose
+    - Profile (basic) -> so that we can View Past Orders - Calvin/Patrick Miller
+- Tables:
+    - User - Calvin
+    - Products - Jose
+    - Cart - Dhruv
+    - Orders - Dhruv
+    - Order Details - Calvin
+    - Roles - Levi
+
+**Tasks:**
+- [Dhruv]: Can Santiago do a pull request straight to dev to add MUI for everyone
+- Make sure everyone is good on pulling down FE repo, running `npm install`
+
+<hr>
