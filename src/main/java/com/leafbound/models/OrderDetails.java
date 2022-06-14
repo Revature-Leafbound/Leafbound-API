@@ -50,7 +50,7 @@ public class OrderDetails {
     }
 
 
-    public OrderDetails(int id, Products product, int quantity, Orders order) {
+    public OrderDetails(int id, Products product, int quantity, Order order) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
