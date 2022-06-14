@@ -25,10 +25,10 @@ public class CartServiceImpl implements CartService {
 		return crepo.save(cart) != null;
 	}
 
-	@Override
-	public boolean updateCart(Carts cart) {
-		return crepo.save(cart) != null;
-	}
+//	@Override
+//	public boolean updateCart(Carts cart) {
+//		return crepo.save(cart) != null;
+//	}
 
 	@Override
 	public Products deleteCart(int id) {

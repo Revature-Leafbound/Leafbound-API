@@ -49,28 +49,6 @@ public class CartController {
         return cserv.addtoCart(cart) ? CREATION_SUCCESSFUL : CREATION_FAILED;
     }
 
-//  ORIGINAL CODE FOR ABOVE METHOD  
-//	@PostMapping(path = "/cart")
-//    @ApiOperation(value = "Create new cart entity", notes = "Add a new cart in the API.")
-//    public @ResponseBody ClientMessage create(@RequestBody Carts cart) {
-//        return cserv.addtoCart(cart) ? CREATION_SUCCESSFUL : CREATION_FAILED;
-//    }
-
-//  POSSIBLE FIX FOR SONARCLOUD ISSUE
-    @PatchMapping(path = "/cart")
-    @ApiOperation(value = "Update cart entity by id.", notes = "Provide an id to update a specific cart in the API.")
-    public @ResponseBody ClientMessage update(@RequestParam(value = "id") int id, @RequestBody CartsRequestModel cartRequestModel) {
-        Carts cart = new Carts(cartRequestModel);
-        return cserv.updateCart(id, cart) ? UPDATE_SUCCESSFUL : UPDATE_FAILED;
-    }
-
-//    ORIGINAL CODE FOR ABOVE METHOD
-//    @PatchMapping(path = "/cart")
-//    @ApiOperation(value = "Update cart entity by id.", notes = "Provide an id to update a specific cart in the API.")
-//    public @ResponseBody ClientMessage update(@RequestParam(value = "id") int id, @RequestBody Carts cart) {
-//       return cserv.updateCart(id, cart) ? UPDATE_SUCCESSFUL : UPDATE_FAILED;
-//    }
-
     @DeleteMapping(path = "/cart")
     @ApiOperation(value = "Remove cart entity by ID.", notes = "Provide an id to delete a specific cart in the API.")
     public @ResponseBody ClientMessage delete(@RequestParam(value = "id") int id) {

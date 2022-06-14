@@ -11,7 +11,7 @@ public interface CartService {
 	public boolean addtoCart(Carts cart);
 	
 	//update cart
-	public boolean updateCart(Carts cart);
+//	public boolean updateCart(Carts cart);
 	
 	//delete cart
 	public Products deleteCart(int id);
