@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.leafbound.test.services.Product;
+import com.leafbound.test.services.ProductServiceTest;
 
 
 @ExtendWith(SpringExtension.class)
