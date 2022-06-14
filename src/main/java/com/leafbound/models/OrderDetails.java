@@ -42,7 +42,7 @@ public class OrderDetails {
     @OneToOne
     @JoinColumn(name = "order_id", unique = true, nullable = false)
     @ApiModelProperty(name = "order_details_order_id", value = "An integer value that serves as the order id for the order.", required = true)
-    private User user;
+    private Order order;
 
 
     public OrderDetails() {
