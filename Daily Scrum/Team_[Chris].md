@@ -45,7 +45,7 @@ _**Members**_: Chris, Jorge G., Jose, Michael, Julian, Joachim
 
 ### Jose's Sprint Meeting Template
 <br>
-Chris, Jorge G., Jose, Michael, Julian, Joachim
+
 ### Sprint #: XX/XX/XXXX
 
 1. Team Lead Announcements

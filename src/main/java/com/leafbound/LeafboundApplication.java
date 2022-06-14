@@ -1,4 +1,4 @@
-package com.leafbound.leafbound;
+package com.leafbound;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
