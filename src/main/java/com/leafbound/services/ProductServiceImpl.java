@@ -24,9 +24,10 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Product createProduct(Product product) {
+	public boolean createProduct(Product product) {
 		
-		return productRepo.save(product);
+		int pk = productRepo.save(product).getId();
+		return (pk > 0) ? true : false;
 	}
 
 }
