@@ -9,5 +9,5 @@ public interface ProductService {
 	//get all products
 	List<Product> getAllProducts();
 	
-	boolean createProduct(Product product);
+	Product createProduct(Product product);
 }
