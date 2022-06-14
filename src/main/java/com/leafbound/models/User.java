@@ -47,8 +47,4 @@ public class User {
 	@JoinColumn(name="role_id", nullable=false)
 	@ApiModelProperty(name="role id", notes="An integer value that serves as the role id for the user", required=true, value="role id")
 	private int roleId;
-	@OneToOne
-	@JoinColumn(name="settings_id", nullable=false)
-	@ApiModelProperty(name="settings id", notes="An integer value that serves as the settings id for the user", required=true, value="settings id")
-	private int settingsId;
 }
