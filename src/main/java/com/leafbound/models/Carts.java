@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -44,7 +45,7 @@ public class Carts {
     @OneToOne
     @JoinColumn(name = "customer_id", unique = true, nullable = false)
     @ApiModelProperty(name = "carts_users_id", value = "An integer value that serves as the customer id for the user.", required = true)
-    private Users user;
+    private User user;
 
 
 
@@ -54,7 +55,7 @@ public class Carts {
 
 
 
-    public Carts(int id, Products product, int quantity, Users user) {
+    public Carts(int id, Products product, int quantity, User user) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
@@ -63,7 +64,7 @@ public class Carts {
 
 
 
-    public Carts(Products product, int quantity, Users user) {
+    public Carts(Products product, int quantity, User user) {
         this.product = product;
         this.quantity = quantity;
         this.user = user;
