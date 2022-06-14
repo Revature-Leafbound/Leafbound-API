@@ -38,8 +38,8 @@ public class ProductController {
 	//create new product
 	@PostMapping("/product")
 	@ApiOperation(value="create new product entity")
-	public @ResponseBody String createProduct(@RequestBody Product product) {
-		return productServ.createProduct(product) ? "CREATION SUCCESSFUL" : "CREATION FAILED";
+	public @ResponseBody Product createProduct(@RequestBody Product product) {
+		return productServ.createProduct(product);
 
 		
 	}
