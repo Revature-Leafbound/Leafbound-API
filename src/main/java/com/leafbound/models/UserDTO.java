@@ -9,7 +9,6 @@ public class UserDTO {
     private String password;
     private String email;
     private int roleId;
-    private int settingsId;
 
     public UserDTO() {
     }
@@ -23,14 +22,12 @@ public class UserDTO {
      * @param roleId
      * @param settingsId
      */
-    public UserDTO(String firstName, String lastName, String password, String email, int roleId,
-            int settingsId) {
+    public UserDTO(String firstName, String lastName, String password, String email, int roleId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.email = email;
         this.roleId = roleId;
-        this.settingsId = settingsId;
     }
 
     /**
@@ -50,7 +47,6 @@ public class UserDTO {
         this.password = password;
         this.email = email;
         this.roleId = roleId;
-        this.settingsId = settingsId;
     }
 
     /**
@@ -137,24 +133,10 @@ public class UserDTO {
         this.roleId = roleId;
     }
 
-    /**
-     * @return the settingsId
-     */
-    public int getSettingsId() {
-        return settingsId;
-    }
-
-    /**
-     * @param settingsId the settingsId to set
-     */
-    public void setSettingsId(int settingsId) {
-        this.settingsId = settingsId;
-    }
-
     @Override
     public String toString() {
         return "UserDTO [email=" + email + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName
-                + ", roleId=" + roleId + ", settingsId=" + settingsId + "]";
+                + ", roleId=" + roleId + "]";
     }
 
 }

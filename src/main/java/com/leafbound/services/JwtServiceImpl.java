@@ -36,7 +36,7 @@ public class JwtServiceImpl implements JwtService {
 
         // Transform the user into a UserDTO object
         UserDTO userDTO = new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(),
-                user.getEmail(), user.getRoleId(), user.getSettingsId());
+                user.getEmail(), user.getRoleId());
         logger.debug(userDTO.toString());
 
         // Create the JWT from the UserDTO
