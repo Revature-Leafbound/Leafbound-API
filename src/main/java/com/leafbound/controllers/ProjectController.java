@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.leafbound.models.Product;
 import com.leafbound.services.ProductService;
 
 import io.swagger.annotations.Api;
