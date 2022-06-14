@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/api/v1")  // this might need to be changed
 @CrossOrigin(origins = {"http://localhost:5500/", "http://127.0.0.1:5500/", "http://127.0.0.1:5501/", "http://localhost:8080/", "http://127.0.0.1:8080/", "http://localhost:5502/", "http://127.0.0.1:5502/"})
 @Api(value = "ProductRestController", tags = {"REST controller related to Product Entities"})
-public class ProjectController {
+public class ProductController {
 
 	@Autowired
 	private ProductService productServ;
