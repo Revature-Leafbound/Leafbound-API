@@ -110,7 +110,7 @@ public class ProductControllerTest {
 	@Order(3)
 	@DisplayName("3. Attemp to pull invalid product")
 	public void getProduct_ShouldReturnInvalid() throws Exception {
-		when(pserv.getById(mockUUID1.toString())).thenReturn(mockProduct1)
+		when(pserv.getById(mockUUID1.toString())).thenReturn(mockProduct1);
 		
 		RequestBuilder request = MockMvcRequestBuilders.get("/api/v1/product?id=1");
 		MvcResult result = mockmvc.perform(request).andReturn();
