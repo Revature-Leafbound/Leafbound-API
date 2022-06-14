@@ -33,12 +33,15 @@ public class User {
 	@Column(name="first_name")
 	@ApiModelProperty(name="first name", notes="A string value that serves as the first name for the user", required=true, value="first name")
 	private String firstName;
+	
 	@Column(name="last_name")
 	@ApiModelProperty(name="last name", notes="A string value that serves as the last name for the user", required=true, value="last name")
 	private String lastName;
+	
 	@Column(name="password")
 	@ApiModelProperty(name="password", notes="A string value that serves as the password for the user", required=true, value="password")
 	private String password;
+	
 	@Column(name="email", unique=true, nullable=false)
 	@ApiModelProperty(name="first name", notes="A string value that serves as the email for the user", required=true, value="email")
 	private String email;
@@ -47,8 +50,4 @@ public class User {
 	@JoinColumn(name="role_id", nullable=false)
 	@ApiModelProperty(name="role id", notes="An integer value that serves as the role id for the user", required=true, value="role id")
 	private int roleId;
-	@OneToOne
-	@JoinColumn(name="settings_id", nullable=false)
-	@ApiModelProperty(name="settings id", notes="An integer value that serves as the settings id for the user", required=true, value="settings id")
-	private int settingsId;
 }
