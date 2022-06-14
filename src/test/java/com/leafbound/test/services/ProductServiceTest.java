@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -178,10 +179,6 @@ public class ProductServiceTest {
             when(productRepo.delete(2)).thenReturn(false);
             assertNotNull(productService.getById(2));
         }
-    
-
-
-    
 
 
 
