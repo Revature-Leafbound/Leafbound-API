@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.leafbound.test.services.Product;
+import com.leafbound.test.services.ProductServiceTest;
 
 
 @ExtendWith(SpringExtension.class)
@@ -90,7 +90,7 @@ public class ProductControllerTest {
 	@Order(1)
 	@DisplayName("1. AppContext Sanity Test")
 	public void contextLoads() throws Exception {
-		assertThat(productController).inNotNull();
+		assertThat(productController).isNotNull();
 		assertThat(pserv).isNotNull();
 	}
 	
@@ -110,7 +110,7 @@ public class ProductControllerTest {
 	@Order(3)
 	@DisplayName("3. Attemp to pull invalid product")
 	public void getProduct_ShouldReturnInvalid() throws Exception {
-		when(pserv.getById(mockUUID1.toString())).thenReturn(mockProduct1)
+		when(pserv.getById(mockUUID1.toString())).thenReturn(mockProduct1);
 		
 		RequestBuilder request = MockMvcRequestBuilders.get("/api/v1/product?id=1");
 		MvcResult result = mockmvc.perform(request).andReturn();
