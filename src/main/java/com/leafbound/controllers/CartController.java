@@ -43,7 +43,7 @@ public class CartController {
 
 	@PostMapping(path = "/cart")
     @ApiOperation(value = "Create new cart entity", notes = "Add a new cart in the API.")
-    public @ResponseBody ClientMessage create(@RequestBody Carts cart) throws Exception {
+    public @ResponseBody ClientMessage create(@RequestBody Carts cart) {
         return cserv.addtoCart(cart) ? CREATION_SUCCESSFUL : CREATION_FAILED;
     }
 
