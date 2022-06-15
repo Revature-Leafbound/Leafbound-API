@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -38,6 +39,7 @@ public class UserServiceTest {
 	private static UserDTO dummyTransfer;
 	static List<User> dummyDB;
 	
+	Logger log = Logger.getLogger(UserServiceTest.class);
 	@BeforeAll
 	static void setupBefore() throws Exception {
 		mockdao = Mockito.mock(UserRepository.class);
@@ -95,7 +97,7 @@ public class UserServiceTest {
 	@DisplayName("3. Get User By Id")
 	void testGetUserById() {
 		when(uServ.getUserById(u1.getId())).thenReturn(u1);
-		System.out.println(u1.getId());
+		log.info("user id: " + u1.getId());
 		
 		assertEquals(u1, uServ.getUserById(u1.getId()));
 	}
