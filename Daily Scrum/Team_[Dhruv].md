@@ -39,6 +39,74 @@ _**Members**_: Dhruv, Jorge A., Enock, Santiago, Patrick Y., Vidya, Markus
 ### Jorge's Sprint Meeting Template
 <br>
 
+### Sprint #: 06/13/2022   
+1. Team Lead Announcements
+2. **Progress Check**
+    - Markus:
+        - [front end working on Cart] 
+        - [ ] 
+    - Vidya:
+        - [ ] 
+        - [ ] 
+    - Patrick Y.:
+        - [ ] 
+        - [ ] 
+    - Santiago:
+        - [ ] 
+        - [ ] 
+    - Enock:
+        - [ ] 
+        - [ ] 
+    - Jorge A.:
+        - [ ] 
+        - [ ] 
+    - Dhruv:
+        - [ ] 
+        - [ ] 
+<br> </br>
+
+3. **Any issues?**
+    - [ ] 
+ <br> </br>
+
+4. **Agenda**
+    - [ ] 
+    - [ ] 
+ <br> </br>
+
+5. **Issues/Tasks** 
+    - Markus:
+        - [Assigned task Front-end Carts feature ] 
+        - [ ] 
+    - Vidya:
+        - [ ] 
+        - [ ] 
+    - Patrick Y.:
+        - [ ] 
+        - [ ] 
+    - Santiago:
+        - [ ] 
+        - [ ] 
+    - Enock:
+        - [ ] 
+        - [ ] 
+    - Jorge A.:
+        - [ ] 
+        - [ ] 
+    - Dhruv:
+        - [ ] 
+        - [ ] 
+    - _Reminders: Topics to understand and implement:_
+        - [ ] 
+        - [ ] 
+        - [ ] 
+ <br> </br>
+
+
+[Return to: _Table of Contents_](#table-of-contents)
+
+<br>
+
 ### Sprint #: XX/XX/XXXX
 1. Team Lead Announcements
 2. **Progress Check**

@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;
-import com.leafbound.services.JwtService;
-import com.leafbound.services.UserService;
+import com.leafbound.services.JwtServiceImpl;
+import com.leafbound.services.UserServiceImpl;
 
 import io.swagger.annotations.Api;
 
@@ -37,10 +37,10 @@ public class UserController {
 	private static Logger log = Logger.getLogger(UserController.class);
 
 	@Autowired
-	private UserService service;
+	private UserServiceImpl service;
 
 	@Autowired
-	private JwtService jwtService;
+	private JwtServiceImpl jwtService;
 
 	@GetMapping("/GetUser")
 	public @ResponseBody User readById(UUID id) {
@@ -66,18 +66,10 @@ public class UserController {
 			@PathVariable String id) {
 		log.info("Deleting user");
 
-		try {
-			UserDTO userDTO = jwtService.getDTO(authorization.replace("Bearer ", ""));
+		// TODO: Rework the lockout
+		// UserDTO userDTO = jwtService.getDTO(authorization.replace("Bearer ", ""));
 
-			if (userDTO != null && userDTO.getRole().getRole().equals("admin")) {
-				return service.deleteUser(id) ? "DELETION_SUCCESSFUL" : "DELETION_FAILED";
-			} else {
-				return "DELETION_FAILED";
-			}
-		} catch (InvalidKeyException e) {
-			return "DELETION_FAILED";
-		}
-		// TODO: Return proper response
+		return service.deleteUser(id) ? "DELETION_SUCCESSFUL" : "DELETION_FAILED";
 	}
 
 	@GetMapping("/Login")

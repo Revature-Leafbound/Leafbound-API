@@ -1,71 +1,66 @@
 package com.leafbound.models;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Entity
-@Table(name = "order_details")
+@Table(name = "carts")
 @Data
-@ApiModel(value = "OrderDetails", description = "This model serves as the basic model for all OrderDetails entity API operations.")
-public class OrderDetails {
+@ApiModel(value = "carts", description = "This model serves as the basic model for all carts entity API operations.")
+public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @ApiModelProperty(name = "id", value = "An integer value that serves as the unique identifier for any order details entity.", required = true)
+    @ApiModelProperty(name = "id", value = "An integer value that serves as the unique identifier for any carts entity.", required = true)
     private int id;
 
     @OneToOne
     @JoinColumn(name = "product_id", unique = true, nullable = false)
-    @ApiModelProperty(name = "order_details_product_id", value = "An integer value that serves as the product id for the product.", required = true)
+    @ApiModelProperty(name = "carts_product_id", value = "An integer value that serves as the product id for the product.", required = true)
     private Product product;
+
+    @OneToOne
+    @JoinColumn(name = "customer_id", unique = true, nullable = false)
+    @ApiModelProperty(name = "carts_users_id", value = "An integer value that serves as the customer id for the user.", required = true)
+    private User user;
 
     @Column(name = "quantity", nullable = false)
     @ApiModelProperty(name = "quantity", value = "An integer value describing the quantity of a product.", required = true)
     private int quantity;
 
-    @OneToOne
-    @JoinColumn(name = "order_id", unique = true, nullable = false)
-    @ApiModelProperty(name = "order_details_order_id", value = "An integer value that serves as the order id for the order.", required = true)
-    private Order order;
-
-    public OrderDetails() {
+    public Cart() {
         super();
     }
 
-    public OrderDetails(int id, Product product, int quantity, Order order) {
+    public Cart(int id, Product product, int quantity, User user) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
-        this.order = order;
+        this.user = user;
     }
 
-    public OrderDetails(Product product, int quantity, Order order) {
+    public Cart(Product product, int quantity, User user) {
         this.product = product;
         this.quantity = quantity;
-        this.order = order;
+        this.user = user;
     }
 
     /**
      * @param id
      * @param product
      * @param quantity
-     * @param order
+     * @param user
      */
 
 }
