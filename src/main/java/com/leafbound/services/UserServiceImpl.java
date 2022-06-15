@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 		// Create an empty user model
 		User user = new User();
 
-		// Update the user from the DTOw
+		// Update the user from the DTO
 		user.setFirstName(userDTO.getFirstName());
 		user.setLastName(userDTO.getLastName());
 		user.setPassword(userDTO.getPassword());
