@@ -23,6 +23,7 @@ public class CartServiceImpl implements CartService {
 		return (pk > 0) ? true : false;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public boolean updateCart(Carts cart) {
 		Carts target = crepo.findById(cart.getById());
@@ -33,6 +34,12 @@ public class CartServiceImpl implements CartService {
 
 		return (crepo.save(target) != null) ? true : false;
 	}
+=======
+//	@Override
+//	public boolean updateCart(Carts cart) {
+//		return crepo.save(cart) != null;
+//	}
+>>>>>>> 31cd7e6ab654f74798473c609811d0c4944bac49
 
 	@Override
 	public Carts deleteCart(int id) {

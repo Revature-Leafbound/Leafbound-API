@@ -20,23 +20,23 @@ import com.leafbound.services.UserService;
 
 import io.swagger.annotations.Api;
 
-@CrossOrigin(origins ="http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/v1")
-@Api(value= "UserRollController", tags = "USER COLLECTIONS")
+@Api(value = "UserRollController", tags = "USER COLLECTIONS")
 public class UserController {
-	
+
 	private static Logger log = Logger.getLogger(UserController.class);
-	
+
 	@Autowired
 	private UserService service;
-	
+
 	@PostMapping("/CreateUser")
 	public @ResponseBody String createUser(@RequestBody User user) {
 		log.info("Creating user");
-		
-		return (service.createUser(user)) ? "User created successfully": "Error creating user";
-		
+
+		return (service.createUser(user)) ? "User created successfully" : "Error creating user";
+
 	}
 
 	@GetMapping("/GetUser")
@@ -44,39 +44,39 @@ public class UserController {
 		log.info("Getting user with id: " + id);
 		return service.getUserById(id);
 	}
-	
+
 	@GetMapping("/GetUsers")
-	public @ResponseBody List<User> readAllUsers(){
+	public @ResponseBody List<User> readAllUsers() {
 		log.info("Getting all users");
 		return service.getAllUsers();
 	}
-	
+
 	@PatchMapping("/UpdateUser")
 	public @ResponseBody String updateUser(@RequestBody User user) {
-		log.info("Updating user");		
-		
-		return (service.updateUser(user)) ? "Update successful": "Update failed";
-		
+		log.info("Updating user");
+
+		return (service.updateUser(user)) ? "Update successful" : "Update failed";
+
 	}
-	
+
 	@DeleteMapping("/DeleteUser")
 	public @ResponseBody String deleteUser(@RequestBody UUID id) {
-		log.info("Deleting user");	
-		return (service.deleteUser(id)) ? "Delete successful": "Delete failed";
-		
+		log.info("Deleting user");
+		return (service.deleteUser(id)) ? "Delete successful" : "Delete failed";
+
 	}
-	
+
 	@GetMapping("/Login")
 	public @ResponseBody User login(@RequestBody User user) {
-		log.info("Loggin in");	
+		log.info("Loggin in");
 		return service.login(user);
-		
+
 	}
-	
+
 	@PostMapping("/Register")
 	public @ResponseBody User register(@RequestBody User user) {
-		log.info("Register user");	
+		log.info("Register user");
 		return service.register(user);
-		
+
 	}
 }
