@@ -38,7 +38,7 @@ public class CartController {
     @GetMapping(path = "/cart")
     @ApiOperation(value = "Find cart by id number", notes = "Provide an id to lookup a specific cart in the API", response = Carts.class)
     public @ResponseBody Carts getById(@RequestParam(value = "id") int id) {
-        return cserv.findProdById(id);
+        return cserv.findById(id);
     }
 
 //  POSSIBLE FIX FOR SONARCLOUD ISSUE    

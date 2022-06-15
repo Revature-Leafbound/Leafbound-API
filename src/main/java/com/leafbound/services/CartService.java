@@ -4,15 +4,11 @@ import com.leafbound.models.Carts;
 
 public interface CartService {
 	
-	//find products by id
-	public Products findProdById(int id);
+	public Carts findById(int id);
 	
-	// add
 	public boolean addtoCart(Carts cart);
 	
-	//update cart
 	public boolean updateCart(Carts cart);
 	
-	//delete cart
-	public Products deleteCart(int id);
+	public Carts deleteCart(int id);
 }
