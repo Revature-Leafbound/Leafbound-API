@@ -54,10 +54,9 @@ public class JwtServiceImpl implements JwtService {
 
         try {
             userDTO = this.parseJwt(jwt);
-        } catch (JsonProcessingException e) {
-            // TODO: handle exception
         } catch (IOException e) {
-            // TODO: handle exception
+            logger.warn("Unable to parse JWT: " + e.getMessage());
+            return userDTO;
         }
 
         return userDTO;

@@ -9,10 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.leafbound.models.User;
 
-
 @Repository
 @Transactional
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-	
 }
