@@ -2,6 +2,7 @@ package com.leafbound.test.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.Mockito.when;
 import static org.junit
 
 import java.time.LocalDate;
@@ -44,7 +45,7 @@ public class ProductServiceTest {
 
     @InjectMocks
     private static ProductServiceImpl productService;
-    private static Product mockProduct1, mockProduct2, mockProduct3;
+    private static Product mockProduct1, mockProduct2, mockProduct3, mockProduct4;
     private static List<Product> dummyDb;
 
     @BeforeAll
@@ -82,18 +83,18 @@ public class ProductServiceTest {
 
         when(productRepo.save(mockProduct3)).thenReturn(mockProduct3);
 
-        assertEquals(true, productService.add(mockProduct3));
+        assertEquals(mockProduct3, productService.add(mockProduct3));
     }
 
     @Test 
     @Order(3)
-    @DisplayName("3. Failed Creation UserRole Test")
+    @DisplayName("3. Failed Creation Product Test")
     public void addProductTest_failure(){
         mockProduct3 = new Product();
         mockProduct3.setid(3);
         when(productRepo.save(mockProduct3)).thenReturn(mockProduct3);
 
-        assertEquals(false, productService.add(mockProduct3));
+        assertEquals(mockProduct4, productService.add(mockProduct3));
     }
 
     @Test
@@ -143,7 +144,7 @@ public class ProductServiceTest {
             when(productService.getById(2)).thenReturn(mockProduct2);
             when(productRepo.save(mockProduct2)).thenReturn(mockProduct2);
 
-            assertEquals(true, productService.update(mockProduct2));
+            assertEquals("newIsbn", mockProduct2.getIsbn());
         }
     
 
@@ -157,7 +158,7 @@ public class ProductServiceTest {
             when(productService.getById(2)).thenReturn(mockProduct2);
             when(productRepo.save(mockProduct2)).thenReturn(mockProduct2);
 
-            assertFalse(productService.update(mockProduct2));
+            assertNull(productService.update(mockProduct2));
         }
     
 
