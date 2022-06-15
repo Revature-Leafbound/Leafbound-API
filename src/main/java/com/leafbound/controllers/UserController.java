@@ -37,7 +37,7 @@ public class UserController {
 
 	@Autowired
 	private UserService service;
-	
+
 	@Autowired
 	private JwtService jwtService;
 
@@ -69,28 +69,55 @@ public class UserController {
 	}
 
 	@GetMapping("/Login")
-	public @ResponseBody User login(@RequestBody User user) {
-		log.info("Loggin in");
-		return service.login(user);
+	public @ResponseBody User login(@RequestBody UserDTO userDTO) {
+		
+		// Create a new HttpHeader object
+		HttpHeaders headers = new HttpHeaders();
+
+		// Goal confirm the credential form the request
+	
+			// Update the current userDTO with a completed userDTO
+			userDTO = service.login(userDTO);
+	
+
+		
+		// create a jwt to send back
+		try{
+			//Create a string for the JWT
+			//createJwt(UserDTO userDTO)
+			String jwt = jwtService.createJWT(userDTO);
+
+
+		}
 		
 	}
 
 	@PostMapping("/Register")
 	public ResponseEntity<String> register(@RequestBody UserDTO userDTO) {
 		log.info("Register user");
+
+		// Create a new HttpHeader object
 		HttpHeaders responseHeaders = new HttpHeaders();
+
+		// Goal confirm the credential form the request
 		userDTO = service.createUser(userDTO);
+
+		// create a jwt to send back
 		try {
 			String jwt = jwtService.createJwt(userDTO);
 			responseHeaders.set("X-Auth-Token", "Bearer " + jwt);
 			responseHeaders.set("Access-Control-Expose-Headers", "X-Auth-Token");
 		} catch (InvalidKeyException | JsonProcessingException e) {
-			log.debug("Register JWT threw an error " + e.getMessage()); 
+			log.debug("Register JWT threw an error " + e.getMessage());
+
+			// Return a bad request
 			return new ResponseEntity<>("Unauthorized user", HttpStatus.UNAUTHORIZED);
 		}
+
+		// Return a created status
 		return ResponseEntity.ok()
 				.headers(responseHeaders)
 				.body("Login successful");
-		
+
 	}
 }
