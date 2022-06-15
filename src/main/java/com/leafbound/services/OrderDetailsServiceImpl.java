@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.leafbound.models.Order;
 import com.leafbound.models.OrderDetails;
 import com.leafbound.models.OrderDetailsDTO;
+import com.leafbound.models.Product;
 import com.leafbound.repositories.OrderDetailsRepository;
 
 public class OrderDetailsServiceImpl implements OrderDetailsService {

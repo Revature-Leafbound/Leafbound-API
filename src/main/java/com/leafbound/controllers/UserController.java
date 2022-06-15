@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;
-import com.leafbound.services.JwtService;
-import com.leafbound.services.UserService;
+import com.leafbound.services.JwtServiceImpl;
+import com.leafbound.services.UserServiceImpl;
 
 import io.swagger.annotations.Api;
 
@@ -37,10 +37,10 @@ public class UserController {
 	private static Logger log = Logger.getLogger(UserController.class);
 
 	@Autowired
-	private UserService service;
+	private UserServiceImpl service;
 
 	@Autowired
-	private JwtService jwtService;
+	private JwtServiceImpl jwtService;
 
 	@GetMapping("/GetUser")
 	public @ResponseBody User readById(UUID id) {
