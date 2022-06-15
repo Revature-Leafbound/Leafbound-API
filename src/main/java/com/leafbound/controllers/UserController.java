@@ -59,7 +59,6 @@ public class UserController {
 		log.info("Updating user");
 
 		return (service.updateUser(user)) ? "Update successful" : "Update failed";
-
 	}
 
 	@DeleteMapping("/DeleteUser/{id}")
