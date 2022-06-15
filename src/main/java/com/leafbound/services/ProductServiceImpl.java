@@ -25,9 +25,21 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public Product createProduct(Product product) {
-		
-		
 		return productRepo.save(product);
+	}
+
+	@Override
+	public Product updateProduct(Product product) {
+		Product target = productRepo.findById(product.getId());
+		product.setId(target.getId());
+		return productRepo.save(product);
+		
+	}
+
+	@Override
+	public boolean deleteProduct(Product product) {
+		productRepo.delete(product);
+		return true;
 	}
 
 }
