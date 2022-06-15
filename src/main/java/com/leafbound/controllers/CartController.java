@@ -34,14 +34,7 @@ public class CartController {
     
     @Autowired
     private CartServiceImpl cserv;
-
-    @GetMapping(path = "/cart")
-    @ApiOperation(value = "Find cart by id number", notes = "Provide an id to lookup a specific cart in the API", response = Carts.class)
-    public @ResponseBody Carts getById(@RequestParam(value = "id") int id) {
-        return cserv.findById(id);
-    }
-
-//  POSSIBLE FIX FOR SONARCLOUD ISSUE    
+   
     @PostMapping(path = "/cart")
     @ApiOperation(value = "Create new cart entity", notes = "Add a new cart in the API.")
     public @ResponseBody ClientMessage create(@RequestBody CartsRequestModel cartRequestModel) {

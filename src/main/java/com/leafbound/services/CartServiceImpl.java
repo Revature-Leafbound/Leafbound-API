@@ -13,39 +13,10 @@ public class CartServiceImpl implements CartService {
 	private CartRepository crepo;
 
 	@Override
-	public Carts findById(int id) {
-		return crepo.findById(id);
-	}
-
-	@Override
 	public boolean addtoCart(Carts cart) {
 		int pk = crepo.save(cart).getId();
-		return (pk > 0) ? true : false;
+		return (pk > 0);
 	}
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-	@Override
-	public boolean updateCart(Carts cart) {
-		Carts target = crepo.findById(cart.getById());
-
-		target.setProductId(cart.getProductId());
-		target.setQuantity(cart.getQuantity());
-		target.setCustomerId(cart.getCustomerId());
-
-		return (crepo.save(target) != null) ? true : false;
-	}
-=======
-=======
->>>>>>> refs/remotes/origin/7-table-cart
-//	@Override
-//	public boolean updateCart(Carts cart) {
-//		return crepo.save(cart) != null;
-//	}
-<<<<<<< HEAD
->>>>>>> 31cd7e6ab654f74798473c609811d0c4944bac49
-=======
->>>>>>> refs/remotes/origin/7-table-cart
 
 	@Override
 	public Carts deleteCart(int id) {
