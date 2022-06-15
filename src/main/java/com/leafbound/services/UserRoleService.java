@@ -1,8 +1,6 @@
 package com.leafbound.services;
 
-package com.leafbound.models.UserRole;
-
-import java.util.List;
+import com.leafbound.models.UserRole;
 
 public interface UserRoleService {
 

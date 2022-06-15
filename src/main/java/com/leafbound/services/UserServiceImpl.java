@@ -1,18 +1,19 @@
 package com.leafbound.services;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;
 import com.leafbound.repositories.UserRepository;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
