@@ -28,7 +28,7 @@ public class Product {
 	    notes="an Integer value that serves as the unique identier for any product entity",
 	    required = true,
 	    value = "1")
-		private int id;
+	private int id;
 	
 	@Column(name="author", nullable=false)
 	  @ApiModelProperty(name="author", 
