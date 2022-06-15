@@ -1,10 +1,14 @@
 package com.leafbound.controllers;
 
+import java.security.InvalidKeyException;
 import java.util.List;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.leafbound.models.User;
+import com.leafbound.models.UserDTO;
+import com.leafbound.services.JwtService;
 import com.leafbound.services.UserService;
 
 import io.swagger.annotations.Api;
@@ -30,14 +37,9 @@ public class UserController {
 
 	@Autowired
 	private UserService service;
-
-	@PostMapping("/CreateUser")
-	public @ResponseBody String createUser(@RequestBody User user) {
-		log.info("Creating user");
-
-		return (service.createUser(user)) ? "User created successfully" : "Error creating user";
-
-	}
+	
+	@Autowired
+	private JwtService jwtService;
 
 	@GetMapping("/GetUser")
 	public @ResponseBody User readById(UUID id) {
@@ -70,13 +72,25 @@ public class UserController {
 	public @ResponseBody User login(@RequestBody User user) {
 		log.info("Loggin in");
 		return service.login(user);
-
+		
 	}
 
 	@PostMapping("/Register")
-	public @ResponseBody User register(@RequestBody User user) {
+	public ResponseEntity<String> register(@RequestBody UserDTO userDTO) {
 		log.info("Register user");
-		return service.register(user);
-
+		HttpHeaders responseHeaders = new HttpHeaders();
+		userDTO = service.createUser(userDTO);
+		try {
+			String jwt = jwtService.createJwt(userDTO);
+			responseHeaders.set("X-Auth-Token", "Bearer " + jwt);
+			responseHeaders.set("Access-Control-Expose-Headers", "X-Auth-Token");
+		} catch (InvalidKeyException | JsonProcessingException e) {
+			log.debug("Register JWT threw an error " + e.getMessage()); 
+			return new ResponseEntity<>("Unauthorized user", HttpStatus.UNAUTHORIZED);
+		}
+		return ResponseEntity.ok()
+				.headers(responseHeaders)
+				.body("Login successful");
+		
 	}
 }

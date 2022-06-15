@@ -6,6 +6,7 @@ import java.security.InvalidKeyException;
 import java.security.Key;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,6 +18,7 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
+@Service
 public class JwtServiceImpl implements JwtService {
 
     private Logger logger = Logger.getLogger(JwtServiceImpl.class);
@@ -30,14 +32,9 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public String createJwt(User user) throws InvalidKeyException, JsonProcessingException {
+    public String createJwt(UserDTO userDTO) throws InvalidKeyException, JsonProcessingException {
         logger.info("Within the JwtServiceImpl.createJwt mwthod.");
-        logger.debug(user.toString());
-
-        // Transform the user into a UserDTO object
-        UserDTO userDTO = new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(),
-                user.getEmail(), user.getRoleId());
-        logger.debug(userDTO.toString());
+        logger.info(userDTO.toString());
 
         // Create the JWT from the UserDTO
         return Jwts.builder()

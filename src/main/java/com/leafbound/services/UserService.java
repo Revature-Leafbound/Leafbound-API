@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 import com.leafbound.models.User;
+import com.leafbound.models.UserDTO;
 
 public interface UserService {
-	boolean createUser(User user);
+	UserDTO createUser(UserDTO userDTO);
 
 	User getUserById(UUID id);
 

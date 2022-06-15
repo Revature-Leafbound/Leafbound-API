@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.leafbound.models.User;
+import com.leafbound.models.UserDTO;
 import com.leafbound.repositories.UserRepository;
 
 @Service
@@ -20,9 +21,16 @@ public class UserServiceImpl implements UserService {
 	private UserRepository repository;
 
 	@Override
-	public boolean createUser(User user) {
+	public UserDTO createUser(UserDTO userDTO) {
+		User user = new User();
+		user.setFirstName(userDTO.getFirstName());
+		user.setLastName(userDTO.getLastName());
+		user.setPassword(userDTO.getPassword());
+		user.setEmail(userDTO.getEmail());
+		user.setRoleId(userDTO.getRoleId());
 		UUID pk = repository.save(user).getId();
-		return (pk != null);
+		userDTO.setId(pk);
+		return userDTO;
 	}
 
 	@Override

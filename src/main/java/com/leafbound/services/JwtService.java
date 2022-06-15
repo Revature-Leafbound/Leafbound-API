@@ -8,7 +8,7 @@ import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;
 
 public interface JwtService {
-    public String createJwt(User user) throws InvalidKeyException, JsonProcessingException;
+    public String createJwt(UserDTO userDTO) throws InvalidKeyException, JsonProcessingException;
 
     public UserDTO getDTO(String jwt);
 
