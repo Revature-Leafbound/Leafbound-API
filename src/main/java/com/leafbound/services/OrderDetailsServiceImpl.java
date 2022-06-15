@@ -23,7 +23,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     private ProductService productService;
 
     @Override
-    public boolean create(OrderDetailsDTO orderDetailsDTO) {
+    public boolean add(OrderDetailsDTO orderDetailsDTO) {
 
         // Create a new OrderDetails object
         OrderDetails orderDetails = new OrderDetails();

@@ -12,10 +12,10 @@ import com.leafbound.models.User;
 import com.leafbound.repositories.UserRepository;
 
 @Service
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
-	
+
 	@Autowired
 	private UserRepository repository;
 
@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean deleteUser(UUID id) {
 		try {
-		this.getUserById(id);
-		repository.deleteById(id);
+			this.getUserById(id);
+			repository.deleteById(id);
 		} catch (IllegalArgumentException e) {
 			logger.warn("Unable to delete user: " + e.getMessage());
 			return false;

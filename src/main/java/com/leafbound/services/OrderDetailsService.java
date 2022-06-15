@@ -7,7 +7,7 @@ import com.leafbound.models.OrderDetailsDTO;
 
 public interface OrderDetailsService {
 
-    public boolean create(OrderDetailsDTO orderDetailsDTO);
+    public boolean add(OrderDetailsDTO orderDetailsDTO);
 
     public List<OrderDetailsDTO> getByOrderId(UUID orderId);
 
