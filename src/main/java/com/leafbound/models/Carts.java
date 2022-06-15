@@ -38,15 +38,14 @@ public class Carts {
     @ApiModelProperty(name = "carts_product_id", value = "An integer value that serves as the product id for the product.", required = true)
     private Products product;
 
-    @Column(name = "quantity", nullable = false)
-    @ApiModelProperty(name = "quantity", value = "An integer value describing the quantity of a product.", required = true)
-    private int quantity;
-
     @OneToOne
     @JoinColumn(name = "customer_id", unique = true, nullable = false)
     @ApiModelProperty(name = "carts_users_id", value = "An integer value that serves as the customer id for the user.", required = true)
-    private User user;
+    private User user;    
 
+    @Column(name = "quantity", nullable = false)
+    @ApiModelProperty(name = "quantity", value = "An integer value describing the quantity of a product.", required = true)
+    private int quantity;
 
 
     public Carts() {
