@@ -66,18 +66,10 @@ public class UserController {
 			@PathVariable String id) {
 		log.info("Deleting user");
 
-		try {
-			UserDTO userDTO = jwtService.getDTO(authorization.replace("Bearer ", ""));
+		// TODO: Rework the lockout
+		// UserDTO userDTO = jwtService.getDTO(authorization.replace("Bearer ", ""));
 
-			if (userDTO != null && userDTO.getRole().getRole().equals("admin")) {
-				return service.deleteUser(id) ? "DELETION_SUCCESSFUL" : "DELETION_FAILED";
-			} else {
-				return "DELETION_FAILED";
-			}
-		} catch (InvalidKeyException e) {
-			return "DELETION_FAILED";
-		}
-		// TODO: Return proper response
+		return service.deleteUser(id) ? "DELETION_SUCCESSFUL" : "DELETION_FAILED";
 	}
 
 	@GetMapping("/Login")
