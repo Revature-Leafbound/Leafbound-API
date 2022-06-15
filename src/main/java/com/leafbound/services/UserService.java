@@ -15,7 +15,7 @@ public interface UserService {
 
 	boolean updateUser(User user);
 
-	boolean deleteUser(UUID id);
+	boolean deleteUser(String id);
 
 	UserDTO login(UserDTO userDTO);
 }

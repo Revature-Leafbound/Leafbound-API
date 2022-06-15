@@ -63,10 +63,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean deleteUser(UUID id) {
+	public boolean deleteUser(String id) {
+		UUID userAsUUID = UUID.fromString(id);
 		try {
-			this.getUserById(id);
-			repository.deleteById(id);
+			repository.deleteById(userAsUUID);
 		} catch (IllegalArgumentException e) {
 			logger.warn("Unable to delete user: " + e.getMessage());
 			return false;

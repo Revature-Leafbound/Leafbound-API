@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;
 import com.leafbound.services.JwtService;
@@ -61,11 +62,23 @@ public class UserController {
 
 	}
 
-	@DeleteMapping("/DeleteUser")
-	public @ResponseBody String deleteUser(@RequestBody UUID id) {
+	@DeleteMapping("/DeleteUser/{id}")
+	public @ResponseBody String deleteUser(@RequestHeader("Authorization") String authorization,
+			@PathVariable String id) {
 		log.info("Deleting user");
-		return (service.deleteUser(id)) ? "Delete successful" : "Delete failed";
 
+		try {
+			UserDTO userDTO = jwtService.getDTO(authorization.replace("Bearer ", ""));
+
+			if (userDTO != null && userDTO.getRole().getRole().equals("admin")) {
+				return service.deleteUser(id) ? "DELETION_SUCCESSFUL" : "DELETION_FAILED";
+			} else {
+				return "DELETION_FAILED";
+			}
+		} catch (InvalidKeyException e) {
+			return "DELETION_FAILED";
+		}
+		// TODO: Return proper response
 	}
 
 	@GetMapping("/Login")
