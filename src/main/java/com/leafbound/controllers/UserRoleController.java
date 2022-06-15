@@ -31,44 +31,38 @@ public class UserRoleController {
     @Autowired
 	private UserRoleServiceImpl service;
 
-    @GetMapping("/GetRoles")
-	public @ResponseBody List<UserRole> readAllUserRoles() {
-		log.info("Getting all users");
-		return service.getAllUsers();
-	}
-}
-
-/*
-
     @GetMapping("/roles")
-    @ApiOperation(value = "Find all user roles.", notes = "Provides a list of all user roles from the API", response = UserRole.class)
-    public @ResponseBody List<UserRole> getAll() {
-        return service.getAll();
-    }
+    @ApiOperation(value = "Find all user roles.", response = UserRole.class)
+	public @ResponseBody List<UserRole> readAllUserRoles() {
+		log.info("Getting all user roles");
+		return service.getAll();
+	}
 
-    @ApiOperation(value = "Find user role by id number", notes = "Provide an id to lookup a specific user role from the API", response = UserRole.class)
     @GetMapping("/role")
-    public @ResponseBody UserRole getById(@RequestParam(value = "id") int id) {
+    @ApiOperation(value = "Find user role by id number", response = UserRole.class)
+    public @ResponseBody UserRole readById(@RequestBody int id) {
+        log.info("Getting user role with id: " + id);
         return service.getById(id);
     }
 
-    @PostMapping(path = "/role")
-    @ApiOperation(value = "Create new user role entity", notes = "Add a new user role in the API.")
-    public @ResponseBody ClientMessage createUserRole(@RequestBody UserRole userRole) throws Exception {
-        return service.add(userRole) ? CREATION_SUCCESSFUL : CREATION_FAILED;
+    @PostMapping("/role")
+    @ApiOperation(value = "Create new user role entity")
+    public @ResponseBody String createUserRole(@RequestBody UserRole userRole) {
+        log.info("Creating user role");
+        return (service.add(userRole)) ? "User Role created successfullly." : "Error creating user role.";
     }
 
-    @PatchMapping("/role")
-    @ApiOperation(value = "Update user role entity by id.", notes = "Provide an id to update a specific user role in the API.")
-    public @ResponseBody ClientMessage updateUserRole(@RequestParam(name= "id") int id, @RequestBody UserRole userRole) {
-        return service.edit(id, userRole) ? UPDATE_SUCCESSFUL : UPDATE_FAILED;
-    }
+    // @PatchMapping("/role")
+    // @ApiOperation(value = "Update user role entity by id.")
+    // public @ResponseBody UserRole updateUserRole(@RequestBody int id, UserRole userRole) {
+    //     return service.edit(id, userRole) ? "User role updated successfully" : "User role update failed";
+    // }
 
     @DeleteMapping("/role")
-    @ApiOperation(value = "Remove user role entity by ID.", notes = "Provide an id to remove a specific user role from the API")
-    public @ResponseBody ClientMessage deleteUserRole(@RequestParam(name = "id") int id) {
-        return service.remove(id) ? DELETION_SUCCESSFUL : DELETION_FAILED;
+    @ApiOperation(value = "Remove user role entity by ID.")
+    public @ResponseBody String deleteUserRole(@RequestBody int id) {
+        log.info("Deleting user role");
+        return (service.remove(id)) ? "Delete successful" : "Delete failed";
     }
 }
 
- */
