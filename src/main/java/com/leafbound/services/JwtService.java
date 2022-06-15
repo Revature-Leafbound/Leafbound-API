@@ -11,5 +11,5 @@ public interface JwtService {
 
     public UserDTO parseJwt(String jwt) throws IOException;
 
-    public String createJWT(UserDTO userDTO) throws InvalidKeyException, io.jsonwebtoken.security.InvalidKeyException;;
+    public String createJWT(UserDTO userDTO) throws InvalidKeyException, io.jsonwebtoken.security.InvalidKeyException;
 }
