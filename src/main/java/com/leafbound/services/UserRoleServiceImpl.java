@@ -15,11 +15,6 @@ public class UserRoleServiceImpl implements UserRoleService {
     private UserRoleRepository repository;
 
     @Override
-    public List<UserRole> getAll() {
-        return repository.findAll();
-    }
-
-    @Override
     public UserRole getById(int id) {
         return repository.findById(id);
     }
@@ -29,13 +24,6 @@ public class UserRoleServiceImpl implements UserRoleService {
         int pk = repository.save(userRole).getId();
         return (pk > 0) ? true : false;
     }
-
-    // @Override
-    // public boolean edit(int id, UserRole userRole) {
-    //     UserRole target = repository.findById(id);
-    //     target.setRole(userRole.getRole());
-    //     return (repository.save(target) != null) ? true : false;
-    // }
 
     @Override
     public boolean remove(int id) {
