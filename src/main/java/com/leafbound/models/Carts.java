@@ -17,7 +17,7 @@ import lombok.Data;
 @Table(name = "carts")
 @Data
 @ApiModel(value = "carts", description = "This model serves as the basic model for all carts entity API operations.")
-public class Cart {
+public class Carts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,18 +39,18 @@ public class Cart {
     @ApiModelProperty(name = "quantity", value = "An integer value describing the quantity of a product.", required = true)
     private int quantity;
 
-    public Cart() {
+    public Carts() {
         super();
     }
 
-    public Cart(int id, Product product, int quantity, User user) {
+    public Carts(int id, Product product, int quantity, User user) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
         this.user = user;
     }
 
-    public Cart(Product product, int quantity, User user) {
+    public Carts(Product product, int quantity, User user) {
         this.product = product;
         this.quantity = quantity;
         this.user = user;

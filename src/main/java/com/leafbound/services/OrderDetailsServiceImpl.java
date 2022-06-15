@@ -30,7 +30,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
         OrderDetails orderDetails = new OrderDetails();
 
         // Get the product
-        Product product = productService.getById(orderDetailsDTO.getProductId());
+        Product product = productService.getProductById(orderDetailsDTO.getProductId());
 
         // Get the order
         Order order = orderService.getOrderById(orderDetailsDTO.getOrderId());
@@ -80,7 +80,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
         Order order = orderService.getOrderById(orderDetailsDTO.getOrderId());
 
         // Get the product object
-        Product product = productService.getById(orderDetailsDTO.getProductId());
+        Product product = productService.getProductById(orderDetailsDTO.getProductId());
 
         // Get the order details
         OrderDetails orderDetails = repository.findById(orderDetailsDTO.getId()).get();

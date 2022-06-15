@@ -7,15 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.leafbound.models.Product;
 
-
-
 @Repository
 @Transactional
-public interface ProductRepository extends JpaRepository<Product, Integer>{
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 	// get all product info from id
-	@Query(value="SELECT * FROM products where id=?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM products where id=?1", nativeQuery = true)
 	public Product findById(int id);
-	
-	
+
 }
