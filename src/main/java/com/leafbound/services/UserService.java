@@ -17,7 +17,5 @@ public interface UserService {
 
 	boolean deleteUser(UUID id);
 
-	User login(User user);
-
-	User register(User user);
+	UserDTO login(UserDTO userDTO);
 }

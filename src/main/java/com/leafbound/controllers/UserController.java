@@ -69,27 +69,37 @@ public class UserController {
 	}
 
 	@GetMapping("/Login")
-	public @ResponseBody User login(@RequestBody UserDTO userDTO) {
-		
+	public ResponseEntity<String> login(@RequestBody UserDTO userDTO) {
+
 		// Create a new HttpHeader object
-		HttpHeaders headers = new HttpHeaders();
+		HttpHeaders responseHeaders = new HttpHeaders();
 
 		// Goal confirm the credential form the request
-	
+		try {
 			// Update the current userDTO with a completed userDTO
 			userDTO = service.login(userDTO);
-	
+		} catch (IllegalArgumentException e) {
+			log.error("Invalid credentials");
+			// Return a bad request
+			return new ResponseEntity<>("Unauthorized user", HttpStatus.UNAUTHORIZED);
+		}
 
-		
 		// create a jwt to send back
-		try{
-			//Create a string for the JWT
-			//createJwt(UserDTO userDTO)
+		try {
+			// Create a string for the JWT
 			String jwt = jwtService.createJWT(userDTO);
 
-
+			// Set Headers
+			responseHeaders.set("X-Auth-Token", "Bearer " + jwt);
+			responseHeaders.set("Access-Control-Expose-Headers", "X-Auth-Token");
+		} catch (InvalidKeyException e) {
+			log.debug("Error in login: " + e.getMessage());
 		}
-		
+
+		// Return a created status
+		return ResponseEntity.ok()
+				.headers(responseHeaders)
+				.body("Login successful");
 	}
 
 	@PostMapping("/Register")
@@ -102,12 +112,12 @@ public class UserController {
 		// Goal confirm the credential form the request
 		userDTO = service.createUser(userDTO);
 
-		// create a jwt to send back
+		// Create a jwt to send back
 		try {
-			String jwt = jwtService.createJwt(userDTO);
+			String jwt = jwtService.createJWT(userDTO);
 			responseHeaders.set("X-Auth-Token", "Bearer " + jwt);
 			responseHeaders.set("Access-Control-Expose-Headers", "X-Auth-Token");
-		} catch (InvalidKeyException | JsonProcessingException e) {
+		} catch (InvalidKeyException e) {
 			log.debug("Register JWT threw an error " + e.getMessage());
 
 			// Return a bad request
@@ -117,7 +127,7 @@ public class UserController {
 		// Return a created status
 		return ResponseEntity.ok()
 				.headers(responseHeaders)
-				.body("Login successful");
+				.body("Registration successful");
 
 	}
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;
 
 import io.jsonwebtoken.Claims;
@@ -32,15 +31,20 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public String createJwt(UserDTO userDTO) throws InvalidKeyException, JsonProcessingException {
+    public String createJWT(UserDTO userDTO)
+            throws InvalidKeyException, io.jsonwebtoken.security.InvalidKeyException {
         logger.info("Within the JwtServiceImpl.createJwt mwthod.");
         logger.info(userDTO.toString());
 
         // Create the JWT from the UserDTO
-        return Jwts.builder()
-                .claim("user_dto", new ObjectMapper().writeValueAsString(userDTO))
-                .signWith(key)
-                .compact();
+        try {
+            return Jwts.builder()
+                    .claim("user_dto", new ObjectMapper().writeValueAsString(userDTO))
+                    .signWith(key)
+                    .compact();
+        } catch (JsonProcessingException e) {
+            throw new InvalidKeyException("JsonProcessingException: " + e.getMessage());
+        }
     }
 
     @Override
