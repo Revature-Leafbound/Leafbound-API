@@ -42,4 +42,9 @@ public class ProductServiceImpl implements ProductService{
 		return true;
 	}
 
+	@Override
+	public List<Product> getAllProductsGenre(String genre) {
+		return productRepo.findAllByGenre(genre);
+	}
+
 }

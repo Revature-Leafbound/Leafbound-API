@@ -37,6 +37,13 @@ public class ProductController {
 		return productServ.getAllProducts();
 	}
 	
+	//get all products by genre
+	@GetMapping("/product")
+	@ApiOperation(value="Find all products by genre")
+	public @ResponseBody List<Product> getAll(String genre){
+		return productServ.getAllProductsGenre(genre);
+	}
+	
 	//create new product
 	@PostMapping("/product")
 	@ApiOperation(value="create new product entity")

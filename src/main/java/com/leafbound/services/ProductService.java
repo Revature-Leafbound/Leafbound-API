@@ -15,4 +15,6 @@ public interface ProductService {
 	
 	boolean deleteProduct(Product product);
 	
+	List<Product> getAllProductsGenre(String genre);
+	
 }
