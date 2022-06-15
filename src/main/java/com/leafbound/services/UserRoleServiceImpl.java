@@ -38,7 +38,6 @@ public class UserRoleServiceImpl implements UserRoleService {
     // }
 
     @Override
-    //@Transactional(rollbackFor = Exception.class)
     public boolean remove(int id) {
         try {
             repository.delete(id);
