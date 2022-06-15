@@ -29,14 +29,7 @@ public class UserRoleController {
     private static Logger log = Logger.getLogger(UserController.class);
 
     @Autowired
-	private UserRoleServiceImpl service;
-
-    @GetMapping("/roles")
-    @ApiOperation(value = "Find all user roles.", response = UserRole.class)
-	public @ResponseBody List<UserRole> readAllUserRoles() {
-		log.info("Getting all user roles");
-		return service.getAll();
-	}
+    private UserRoleServiceImpl service;
 
     @GetMapping("/role")
     @ApiOperation(value = "Find user role by id number", response = UserRole.class)
@@ -51,12 +44,6 @@ public class UserRoleController {
         log.info("Creating user role");
         return (service.add(userRole)) ? "User Role created successfullly." : "Error creating user role.";
     }
-
-    // @PatchMapping("/role")
-    // @ApiOperation(value = "Update user role entity by id.")
-    // public @ResponseBody UserRole updateUserRole(@RequestBody int id, UserRole userRole) {
-    //     return service.edit(id, userRole) ? "User role updated successfully" : "User role update failed";
-    // }
 
     @DeleteMapping("/role")
     @ApiOperation(value = "Remove user role entity by ID.")
