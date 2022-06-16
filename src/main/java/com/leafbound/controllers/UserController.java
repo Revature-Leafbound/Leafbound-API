@@ -36,6 +36,8 @@ public class UserController {
 
 	private static Logger log = Logger.getLogger(UserController.class);
 
+	private String X_AUTH_TOKEN = "X-Auth-Token";
+
 	@Autowired
 	private UserServiceImpl service;
 
@@ -94,8 +96,8 @@ public class UserController {
 			String jwt = jwtService.createJWT(userDTO);
 
 			// Set Headers
-			responseHeaders.set("X-Auth-Token", "Bearer " + jwt);
-			responseHeaders.set("Access-Control-Expose-Headers", "X-Auth-Token");
+			responseHeaders.set(X_AUTH_TOKEN, "Bearer " + jwt);
+			responseHeaders.set("Access-Control-Expose-Headers", X_AUTH_TOKEN);
 		} catch (InvalidKeyException e) {
 			log.debug("Error in login: " + e.getMessage());
 		}
@@ -119,8 +121,8 @@ public class UserController {
 		// Create a jwt to send back
 		try {
 			String jwt = jwtService.createJWT(userDTO);
-			responseHeaders.set("X-Auth-Token", "Bearer " + jwt);
-			responseHeaders.set("Access-Control-Expose-Headers", "X-Auth-Token");
+			responseHeaders.set(X_AUTH_TOKEN, "Bearer " + jwt);
+			responseHeaders.set("Access-Control-Expose-Headers", X_AUTH_TOKEN);
 		} catch (InvalidKeyException e) {
 			log.debug("Register JWT threw an error " + e.getMessage());
 
