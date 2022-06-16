@@ -41,15 +41,17 @@ public class OrderController {
 	
 	}
 	
-//	@GetMapping(path = "/orderdate")
-//	@ApiOperation(value="Getting order by date")
-//	public @ResponseBody List<Order> getByDate(@RequestParam ChronoLocalDate date) {
-//		 
-//		 log.info("finding all orders by Id in controller...");
-//		 
-//		 return oserv.getOrderByDate(date);
-//		 
-//	}
+	@GetMapping(path = "/orderdate")
+	@ApiOperation(value="Getting order by date")
+	public @ResponseBody Order getByDate() {
+		
+		log.info("finding order by date in controller...");
+		
+		
+		return oserv.getOrderByDate(null);
+	}
+	
+
 	
 	@GetMapping(path = "/orderall")
 	@ApiOperation(value="Getting all orders")

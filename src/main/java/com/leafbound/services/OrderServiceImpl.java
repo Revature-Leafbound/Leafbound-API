@@ -1,5 +1,6 @@
 package com.leafbound.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,17 +21,18 @@ public class OrderServiceImpl implements OrderService{
 	public Order getOrderById(UUID id) {
 		
 		return orepo.findById(id).get();
+		
 	}
 
 	@Override
-	public Order getOrderByDate(Order order) {
+	public Order getOrderByDate(LocalDate orderDate) {
 		
-		return orepo.findByDate(order);
+		return orepo.findByDate(orderDate);
 	}
-
+	
 	@Override
 	public List<Order> getAllOrders() {
-		// TODO Auto-generated method stub
+		
 		return orepo.findAll();
 	}
 
@@ -38,7 +40,6 @@ public class OrderServiceImpl implements OrderService{
 	public boolean updateOrder(Order order) {
 		Order target = this.getOrderById(order.getId());
 		target.setOrderDate(order.getOrderDate());
-		
 		return (orepo.save(target)!= null);
 	}
 
@@ -47,5 +48,10 @@ public class OrderServiceImpl implements OrderService{
 		orepo.delete(order);
 		return true;
 	}
+
+
+	
+
+	
 
 }
