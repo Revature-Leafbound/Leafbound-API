@@ -1,5 +1,6 @@
 package com.leafbound.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,7 +10,7 @@ public interface OrderService {
 	
 	Order getOrderById(UUID id);
 	
-	Order getOrderByDate(Order order);
+	Order getOrderByDate(LocalDate orderDate);
 	
 	List<Order> getAllOrders();
 	
