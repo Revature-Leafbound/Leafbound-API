@@ -24,7 +24,7 @@ public class JwtServiceImpl implements JwtService {
 
     private Key key;
 
-    public JwtServiceImpl(Key key) {
+    public JwtServiceImpl() {
         byte[] secret = System.getenv("Leafbound_JWT_Secret").getBytes();
         this.key = key;
         key = Keys.hmacShaKeyFor(secret);
