@@ -26,7 +26,7 @@ public class CartServiceImpl implements CartService {
 		try {
 			repository.deleteById(id);
 		} catch (IllegalArgumentException e) {
-			logger.warn("Unable to delete user: " + e.getMessage());
+			logger.warn("Unable to delete cart: " + e.getMessage());
 			return false;
 		}
 		return true;
