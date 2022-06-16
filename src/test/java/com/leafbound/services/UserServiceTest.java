@@ -20,6 +20,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;
@@ -32,20 +33,22 @@ import com.leafbound.services.UserRoleServiceImpl;
 @ExtendWith(MockitoExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserServiceTest {
-	@Mock
+	@Mock(name="UserRepo")
 	private static UserRepository mockrepo;
 
 	@InjectMocks
+	@Qualifier(value = "UserRepo")
 	private static UserServiceImpl uServ;
 	
 	private static User u1, u2;
 	private static UserDTO dummyTransfer;
 	static List<User> dummyDB;
 	
-	@Mock
+	@Mock(name="RoleRepo")
 	private static UserRoleRepository mockrole;
 	
 	@InjectMocks
+	@Qualifier(value="RoleRepo")
 	private static UserRoleServiceImpl rServ;
 	
 	private static UserRole role;
@@ -76,6 +79,11 @@ public class UserServiceTest {
 		u1.setFirstName("Levi");
 		u1.setLastName("Choi");
 		u1.setPassword("Badpassword");
+		
+		
+		//sanity test
+		mockrole.findById(0);
+		rServ.add(role);
 		u1.setUserRole(rServ.getById(0));
 		tempId = UUID.fromString("22c2db34-749c-45f0-a066-f3bd03bad995");
 		u2 = new User();
@@ -131,10 +139,10 @@ public class UserServiceTest {
 	@Order(3)
 	@DisplayName("3. Get User By Id")
 	void testGetUserById() {
-		when(uServ.getUserById(u1.getId())).thenReturn(u1);
+		when(uServ.getUserById(u1.getId().toString())).thenReturn(u1);
 		log.info("user id: " + u1.getId());
 		
-		assertEquals(u1, uServ.getUserById(u1.getId()));
+		assertEquals(u1, uServ.getUserById(u1.getId().toString()));
 	}
 	
 	@Test
