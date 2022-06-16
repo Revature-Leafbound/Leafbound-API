@@ -27,14 +27,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.leafbound.util.ClientMessageUtil;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import com.leafbound.models.Cart;
 import com.leafbound.models.Product;
 import com.leafbound.models.User;
 import com.leafbound.services.CartService;
-import com.leafbound.services.CartServiceTest;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(CartController.class)
@@ -68,16 +66,10 @@ class CartControllerTest {
         Random rand = new Random();
         int maxNumber = 100_000_000;
         int id1 = rand.nextInt(maxNumber) + 1;
-		int id2 = rand.nextInt(maxNumber) + 1;
-        int id3 = rand.nextInt(maxNumber) + 1;
-        int prodId1 = rand.nextInt(maxNumber) + 1;
-		int prodId2 = rand.nextInt(maxNumber) + 1; 
-        int custId1 = rand.nextInt(maxNumber) + 1;
-		int custId2 = rand.nextInt(maxNumber) + 1;        
+		int id2 = rand.nextInt(maxNumber) + 1;     
 
 		mockCart1 = new Cart(id1, mockProd1, 3, mockUser1);
 		mockCart2 = new Cart(id2, mockProd2, 20, mockUser2);
-
 
 		mockCartDeletion = new Cart(567, mockProd3, 5, mockUser3);
 

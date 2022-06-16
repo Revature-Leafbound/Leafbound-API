@@ -109,12 +109,6 @@ public class CartServiceTest {
         assertEquals(false, cartService.addtoCart(mockCart3));
     }
 
-
-
-
-
-
-
     @Test
     @Order(4)
     @DisplayName("4. Delete Cart Test - success")
@@ -130,9 +124,5 @@ public class CartServiceTest {
         when(cartRepo.deleteById(999)).thenReturn(false);
         assertNotNull(cartService.getById(999));
     }
-
-
-
-
     
 }
