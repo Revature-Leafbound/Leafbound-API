@@ -27,7 +27,7 @@ public class Cart {
 
     @OneToOne
     @JoinColumn(name = "product_id", unique = true, nullable = false)
-    @ApiModelProperty(name = "carts_product_id", value = "An integer value that serves as the product id for the product.", required = true)
+    @ApiModelProperty(name = "carts_products_id", value = "An integer value that serves as the product id for the product.", required = true)
     private Product product;
 
     @OneToOne
