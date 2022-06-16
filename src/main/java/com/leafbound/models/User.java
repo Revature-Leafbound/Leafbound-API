@@ -48,5 +48,5 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name = "role_id", nullable = false)
 	@ApiModelProperty(name = "role id", notes = "An integer value that serves as the role id for the user", required = true, value = "role id")
-	private UserRole roleId;
+	private UserRole userRole;
 }

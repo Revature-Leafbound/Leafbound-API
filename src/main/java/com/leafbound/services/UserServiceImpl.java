@@ -21,6 +21,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository repository;
 
+	@Autowired
+	private UserRoleServiceImpl userRoleService;
+
 	@Override
 	public UserDTO createUser(UserDTO userDTO) {
 
@@ -32,7 +35,7 @@ public class UserServiceImpl implements UserService {
 		user.setLastName(userDTO.getLastName());
 		user.setPassword(userDTO.getPassword());
 		user.setEmail(userDTO.getEmail());
-		user.setRoleId(userDTO.getRoleId());
+		user.setUserRole(userRoleService.getById(userDTO.getRoleId()));
 
 		// Save the user to the DB
 		UUID pk = repository.save(user).getId();
@@ -54,12 +57,18 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean updateUser(User user) {
+
+		// Get the user from the DB
 		User target = this.getUserById(user.getId());
+
+		// Update the user
 		target.setFirstName(user.getFirstName());
 		target.setLastName(user.getLastName());
 		target.setPassword(user.getPassword());
 		target.setEmail(user.getEmail());
-		target.setRoleId(user.getRoleId());
+		target.setUserRole(user.getUserRole());
+
+		// Save the user to the DB
 		return (repository.save(target) != null);
 	}
 
