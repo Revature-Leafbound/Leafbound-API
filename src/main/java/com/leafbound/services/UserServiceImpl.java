@@ -45,9 +45,15 @@ public class UserServiceImpl implements UserService {
 		return userDTO;
 	}
 
+	/**
+	 * Update the user with the given ID.
+	 * 
+	 * @param id The ID of the user to update.
+	 */
 	@Override
-	public User getUserById(UUID id) {
-		return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+	public User getUserById(String id) {
+		UUID uuid = UUID.fromString(id);
+		return repository.findById(uuid).orElseThrow(() -> new IllegalArgumentException("User not found"));
 	}
 
 	@Override
@@ -59,7 +65,7 @@ public class UserServiceImpl implements UserService {
 	public boolean updateUser(User user) {
 
 		// Get the user from the DB
-		User target = this.getUserById(user.getId());
+		User target = this.getUserById(user.getId().toString());
 
 		// Update the user
 		target.setFirstName(user.getFirstName());

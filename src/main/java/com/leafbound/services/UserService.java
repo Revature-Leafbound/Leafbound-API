@@ -9,7 +9,7 @@ import com.leafbound.models.UserDTO;
 public interface UserService {
 	UserDTO createUser(UserDTO userDTO);
 
-	User getUserById(UUID id);
+	User getUserById(String id);
 
 	List<User> getAllUsers();
 
