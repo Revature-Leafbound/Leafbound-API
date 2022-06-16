@@ -27,6 +27,7 @@ import com.leafbound.services.JwtServiceImpl;
 import com.leafbound.services.UserServiceImpl;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -44,8 +45,8 @@ public class UserController {
 	@Autowired
 	private JwtServiceImpl jwtService;
 
-	@GetMapping("/GetUser")
-	public @ResponseBody User readById(UUID id) {
+	@GetMapping("/GetUser/{id}")
+	public @ResponseBody User readById(@PathVariable String id) {
 		log.info("Getting user with id: " + id);
 		return service.getUserById(id);
 	}
