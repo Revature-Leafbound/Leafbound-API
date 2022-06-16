@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -45,6 +46,9 @@ class CartControllerTest {
 	private static Cart mockCartCreation;
 	private static Cart mockCartDeletion;
 	private static List<Cart> dummyDB;
+
+	public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(),
+	MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));	
 
 	ObjectMapper om = new ObjectMapper()
 			.registerModule(new JavaTimeModule())

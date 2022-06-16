@@ -38,7 +38,6 @@ import com.leafbound.services.CartServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-
 public class CartServiceTest {
 
     @Mock
