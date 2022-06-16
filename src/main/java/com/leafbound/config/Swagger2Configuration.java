@@ -20,7 +20,7 @@ public class Swagger2Configuration {
     public Docket swaggerConfiguration() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .paths(PathSelectors.ant("/api/v1/*"))
+                .paths(PathSelectors.ant("/api/v1/**"))
                 .apis(RequestHandlerSelectors.basePackage("com.leafbound"))
                 .build()
                 .enableUrlTemplating(true)
