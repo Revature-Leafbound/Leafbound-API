@@ -55,10 +55,10 @@ public class UserController {
 	}
 
 	@PatchMapping("/UpdateUser")
-	public @ResponseBody String updateUser(@RequestBody User user) {
+	public @ResponseBody String updateUser(@RequestBody UserDTO userDTO) {
 		log.info("Updating user");
 
-		return (service.updateUser(user)) ? "Update successful" : "Update failed";
+		return (service.updateUser(userDTO)) ? "Update successful" : "Update failed";
 	}
 
 	@DeleteMapping("/DeleteUser/{id}")

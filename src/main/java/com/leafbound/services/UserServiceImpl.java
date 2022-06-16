@@ -56,14 +56,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean updateUser(UserDTO user) {
+	public boolean updateUser(UserDTO userDTO) {
 
-		User target = this.getUserById(user.getId());
-		target.setFirstName(user.getFirstName());
-		target.setLastName(user.getLastName());
-		target.setPassword(user.getPassword());
-		target.setEmail(user.getEmail());
-		target.setRoleId(userRoleService.getById(userDTO.getRoleId()));
+		// Get the user from the DB
+		User target = this.getUserById(userDTO.getId());
+
+		// Update the user from the DTO
+		target.setFirstName(userDTO.getFirstName());
+		target.setLastName(userDTO.getLastName());
+		target.setPassword(userDTO.getPassword());
+		target.setEmail(userDTO.getEmail());
+		target.setUserRole(userRoleService.getById(userDTO.getRoleId()));
+
+		// Save the user to the DB
 		return (repository.save(target) != null);
 	}
 
