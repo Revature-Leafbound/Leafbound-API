@@ -39,7 +39,7 @@ import com.leafbound.services.CartServiceTest;
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(CartController.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CartControllerTest {
+class CartControllerTest {
 
 	private static Cart mockCart1, mockCart2;
     private static Product mockProd1, mockProd2, mockProd3;
@@ -89,7 +89,7 @@ public class CartControllerTest {
 	@Test
 	@Order(1)
 	@DisplayName("1. AppContext Sanity Test")
-	public void contextLoads() throws Exception {
+	void contextLoads() throws Exception {
 		assertThat(cartController).isNotNull();
 		assertThat(cserv).isNotNull();
 	}
@@ -97,7 +97,7 @@ public class CartControllerTest {
 	@Test
 	@Order(2)
 	@DisplayName("2. Create a new cart")
-	public void postCart_ShouldReturnSuccess() throws Exception {
+	void postCart_ShouldReturnSuccess() throws Exception {
 		when(cserv.addtoCart(mockCartCreation)).thenReturn(true);
 
 		RequestBuilder request = MockMvcRequestBuilders
@@ -114,7 +114,7 @@ public class CartControllerTest {
 	@Test
 	@Order(3)
 	@DisplayName("3. Create a new cart - failed")
-	public void postCart_ShouldReturnFailed() throws Exception {
+	void postCart_ShouldReturnFailed() throws Exception {
 
 		when(cserv.addtoCart(mockCartCreation)).thenReturn(true);
 
@@ -133,7 +133,7 @@ public class CartControllerTest {
 	@Test
 	@Order(4)
 	@DisplayName("4. Delete cart")
-	public void testDeleteCart() throws Exception {
+	void testDeleteCart() throws Exception {
 
 		when(cserv.deleteCart(8_500_001)).thenReturn(true);
 
@@ -151,7 +151,7 @@ public class CartControllerTest {
 	@Test
 	@Order(5)
 	@DisplayName("5. Delete cart - fail")
-	public void testDeleteCartFail() throws Exception {
+	void testDeleteCartFail() throws Exception {
 
 		when(cserv.deleteCart(8_500_001)).thenReturn(true);
 
