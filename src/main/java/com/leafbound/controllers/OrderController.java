@@ -67,7 +67,7 @@ public class OrderController {
 	
 	@PutMapping("/orderupdate")
 	@ApiOperation(value="Update order entity")
-	public @ResponseBody boolean updateAnimals(@RequestBody Order order) {
+	public @ResponseBody boolean updateOrder(@RequestBody Order order) {
 		
 		log.info("updating an order in controller...");
 		
@@ -77,7 +77,7 @@ public class OrderController {
 	@DeleteMapping("/orderdelete")
 	@ApiOperation(value="Remove order entity")
 
-	public @ResponseBody boolean deleteAnimals(@RequestBody Order order) {
+	public @ResponseBody boolean deleteOrder(@RequestBody Order order) {
 
 		log.info("deleting an order in controller...");
 		return oserv.deleteOrder(order);
