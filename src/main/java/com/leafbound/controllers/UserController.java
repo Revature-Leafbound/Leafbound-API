@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;
-import com.leafbound.services.JwtService;
-import com.leafbound.services.UserService;
+import com.leafbound.services.JwtServiceImpl;
+import com.leafbound.services.UserServiceImpl;
 
 import io.swagger.annotations.Api;
 
@@ -36,11 +36,13 @@ public class UserController {
 
 	private static Logger log = Logger.getLogger(UserController.class);
 
-	@Autowired
-	private UserService service;
+	private String X_AUTH_TOKEN = "X-Auth-Token";
 
 	@Autowired
-	private JwtService jwtService;
+	private UserServiceImpl service;
+
+	@Autowired
+	private JwtServiceImpl jwtService;
 
 	@GetMapping("/GetUser")
 	public @ResponseBody User readById(UUID id) {
@@ -66,18 +68,10 @@ public class UserController {
 			@PathVariable String id) {
 		log.info("Deleting user");
 
-		try {
-			UserDTO userDTO = jwtService.getDTO(authorization.replace("Bearer ", ""));
+		// TODO: Rework the lockout
+		// UserDTO userDTO = jwtService.getDTO(authorization.replace("Bearer ", ""));
 
-			if (userDTO != null && userDTO.getRole().getRole().equals("admin")) {
-				return service.deleteUser(id) ? "DELETION_SUCCESSFUL" : "DELETION_FAILED";
-			} else {
-				return "DELETION_FAILED";
-			}
-		} catch (InvalidKeyException e) {
-			return "DELETION_FAILED";
-		}
-		// TODO: Return proper response
+		return service.deleteUser(id) ? "DELETION_SUCCESSFUL" : "DELETION_FAILED";
 	}
 
 	@GetMapping("/Login")
@@ -102,8 +96,8 @@ public class UserController {
 			String jwt = jwtService.createJWT(userDTO);
 
 			// Set Headers
-			responseHeaders.set("X-Auth-Token", "Bearer " + jwt);
-			responseHeaders.set("Access-Control-Expose-Headers", "X-Auth-Token");
+			responseHeaders.set(X_AUTH_TOKEN, "Bearer " + jwt);
+			responseHeaders.set("Access-Control-Expose-Headers", X_AUTH_TOKEN);
 		} catch (InvalidKeyException e) {
 			log.debug("Error in login: " + e.getMessage());
 		}
@@ -127,8 +121,8 @@ public class UserController {
 		// Create a jwt to send back
 		try {
 			String jwt = jwtService.createJWT(userDTO);
-			responseHeaders.set("X-Auth-Token", "Bearer " + jwt);
-			responseHeaders.set("Access-Control-Expose-Headers", "X-Auth-Token");
+			responseHeaders.set(X_AUTH_TOKEN, "Bearer " + jwt);
+			responseHeaders.set("Access-Control-Expose-Headers", X_AUTH_TOKEN);
 		} catch (InvalidKeyException e) {
 			log.debug("Register JWT threw an error " + e.getMessage());
 

@@ -1,10 +1,10 @@
 package com.leafbound.services;
 
-import com.leafbound.models.Carts;
+import com.leafbound.models.Cart;
 
 public interface CartService {
-	
-	public boolean addtoCart(Carts cart);
-	
-	public Carts deleteCart(int id);
+
+	public boolean addtoCart(Cart cart);
+
+	public boolean deleteCart(int id);
 }

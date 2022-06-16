@@ -1,26 +1,35 @@
 package com.leafbound.services;
 
-import java.util.Optional;
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.leafbound.models.Carts;
+import com.leafbound.models.Cart;
 import com.leafbound.repositories.CartRepository;
 
+@Service
 public class CartServiceImpl implements CartService {
-	
+
+	private Logger logger = Logger.getLogger(CartServiceImpl.class);
+
 	@Autowired
-	private CartRepository crepo;
+	private CartRepository repository;
 
 	@Override
-	public boolean addtoCart(Carts cart) {
-		int pk = crepo.save(cart).getId();
+	public boolean addtoCart(Cart cart) {
+		int pk = repository.save(cart).getId();
 		return (pk > 0);
 	}
 
 	@Override
-	public Carts deleteCart(int id) {
-		return crepo.delete(id);
+	public boolean deleteCart(int id) {
+		try {
+			repository.deleteById(id);
+		} catch (IllegalArgumentException e) {
+			logger.warn("Unable to delete user: " + e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 }

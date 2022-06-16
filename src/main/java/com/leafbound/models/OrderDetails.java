@@ -1,18 +1,13 @@
 package com.leafbound.models;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -33,7 +28,7 @@ public class OrderDetails {
     @OneToOne
     @JoinColumn(name = "product_id", unique = true, nullable = false)
     @ApiModelProperty(name = "order_details_product_id", value = "An integer value that serves as the product id for the product.", required = true)
-    private Products product;
+    private Product product;
 
     @Column(name = "quantity", nullable = false)
     @ApiModelProperty(name = "quantity", value = "An integer value describing the quantity of a product.", required = true)
@@ -48,14 +43,14 @@ public class OrderDetails {
         super();
     }
 
-    public OrderDetails(int id, Products product, int quantity, Order order) {
+    public OrderDetails(int id, Product product, int quantity, Order order) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
         this.order = order;
     }
 
-    public OrderDetails(Products product, int quantity, Order order) {
+    public OrderDetails(Product product, int quantity, Order order) {
         this.product = product;
         this.quantity = quantity;
         this.order = order;
