@@ -32,23 +32,5 @@ public class ProductServiceImpl implements ProductService {
 		return productRepo.findById(id);
 	}
 
-	@Override
-	public Product updateProduct(Product product) {
-		Product target = productRepo.findById(product.getId());
-		product.setId(target.getId());
-		return productRepo.save(product);
-
-	}
-
-	@Override
-	public boolean deleteProduct(Product product) {
-		productRepo.delete(product);
-		return true;
-	}
-
-	@Override
-	public List<Product> getAllProductsGenre(String genre) {
-		return productRepo.findAllByGenre(genre);
-	}
 
 }

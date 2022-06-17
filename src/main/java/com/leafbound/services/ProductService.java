@@ -13,11 +13,4 @@ public interface ProductService {
 
 	Product createProduct(Product product);
 
-	Product updateProduct(Product product);
-
-	boolean deleteProduct(Product product);
-
-	List<Product> getAllProductsGenre(String genre);
-	
-
 }
