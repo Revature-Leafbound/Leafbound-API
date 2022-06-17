@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +17,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderRepository orepo;
-
-	private static Logger log = Logger.getLogger(OrderServiceImpl.class);
 
 	@Override
 	public Order getOrderById(String id) {

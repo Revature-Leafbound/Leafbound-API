@@ -1,7 +1,6 @@
 package com.leafbound.services;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;

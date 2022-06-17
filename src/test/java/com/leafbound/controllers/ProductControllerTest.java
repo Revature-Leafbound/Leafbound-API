@@ -40,9 +40,9 @@ public class ProductControllerTest {
 
 	private static Product mockProduct1;
 	private static Product mockProduct2;
-	private static UUID uuid1;
-	private static UUID uuid2;
-	private static UUID uuid3;
+//	private static UUID uuid1;
+//	private static UUID uuid2;
+//	private static UUID uuid3;
 	private static UUID mockUUID1;
 	private static Product mockProductCreation;
 	private static Product mockProductModification;
@@ -66,17 +66,15 @@ public class ProductControllerTest {
 
 	// If you want to access these outside of the method, you have to define them up
 	// here.
-	private static List<Product> dummyDb = new ArrayList<>();
-	private static Product mockUserModification;
-	private static Product mockUserCreation;
+
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		System.out.println("setUpBeforeClass() :: building test objects...");
 
-		uuid1 = UUID.randomUUID();
-		uuid2 = UUID.randomUUID();
-		uuid3 = UUID.randomUUID();
+//		uuid1 = UUID.randomUUID();
+//		uuid2 = UUID.randomUUID();
+//		uuid3 = UUID.randomUUID();
 
 		/*
 		 * Thes were missing the description and localdate is not a string, but an
@@ -125,14 +123,14 @@ public class ProductControllerTest {
 	@Order(2)
 	@DisplayName("2. Get all products")
 	public void getProducts_ShouldReturnAllProducts() throws Exception {
-		when(pserv.getAllProducts()).thenReturn(dummyDb);
+		when(pserv.getAllProducts()).thenReturn(dummyDB);
 
 		RequestBuilder request = MockMvcRequestBuilders.get("/api/v1/products");
 		MvcResult result = mockmvc.perform(request).andReturn();
 
 		// assertEquals import was missing. This does not easily auto import. Please see
 		// the import at the top of the page.
-		assertEquals(om.writeValueAsString(dummyDb), result.getResponse().getContentAsString());
+		assertEquals(om.writeValueAsString(dummyDB), result.getResponse().getContentAsString());
 	}
 
 	@Test
@@ -213,7 +211,7 @@ public class ProductControllerTest {
 	@DisplayName("7. Update a product")
 	public void postUpdateProduct_ShouldReturnTrue() throws Exception {
 		// The method edit does not exist in ProductService
-		when(pserv.updateProduct(mockUserModification)).thenReturn(mockUserModification);
+		when(pserv.updateProduct(mockProductModification)).thenReturn(mockProductModification);
 
 		RequestBuilder request = MockMvcRequestBuilders
 				// this is going to be a bad url requet
@@ -232,7 +230,7 @@ public class ProductControllerTest {
 	@DisplayName("8. Update a product - failed")
 	public void postUpdateProduct_ShouldReturnFaled() throws Exception {
 		// The method edit does not exist in ProductService
-		when(pserv.updateProduct(mockUserModification)).thenReturn(mockUserModification);
+		when(pserv.updateProduct(mockProductModification)).thenReturn(mockProductModification);
 
 		RequestBuilder request = MockMvcRequestBuilders
 				// this is going to be a bad url requet
