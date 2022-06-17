@@ -22,9 +22,11 @@ public class OrderServiceImpl implements OrderService {
 	private static Logger log = Logger.getLogger(OrderServiceImpl.class);
 
 	@Override
-	public Order getOrderById(UUID id) {
+	public Order getOrderById(String id) {
 
-		return orepo.findById(id).get();
+		UUID uuid = UUID.fromString(id);
+
+		return orepo.findById(uuid).orElseThrow(() -> new RuntimeException("Order not found"));
 
 	}
 
@@ -42,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public boolean updateOrder(Order order) {
-		Order target = this.getOrderById(order.getId());
+		Order target = this.getOrderById(order.getId().toString());
 		target.setOrderDate(order.getOrderDate());
 		return (orepo.save(target) != null);
 	}
