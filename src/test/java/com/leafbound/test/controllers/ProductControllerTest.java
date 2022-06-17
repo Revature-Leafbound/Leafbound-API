@@ -1,5 +1,11 @@
 package com.leafbound.test.controllers;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -21,7 +27,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.leafbound.test.services.ProductServiceTest;
+import com.leafbound.controllers.ProductController;
+import com.leafbound.models.Product;
+import com.leafbound.services.ProductService;
 
 
 @ExtendWith(SpringExtension.class)
