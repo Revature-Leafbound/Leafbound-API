@@ -39,4 +39,5 @@ public class ProductController {
 	public @ResponseBody Product createProduct(@RequestBody Product product) {
 		return productServ.createProduct(product);
 
+	}
 }
