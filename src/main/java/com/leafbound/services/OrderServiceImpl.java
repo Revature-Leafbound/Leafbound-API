@@ -6,41 +6,47 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.leafbound.models.Order;
 import com.leafbound.repositories.OrderRepository;
 
-public class OrderServiceImpl implements OrderService{
-	
+@Service
+@Transactional
+public class OrderServiceImpl implements OrderService {
+
 	@Autowired
 	private OrderRepository orepo;
-	
+
 	private static Logger log = Logger.getLogger(OrderServiceImpl.class);
 
 	@Override
-	public Order getOrderById(UUID id) {
-		
-		return orepo.findById(id).get();
-		
+	public Order getOrderById(String id) {
+
+		UUID uuid = UUID.fromString(id);
+
+		return orepo.findById(uuid).orElseThrow(() -> new RuntimeException("Order not found"));
+
 	}
 
 	@Override
 	public Order getOrderByDate(LocalDate orderDate) {
-		
+
 		return orepo.findByDate(orderDate);
 	}
-	
+
 	@Override
 	public List<Order> getAllOrders() {
-		
+
 		return orepo.findAll();
 	}
 
 	@Override
 	public boolean updateOrder(Order order) {
-		Order target = this.getOrderById(order.getId());
+		Order target = this.getOrderById(order.getId().toString());
 		target.setOrderDate(order.getOrderDate());
-		return (orepo.save(target)!= null);
+		return (orepo.save(target) != null);
 	}
 
 	@Override
@@ -48,10 +54,5 @@ public class OrderServiceImpl implements OrderService{
 		orepo.delete(order);
 		return true;
 	}
-
-
-	
-
-	
 
 }
