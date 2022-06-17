@@ -23,14 +23,35 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productServ;
-	
-	
-	//get all products
+
+	// get all products
 	@GetMapping("/products")
-	@ApiOperation(value="Find all products")
+	@ApiOperation(value = "Find all products")
 	public @ResponseBody List<Product> getAll() {
-		
+
 		return productServ.getAllProducts();
 	}
-	
+
+	// create new product
+	@PostMapping("/product")
+	@ApiOperation(value = "create new product entity")
+	public @ResponseBody Product createProduct(@RequestBody Product product) {
+		return productServ.createProduct(product);
+
+	}
+
+	// Update product
+	@PutMapping("/product")
+	@ApiOperation(value = "update product entity")
+	public @ResponseBody Product updateProduct(@RequestBody Product product) {
+		return productServ.updateProduct(product);
+
+	}
+
+	// Delete product
+	@DeleteMapping("/product")
+	@ApiOperation(value = "update product entity")
+	public @ResponseBody String deleteProduct(@RequestBody Product product) {
+		return productServ.deleteProduct(product) ? "DELETION_SUCCESSFUL" : "DELETION_FAILED";
+	}
 }
