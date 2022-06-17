@@ -154,11 +154,18 @@ public class UserServiceTest {
 	void testUpdateUser() {
 		u1.setFirstName("TestSuccessful");
 		
+		dummyTransfer.setId(u1.getId());
+		dummyTransfer.setEmail(u1.getEmail());
+		dummyTransfer.setFirstName(u1.getFirstName());
+		dummyTransfer.setLastName(u1.getLastName());
+		dummyTransfer.setPassword(u1.getPassword());
+		dummyTransfer.setRoleId(u1.getUserRole().getId());
+
 		boolean result = true;
 		
-		when(uServ.updateUser(u1)).thenReturn(result);
+		when(uServ.updateUser(dummyTransfer)).thenReturn(result);
 		
-		assertEquals(result, uServ.updateUser(u1));
+		assertEquals(result, uServ.updateUser(dummyTransfer));
 	}
 
 	@Test
