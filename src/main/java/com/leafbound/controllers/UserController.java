@@ -2,7 +2,6 @@ package com.leafbound.controllers;
 
 import java.security.InvalidKeyException;
 import java.util.List;
-import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ import io.swagger.annotations.Api;
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/v1")
-@Api(value = "UserRollController", tags = "USER COLLECTIONS")
+@Api(value = "UserController", tags = "USER COLLECTION")
 public class UserController {
 
 	private static Logger log = Logger.getLogger(UserController.class);
@@ -44,8 +43,8 @@ public class UserController {
 	@Autowired
 	private JwtServiceImpl jwtService;
 
-	@GetMapping("/GetUser")
-	public @ResponseBody User readById(UUID id) {
+	@GetMapping("/GetUser/{id}")
+	public @ResponseBody User readById(@PathVariable String id) {
 		log.info("Getting user with id: " + id);
 		return service.getUserById(id);
 	}
