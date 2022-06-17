@@ -95,7 +95,6 @@ public class UserServiceImpl implements UserService {
 
 		// Get the user from the DB
 		User user = repository.findByEmail(userDTO.getEmail());
-
 		// Check if the user exists
 		if (user == null) {
 			throw new IllegalArgumentException("User not found");
@@ -108,6 +107,9 @@ public class UserServiceImpl implements UserService {
 
 		// Set the userDTO id
 		userDTO.setId(user.getId());
+		userDTO.setFirstName(user.getFirstName());
+		userDTO.setLastName(user.getLastName());
+		userDTO.setRoleId(user.getUserRole().getId());
 
 		// Return the userDTO
 		return userDTO;
