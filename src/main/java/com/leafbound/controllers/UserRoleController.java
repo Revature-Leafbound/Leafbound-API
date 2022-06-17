@@ -43,9 +43,9 @@ public class UserRoleController {
         return (service.add(userRole)) ? "User Role created successfullly." : "Error creating user role.";
     }
 
-    @DeleteMapping("/role")
+    @DeleteMapping("/role/{id}")
     @ApiOperation(value = "Remove user role entity by ID.")
-    public @ResponseBody String deleteUserRole(@RequestBody int id) {
+    public @ResponseBody String deleteUserRole(@PathVariable int id) {
         log.info("Deleting user role");
         return (service.remove(id)) ? "Delete successful" : "Delete failed";
     }
