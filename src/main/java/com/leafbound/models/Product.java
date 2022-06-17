@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,6 +26,7 @@ public class Product {
 	@GeneratedValue(generator = "uuid4")
 	@Column(name = "id")
 	@ApiModelProperty(name = "id", notes = "an Integer value that serves as the unique identier for any product entity", required = true, value = "1")
+	@Type(type="org.hibernate.type.UUIDCharType")
 	private UUID id;
 
 	@Column(name = "author", nullable = false)
@@ -97,7 +100,7 @@ public class Product {
 		this.list_price = list_price;
 	}
 
-	public Product(int id, String author, String publisher, String isbn, String genre, String title, String language,
+	public Product(UUID id, String author, String publisher, String isbn, String genre, String title, String language,
 			LocalDate published_date, String edition, String description, double list_price) {
 		super();
 		this.id = id;
