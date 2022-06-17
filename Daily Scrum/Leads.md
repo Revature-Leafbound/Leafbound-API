@@ -318,3 +318,37 @@ Calvin:
   - Order Details: Chris(?)
 
 <hr>
+
+Staging manager: jennifer.heermance@revature.com
+
+Dhruv:
+Who will be here on the 23rd:
+Markus: by today - Cart
+Santi: Nav & Checkout FE:
+Patrick: Available (Registration FE)
+Enock & Jorge A: Order Unit Testing =>
+Jorge A: Cart Endpoint Testing
+Vidya: Order Endpoints
+
+CaLe:
+Yugal - your tests running
+Adam - User Service tests almost done; User Controller tests
+Patrick - Profile (Login) + JWT header
+Jacob: today
+
+Jose:
+Joachim - product testing; angular (jasmine and karma tests (FE testing))
+Julian - Checkout FE Tests
+Michael -
+Jorge - getting all the stuff from the APIs
+Chris - Endpoint testing
+
+FE testing:
+Checkout - Julian
+Login -
+Registration -
+Profile -
+Cart -
+Products -
+
+Presentation Slides: Yugal
