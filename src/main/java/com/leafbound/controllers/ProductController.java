@@ -4,10 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,30 +31,12 @@ public class ProductController {
 	@GetMapping("/products")
 	@ApiOperation(value = "Find all products")
 	public @ResponseBody List<Product> getAll() {
-
 		return productServ.getAllProducts();
 	}
 
-	// create new product
 	@PostMapping("/product")
 	@ApiOperation(value = "create new product entity")
 	public @ResponseBody Product createProduct(@RequestBody Product product) {
 		return productServ.createProduct(product);
 
-	}
-
-	// Update product
-	@PutMapping("/product")
-	@ApiOperation(value = "update product entity")
-	public @ResponseBody Product updateProduct(@RequestBody Product product) {
-		return productServ.updateProduct(product);
-
-	}
-
-	// Delete product
-	@DeleteMapping("/product")
-	@ApiOperation(value = "update product entity")
-	public @ResponseBody String deleteProduct(@RequestBody Product product) {
-		return productServ.deleteProduct(product) ? "DELETION_SUCCESSFUL" : "DELETION_FAILED";
-	}
 }
