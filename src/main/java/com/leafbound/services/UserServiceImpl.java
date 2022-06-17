@@ -24,6 +24,11 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRoleServiceImpl userRoleService;
 
+	public UserServiceImpl(UserRoleServiceImpl userRoleService) {
+		super();
+		this.userRoleService = userRoleService;
+	}
+
 	@Override
 	public UserDTO createUser(UserDTO userDTO) {
 

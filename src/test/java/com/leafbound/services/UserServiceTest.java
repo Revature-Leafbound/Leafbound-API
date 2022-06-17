@@ -3,7 +3,9 @@ package com.leafbound.services;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
-import java.lang.reflect.*;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -20,17 +22,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;
 import com.leafbound.models.UserRole;
 import com.leafbound.repositories.UserRepository;
 import com.leafbound.repositories.UserRoleRepository;
-import com.leafbound.services.UserServiceImpl;
-import com.leafbound.services.UserRoleServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -55,21 +53,14 @@ public class UserServiceTest {
 
 	Logger log = Logger.getLogger(UserServiceTest.class);
 	
-	private static Field f;
-	private static Field f2;
-	
 	@BeforeAll
 	static void setupBefore() throws Exception {
 		mockrepo = Mockito.mock(UserRepository.class);
 		mockrole = Mockito.mock(UserRoleRepository.class);
-		uServ = new UserServiceImpl();
-
-		f = uServ.getClass().getDeclaredField("userRoleService");
-		f.setAccessible(true);
-		f2 = f.getClass().getDeclaredField("repository");
-		f2.setAccessible(true);
+		UserRoleServiceImpl temp = new UserRoleServiceImpl(mockrole);
 		
-		f2.set(UserRoleRepository.class, mockrole);
+		uServ = new UserServiceImpl(temp);
+
 		
 		role = new UserRole();
 		role.setId(0);
@@ -85,7 +76,7 @@ public class UserServiceTest {
 		u1.setEmail("test@gmail.com");
 		u1.setFirstName("Levi");
 		u1.setLastName("Choi");
-		u1.setPassword("Badpassword");		
+		u1.setPassword("Badpassword");
 		u1.setUserRole(role);
 		
 		tempId = UUID.fromString("22c2db34-749c-45f0-a066-f3bd03bad995");
@@ -103,10 +94,6 @@ public class UserServiceTest {
 		dummyDB.add(u1);
 		dummyDB.add(u2);
 	}
-	@AfterAll
-	static void afterTesting() {
-		
-	}
 	
 	@Test
 	@Order(1)
@@ -114,7 +101,6 @@ public class UserServiceTest {
 	void checkMockInjection() throws IllegalArgumentException, IllegalAccessException {
 		assertThat(mockrepo).isNotNull();
 		assertThat(uServ).isNotNull();
-		assertThat(f2.get(mockrole)).isNotNull();
 	}
 	
 	@Test

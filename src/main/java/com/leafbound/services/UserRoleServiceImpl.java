@@ -14,7 +14,12 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Autowired
     private UserRoleRepository repository;
 
-    @Override
+	public UserRoleServiceImpl(UserRoleRepository repository) {
+		super();
+		this.repository = repository;
+	}
+
+	@Override
     public UserRole getById(int id) {
         return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
