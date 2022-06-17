@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;
 import com.leafbound.repositories.UserRepository;
+import com.leafbound.repositories.UserRoleRepository;
 
 @Service
 @Transactional
@@ -24,9 +25,14 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRoleServiceImpl userRoleService;
 
-	public UserServiceImpl(UserRoleServiceImpl userRoleService) {
+	public UserServiceImpl(UserRepository repository, UserRoleRepository roleRepository) {
 		super();
-		this.userRoleService = userRoleService;
+		this.repository = repository;
+		this.userRoleService = new UserRoleServiceImpl(roleRepository);
+	}
+
+	public UserRoleServiceImpl getUserRoleService() {
+		return userRoleService;
 	}
 
 	@Override

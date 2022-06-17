@@ -2,16 +2,14 @@ package com.leafbound.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -33,15 +31,14 @@ import com.leafbound.repositories.UserRoleRepository;
 @ExtendWith(MockitoExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserServiceTest {
+	private static UserServiceImpl uServ;
+
 	@Mock
 	private static UserRepository mockrepo;
 
 	@Mock
 	private static UserRoleRepository mockrole;
 	
-	
-	@InjectMocks
-	private static UserServiceImpl uServ;
 	
 	private static User u1, u2;
 	private static UserDTO dummyTransfer;
@@ -57,9 +54,8 @@ public class UserServiceTest {
 	static void setupBefore() throws Exception {
 		mockrepo = Mockito.mock(UserRepository.class);
 		mockrole = Mockito.mock(UserRoleRepository.class);
-		UserRoleServiceImpl temp = new UserRoleServiceImpl(mockrole);
 		
-		uServ = new UserServiceImpl(temp);
+		uServ = new UserServiceImpl(mockrepo, mockrole);
 
 		
 		role = new UserRole();
@@ -69,6 +65,8 @@ public class UserServiceTest {
 	
 		dummyRoleDB = new ArrayList<UserRole>();
 		dummyRoleDB.add(role);
+
+		uServ.getUserRoleService().add(role);
 		
 		u1 = new User();
 		UUID tempId = UUID.fromString("5cab4b69-f9ba-4d41-8dc3-5ed24da7027a");
@@ -100,6 +98,8 @@ public class UserServiceTest {
 	@DisplayName("1. Mock Validation")
 	void checkMockInjection() throws IllegalArgumentException, IllegalAccessException {
 		assertThat(mockrepo).isNotNull();
+		assertThat(mockrole).isNotNull();
+		assertThat(role).isNotNull();
 		assertThat(uServ).isNotNull();
 	}
 	
@@ -154,10 +154,28 @@ public class UserServiceTest {
 	void testUpdateUser() {
 		u1.setFirstName("TestSuccessful");
 		
-		boolean result = false;
+		boolean result = true;
 		
 		when(uServ.updateUser(u1)).thenReturn(result);
 		
 		assertEquals(result, uServ.updateUser(u1));
+	}
+
+	@Test
+	@Order(6)
+	@DisplayName("6. Delete User - User exists")
+	void testDeleteUser() {	
+		boolean result = true;
+		
+		// when(uServ.deleteUser(u1.getId().toString())).thenReturn(result);
+		verify(uServ).deleteUser(u1.getId().toString());
+		assertEquals(result, uServ.deleteUser(u1.getId().toString()));
+	}
+
+	@Test
+	@Order(7)
+	@DisplayName("7. Login")
+	void testLogin() {
+
 	}
 }
