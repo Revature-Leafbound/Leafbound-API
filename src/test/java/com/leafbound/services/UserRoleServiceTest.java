@@ -1,10 +1,12 @@
 package com.leafbound.services;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,21 +15,21 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.leafbound.models.UserRole;
 import com.leafbound.repositories.UserRoleRepository;
 
 @RunWith(SpringRunner.class)
+@SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserRoleServiceTest {
 
-	@Mock
+	@MockBean
 	@Autowired
 	private UserRoleRepository userRoleRepo;
 
@@ -63,6 +65,14 @@ public class UserRoleServiceTest {
 
 	@Test
 	@Order(1)
+	@DisplayName("1. Mock Validation Test")
+	public void checkMockInjection() {
+		assertThat(userRoleRepo).isNotNull();
+		assertThat(userRoleService).isNotNull();
+	}
+
+	@Test
+	@Order(2)
 	@DisplayName("1. getById() test")
 	public void getById() throws Exception {
 		when(userRoleRepo.findById(1).get()).thenReturn(mockUserRole1);
@@ -72,7 +82,7 @@ public class UserRoleServiceTest {
 	}
 
 	@Test
-	@Order(2)
+	@Order(3)
 	@DisplayName("2. add() test")
 	public void add() throws Exception {
 		mockUserRole3 = mockUserRole2;
@@ -85,7 +95,7 @@ public class UserRoleServiceTest {
 	}
 
 	@Test
-	@Order(3)
+	@Order(4)
 	@DisplayName("3. remove() test")
 	public void remove() throws Exception {
 
