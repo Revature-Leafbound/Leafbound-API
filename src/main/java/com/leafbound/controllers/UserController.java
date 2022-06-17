@@ -62,7 +62,7 @@ public class UserController {
 		return (service.updateUser(userDTO)) ? "Update successful" : "Update failed";
 	}
 
-	@DeleteMapping("/DeleteUser/{id}")
+	@DeleteMapping("/user/{id}")
 	public @ResponseBody String deleteUser(@RequestHeader("Authorization") String authorization,
 			@PathVariable String id) {
 		log.info("Deleting user");
