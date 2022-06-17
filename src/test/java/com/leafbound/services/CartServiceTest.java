@@ -21,13 +21,18 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.leafbound.models.Cart;
 import com.leafbound.models.Product;
@@ -36,44 +41,55 @@ import com.leafbound.repositories.CartRepository;
 import com.leafbound.services.CartService;
 import com.leafbound.services.CartServiceImpl;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
+@RunWith(SpringRunner.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CartServiceTest {
 
-    @Mock
+    // @TestConfiguration
+    // static class CartServiceImplTestContextConfiguaration {
+    // @Bean
+    // public CartService cartService() {
+    // return new CartServiceImpl();
+    // }
+    // }
+
+    @MockBean
+    @Autowired
     private static CartRepository cartRepo;
 
-    @InjectMocks
+    @Autowired
     private static CartServiceImpl cartService;
-	private static Cart mockCart1, mockCart2, mockCart3;
+
+    private static Cart mockCart1, mockCart2, mockCart3, mockCartDeletion;
     private static Product mockProd1, mockProd2, mockProd3;
     private static User mockUser1, mockUser2, mockUser3;
-	private static List<Cart> dummyDB;
+    private static List<Cart> dummyDB;
 
     @BeforeAll
     static void setUpBeforeClass() throws Exception {
         cartRepo = Mockito.mock(CartRepository.class);
-        cartService = new CartServiceImpl(cartRepo);
+        // cartService = new CartServiceImpl(cartRepo);
 
         Random rand = new Random();
         int maxNumber = 100_000_000;
         int id1 = rand.nextInt(maxNumber) + 1;
-		int id2 = rand.nextInt(maxNumber) + 1;
+        int id2 = rand.nextInt(maxNumber) + 1;
         int id3 = rand.nextInt(maxNumber) + 1;
         int prodId1 = rand.nextInt(maxNumber) + 1;
-		int prodId2 = rand.nextInt(maxNumber) + 1; 
+        int prodId2 = rand.nextInt(maxNumber) + 1;
         int custId1 = rand.nextInt(maxNumber) + 1;
-		int custId2 = rand.nextInt(maxNumber) + 1;        
+        int custId2 = rand.nextInt(maxNumber) + 1;
 
-		mockCart1 = new Cart(id1, mockProd1, 3, mockUser1);
-		mockCart2 = new Cart(id2, mockProd2, 20, mockUser2);
-        mockCart3 = new Cart(id3, mockProd3, 27, mockUser3);
+        mockCart1 = new Cart(1, mockProd1, 3, mockUser1);
+        mockCart2 = new Cart(2, mockProd2, 20, mockUser2);
+        mockCart3 = new Cart(3, mockProd3, 27, mockUser3);
 
-		mockCartDeletion = new Cart(567, mockProd3, 5, mockUser3);
+        mockCartDeletion = new Cart(567, mockProd3, 5, mockUser3);
 
-		dummyDB = new ArrayList<>();
-		dummyDB.add(mockCart1);
-		dummyDB.add(mockCart2);
+        dummyDB = new ArrayList<>();
+        dummyDB.add(mockCart1);
+        dummyDB.add(mockCart2);
     }
 
     @Test
@@ -123,5 +139,5 @@ public class CartServiceTest {
         when(cartRepo.deleteById(999)).thenReturn(false);
         assertNotNull(cartService.getById(999));
     }
-    
+
 }
