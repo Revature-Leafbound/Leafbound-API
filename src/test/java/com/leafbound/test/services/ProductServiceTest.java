@@ -87,11 +87,11 @@ public class ProductServiceTest {
 	@DisplayName("2. Passed Create Product Test")
 	public void addProductTest_success() {
 		mockProduct3 = mockProduct2;
-		mockProduct3.setid(3);
+		mockProduct3.setId(uuid3);
 
 		when(productRepo.save(mockProduct3)).thenReturn(mockProduct3);
 
-		assertEquals(mockProduct3, productService.add(mockProduct3));
+		assertEquals(mockProduct3, productService.createProduct(mockProduct3));
 	}
 
 	@Test
@@ -99,10 +99,10 @@ public class ProductServiceTest {
 	@DisplayName("3. Failed Creation Product Test")
 	public void addProductTest_failure() {
 		mockProduct3 = new Product();
-		mockProduct3.setid(3);
+		mockProduct3.setId(uuid3);
 		when(productRepo.save(mockProduct3)).thenReturn(mockProduct3);
 
-		assertEquals(mockProduct4, productService.add(mockProduct3));
+		assertEquals(mockProduct4, productService.createProduct(mockProduct3));
 	}
 
 	@Test
