@@ -73,7 +73,7 @@ public class UserController {
 		return service.deleteUser(id) ? "DELETION_SUCCESSFUL" : "DELETION_FAILED";
 	}
 
-	@GetMapping("/Login")
+	@PostMapping("/Login")
 	public ResponseEntity<String> login(@RequestBody UserDTO userDTO) {
 
 		// Create a new HttpHeader object
