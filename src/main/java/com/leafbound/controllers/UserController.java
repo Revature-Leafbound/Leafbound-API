@@ -43,23 +43,23 @@ public class UserController {
 	@Autowired
 	private JwtServiceImpl jwtService;
 
-	@GetMapping("/GetUser/{id}")
+	@GetMapping("/user/{id}")
 	public @ResponseBody User readById(@PathVariable String id) {
 		log.info("Getting user with id: " + id);
 		return service.getUserById(id);
 	}
 
-	@GetMapping("/GetUsers")
+	@GetMapping("/users")
 	public @ResponseBody List<User> readAllUsers() {
 		log.info("Getting all users");
 		return service.getAllUsers();
 	}
 
-	@PatchMapping("/UpdateUser")
-	public @ResponseBody String updateUser(@RequestBody User user) {
+	@PatchMapping("/user")
+	public @ResponseBody String updateUser(@RequestBody UserDTO userDTO) {
 		log.info("Updating user");
 
-		return (service.updateUser(user)) ? "Update successful" : "Update failed";
+		return (service.updateUser(userDTO)) ? "Update successful" : "Update failed";
 	}
 
 	@DeleteMapping("/DeleteUser/{id}")
@@ -73,7 +73,7 @@ public class UserController {
 		return service.deleteUser(id) ? "DELETION_SUCCESSFUL" : "DELETION_FAILED";
 	}
 
-	@PostMapping("/Login")
+	@PostMapping("/user/login")
 	public ResponseEntity<String> login(@RequestBody UserDTO userDTO) {
 
 		// Create a new HttpHeader object
@@ -107,7 +107,7 @@ public class UserController {
 				.body("Login successful");
 	}
 
-	@PostMapping("/Register")
+	@PostMapping("/user/register")
 	public ResponseEntity<String> register(@RequestBody UserDTO userDTO) {
 		log.info("Register user");
 
