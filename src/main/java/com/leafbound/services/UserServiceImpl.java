@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;
+import com.leafbound.models.UserRole;
 import com.leafbound.repositories.UserRepository;
 import com.leafbound.repositories.UserRoleRepository;
 
@@ -73,17 +74,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean updateUser(User user) {
+	public boolean updateUser(UserDTO userDTO) {
 
 		// Get the user from the DB
-		User target = this.getUserById(user.getId().toString());
+		User target = this.getUserById(userDTO.getId().toString());
+
+		UserRole userRole = userRoleService.getById(userDTO.getRoleId());
 
 		// Update the user
-		target.setFirstName(user.getFirstName());
-		target.setLastName(user.getLastName());
-		target.setPassword(user.getPassword());
-		target.setEmail(user.getEmail());
-		target.setUserRole(user.getUserRole());
+		target.setFirstName(userDTO.getFirstName());
+		target.setLastName(userDTO.getLastName());
+		target.setPassword(userDTO.getPassword());
+		target.setEmail(userDTO.getEmail());
+		target.setUserRole(userRole);
 
 		// Save the user to the DB
 		return (repository.save(target) != null);
@@ -106,7 +109,6 @@ public class UserServiceImpl implements UserService {
 
 		// Get the user from the DB
 		User user = repository.findByEmail(userDTO.getEmail());
-
 		// Check if the user exists
 		if (user == null) {
 			throw new IllegalArgumentException("User not found");
@@ -119,6 +121,9 @@ public class UserServiceImpl implements UserService {
 
 		// Set the userDTO id
 		userDTO.setId(user.getId());
+		userDTO.setFirstName(user.getFirstName());
+		userDTO.setLastName(user.getLastName());
+		userDTO.setRoleId(user.getUserRole().getId());
 
 		// Return the userDTO
 		return userDTO;
