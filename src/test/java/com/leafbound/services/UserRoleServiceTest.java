@@ -12,29 +12,33 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.leafbound.models.UserRole;
 import com.leafbound.repositories.UserRoleRepository;
 
-@ExtendWith(MockitoExtension.class)
+@RunWith(SpringRunner.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserRoleServiceTest {
 
 	@Mock
-	private static UserRoleRepository userRoleRepo;
+	@Autowired
+	private UserRoleRepository userRoleRepo;
 
-	@InjectMocks
-	private static UserRoleServiceImpl userRoleService;
-	private static UserRole mockUserRole1, mockUserRole2, mockUserRole3;
-	private static List<UserRole> dummyDb;
+	@Autowired
+	private UserRoleService userRoleService;
+
+	private UserRole mockUserRole1, mockUserRole2, mockUserRole3;
+	private List<UserRole> dummyDb;
 
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	public void setUpBeforeClass() throws Exception {
 
 		userRoleRepo = Mockito.mock(UserRoleRepository.class);
 
@@ -61,9 +65,9 @@ public class UserRoleServiceTest {
 	@Order(1)
 	@DisplayName("1. getById() test")
 	public void getById() throws Exception {
-		when(userRoleService.getById(1)).thenReturn(mockUserRole1);
+		when(userRoleRepo.findById(1).get()).thenReturn(mockUserRole1);
 
-		assertEquals(mockUserRole1, userRoleService.getById(1));
+		assertEquals(userRoleService.getById(1), mockUserRole1);
 
 	}
 
