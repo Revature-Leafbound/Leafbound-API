@@ -27,6 +27,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -37,6 +38,7 @@ import com.leafbound.models.UserRole;
 import com.leafbound.repositories.UserRepository;
 import com.leafbound.repositories.UserRoleRepository;
 import com.leafbound.services.UserServiceImpl;
+import com.leafbound.util.ClientMessageUtil;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(UserController.class)
@@ -45,16 +47,15 @@ public class UserControllerTests {
 
 	private static User mockUser1;
 	private static User mockUser2;
-	private static User mockUserCreation;
 	private static User mockUserModification;
 	private static User mockUserDeletion;
 	private static List<User> dummyDb;
 
 	private static UserRole role;
 
-	//ObjectMapper om = new ObjectMapper()
-	//		.registerModule()
-	//		.configure();;
+	ObjectMapper om = new ObjectMapper()
+			.registerModule(null)
+			.configure();
 
 	@Autowired
 	private static UserController userController;
@@ -76,8 +77,6 @@ public class UserControllerTests {
 
 		mockUser1 = new User();
 		mockUser2 = new User();
-		
-		mockUserCreation = new User();
 		
 		UUID tempId = UUID.fromString("5cab4b69-f9ba-4d41-8dc3-5ed24da7027a");
 		mockUser1.setId(tempId);
@@ -134,14 +133,23 @@ public class UserControllerTests {
 	@DisplayName("2. Create User - Happy Path Scenerio Test")
 	public void testCreateUser() throws Exception {
 		// id number of this creation should be 3
-		mockUserCreation.setId(3);
 		// tell Mockito the behavior that I want this method to act like in the mock environment
-		when(service.createUser(mockUserCreation)).thenReturn(true);
+
+		UserDTO transfer = new UserDTO();
+
+		transfer.setId(mockUser1.getId());
+		transfer.setEmail(mockUser1.getEmail());
+		transfer.setFirstName(mockUser1.getFirstName());
+		transfer.setLastName(mockUser1.getLastName());
+		transfer.setPassword(mockUser1.getPassword());
+		transfer.setRoleId(mockUser1.getUserRole().getId());
+
+		when(service.createUser(transfer)).thenReturn();
 		
 		//act
 		RequestBuilder request = MockMvcRequestBuilders.post("/api/user/register")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
-				.content(om.writeValueAsString(mockUserCreation))
+				.content(om.writeValueAsString(mockUser1))
 				.contentType(MediaType.APPLICATION_JSON);
 		
 		MvcResult result = mockmvc.perform(request).andReturn();
@@ -192,7 +200,7 @@ public class UserControllerTests {
 	@DisplayName("6. Delete User - Happy Path Scenerio Test")
 	
 	public void testDeleteUser() throws Exception {
-		when(service.deleteUser(mockUserDeletion)).thenReturn(true);
+		when(service.deleteUser(mockUserDeletion.getId().toString())).thenReturn(true);
 		RequestBuilder request = MockMvcRequestBuilders.delete("/api/user/delete")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockUserDeletion))
