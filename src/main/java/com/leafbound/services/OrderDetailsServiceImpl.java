@@ -83,7 +83,8 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
         Product product = productService.getProductById(orderDetailsDTO.getProductId());
 
         // Get the order details
-        OrderDetails orderDetails = repository.findById(orderDetailsDTO.getId()).get();
+        OrderDetails orderDetails = repository.findById(orderDetailsDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Order details not found"));
 
         // Set the order details
         orderDetails.setQuantity(orderDetailsDTO.getQuantity());
