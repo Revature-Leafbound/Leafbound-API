@@ -10,7 +10,7 @@ public interface OrderService {
 
 	Order getOrderById(String id);
 
-	Order getOrderByDate(LocalDate orderDate);
+	Order getOrderByDate(String orderDate);
 
 	List<Order> getAllOrders();
 
