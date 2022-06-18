@@ -30,7 +30,7 @@ public class ProductController {
 	private ProductService productServ;
 
 	// get all products
-	@GetMapping("/products")
+	@GetMapping("/product/all")
 	@ApiOperation(value = "Find all products")
 	public @ResponseBody List<Product> getAll() {
 

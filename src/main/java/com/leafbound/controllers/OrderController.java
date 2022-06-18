@@ -39,7 +39,7 @@ public class OrderController {
 
 	}
 
-	@GetMapping(path = "/order/{orderDate}")
+	@GetMapping(path = "/order/getByDate/{orderDate}")
 	@ApiOperation(value = "Getting order by date")
 	public @ResponseBody Order getByDate(@PathVariable String orderDate) {
 		// TODO: Are we using this route?
@@ -48,7 +48,7 @@ public class OrderController {
 		return oserv.getOrderByDate(orderDate);
 	}
 
-	@GetMapping(path = "/orders")
+	@GetMapping(path = "/order/all")
 	@ApiOperation(value = "Getting all orders")
 	public @ResponseBody List<Order> getAll() {
 
