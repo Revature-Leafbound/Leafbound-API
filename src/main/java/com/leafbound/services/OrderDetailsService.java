@@ -9,7 +9,7 @@ public interface OrderDetailsService {
 
     public boolean add(OrderDetailsDTO orderDetailsDTO);
 
-    public List<OrderDetailsDTO> getByOrderId(UUID orderId);
+    public List<OrderDetailsDTO> getByOrderId(String orderId);
 
     public boolean update(OrderDetailsDTO orderDetailsDTO);
 

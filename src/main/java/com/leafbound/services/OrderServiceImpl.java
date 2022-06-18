@@ -26,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
 
 		UUID uuid = UUID.fromString(id);
 
-		return orepo.findById(uuid).orElseThrow(() -> new RuntimeException("Order not found"));
+		return orepo.findById(uuid).orElseThrow(() -> new RuntimeException("Order not found in DB"));
 
 	}
 
