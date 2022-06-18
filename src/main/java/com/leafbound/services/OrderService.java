@@ -14,8 +14,8 @@ public interface OrderService {
 
 	List<Order> getAllOrders();
 
-	boolean updateOrder(Order order);
+	boolean updateOrder(String id, Order order);
 
-	boolean deleteOrder(Order order);
+	boolean deleteOrder(int id);
 
 }

@@ -50,15 +50,16 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public boolean updateOrder(Order order) {
-		Order target = this.getOrderById(order.getId().toString());
+	public boolean updateOrder(String id, Order order) {
+		Order target = this.getOrderById(id);
 		target.setOrderDate(order.getOrderDate());
 		return (orepo.save(target) != null);
 	}
 
 	@Override
-	public boolean deleteOrder(Order order) {
-		orepo.delete(order);
+	public boolean deleteOrder(int id) {
+		UUID uuid = UUID.fromString(String.valueOf(id));
+		orepo.deleteById(uuid);
 		return true;
 	}
 

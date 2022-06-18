@@ -39,7 +39,7 @@ public class OrderController {
 
 	}
 
-	@GetMapping(path = "/order/getByDate/{orderDate}")
+	@GetMapping(path = "/order/date/{orderDate}")
 	@ApiOperation(value = "Getting order by date")
 	public @ResponseBody Order getByDate(@PathVariable String orderDate) {
 		// TODO: Are we using this route?
@@ -58,22 +58,21 @@ public class OrderController {
 
 	}
 
-	@PatchMapping("/order")
+	@PatchMapping("/order/{id}")
 	@ApiOperation(value = "Update order entity")
-	public @ResponseBody boolean updateOrder(@RequestBody Order order) {
+	public @ResponseBody boolean updateOrder(@PathVariable String id, @RequestBody Order order) {
 
 		log.info("updating an order in controller...");
 
-		return oserv.updateOrder(order);
+		return oserv.updateOrder(id, order);
 	}
 
-	@DeleteMapping("/order")
+	@DeleteMapping("/order/{id}")
 	@ApiOperation(value = "Remove order entity")
-
-	public @ResponseBody boolean deleteOrder(@RequestBody Order order) {
+	public @ResponseBody boolean deleteOrder(@PathVariable int id) {
 
 		log.info("deleting an order in controller...");
-		return oserv.deleteOrder(order);
+		return oserv.deleteOrder(id);
 	}
 
 }
