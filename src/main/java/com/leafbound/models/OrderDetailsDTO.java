@@ -1,7 +1,5 @@
 package com.leafbound.models;
 
-import java.util.UUID;
-
 public class OrderDetailsDTO {
     private int id;
     private String orderId;
