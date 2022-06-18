@@ -23,6 +23,12 @@ public class OrderServiceImpl implements OrderService {
 	private static Logger log = Logger.getLogger(OrderServiceImpl.class);
 
 	@Override
+	public boolean add(Order order) {
+		log.info("Adding order");
+		return orepo.save(order) != null;
+	}
+
+	@Override
 	public Order getOrderById(String id) {
 
 		UUID uuid = UUID.fromString(id);
@@ -34,10 +40,10 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order getOrderByDate(String orderDate) {
 		// Create a date fomatter
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
 		// Parse the date
-		LocalDate date = LocalDate.parse(orderDate, formatter);
+		LocalDate date = LocalDate.parse(orderDate);
 
 		// Find the order
 		return orepo.findByDate(date);
