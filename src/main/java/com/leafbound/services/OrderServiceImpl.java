@@ -39,11 +39,13 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order getOrderByDate(String orderDate) {
-		// Create a date fomatter
-		// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		log.info("finding order by date in service...");
 
 		// Parse the date
 		LocalDate date = LocalDate.parse(orderDate);
+
+		//
+		log.info("Returning order by date: " + date);
 
 		// Find the order
 		return orepo.findByDate(date);

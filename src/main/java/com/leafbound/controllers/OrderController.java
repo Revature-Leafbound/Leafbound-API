@@ -36,9 +36,9 @@ public class OrderController {
 
 	@PostMapping(path = "/order")
 	@ApiOperation(value = "Create a new order", notes = "Create a new order")
-	public @ResponseBody ClientMessage createOrder(@RequestBody Order order) {
+	public @ResponseBody boolean createOrder(@RequestBody Order order) {
 		log.info("Creating order");
-		return oserv.add(order) ? CREATION_SUCCESSFUL : CREATION_FAILED;
+		return oserv.add(order);
 	}
 
 	@GetMapping(path = "/order/{id}")
