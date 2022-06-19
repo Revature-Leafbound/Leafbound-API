@@ -1,7 +1,6 @@
 package com.leafbound.models;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -16,11 +15,15 @@ import org.hibernate.annotations.GenericGenerator;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "orders")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @ApiModel(value = "Orders", description = "This model serves as model for Order entyty")
 public class Order {
 
@@ -35,8 +38,8 @@ public class Order {
 	@ApiModelProperty(name = "user_id", notes = "An UUID value that serves as the user id for orders", required = true, value = "user id")
 	private User user;
 
-	@Column(name = "oder_date")
+	@Column(name = "order_date")
 	@ApiModelProperty(name = "order date", notes = "A date value that serves as a date for orders", required = true, value = "order date")
-	private Date orderDate;
+	private LocalDate orderDate;
 
 }

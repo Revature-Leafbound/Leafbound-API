@@ -7,10 +7,10 @@ import static com.leafbound.util.ClientMessageUtil.DELETION_SUCCESSFUL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,9 +36,9 @@ public class CartController {
         return cserv.addtoCart(cart) ? CREATION_SUCCESSFUL : CREATION_FAILED;
     }
 
-    @DeleteMapping(path = "/cart")
+    @DeleteMapping(path = "/cart/{id}")
     @ApiOperation(value = "Remove cart entity by ID.", notes = "Provide an id to delete a specific cart in the API.")
-    public @ResponseBody ClientMessage delete(@RequestParam(value = "id") int id) {
+    public @ResponseBody ClientMessage delete(@PathVariable int id) {
         return cserv.deleteCart(id) ? DELETION_SUCCESSFUL : DELETION_FAILED;
     }
 
