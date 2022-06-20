@@ -1,6 +1,7 @@
 package com.leafbound.services;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,18 +23,32 @@ public class OrderServiceImpl implements OrderService {
 	private static Logger log = Logger.getLogger(OrderServiceImpl.class);
 
 	@Override
+	public boolean add(Order order) {
+		log.info("Adding order");
+		return orepo.save(order) != null;
+	}
+
+	@Override
 	public Order getOrderById(String id) {
 
 		UUID uuid = UUID.fromString(id);
 
-		return orepo.findById(uuid).orElseThrow(() -> new RuntimeException("Order not found"));
+		return orepo.findById(uuid).orElseThrow(() -> new RuntimeException("Order not found in DB"));
 
 	}
 
 	@Override
-	public Order getOrderByDate(LocalDate orderDate) {
+	public List<Order> getOrderByDate(String orderDate) {
+		log.info("finding order by date in service...");
 
-		return orepo.findByDate(orderDate);
+		// Parse the date
+		LocalDate date = LocalDate.parse(orderDate);
+
+		//
+		log.info("Returning order by date: " + date);
+
+		// Find the order
+		return orepo.findByDate(date);
 	}
 
 	@Override
@@ -43,16 +58,22 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public boolean updateOrder(Order order) {
-		Order target = this.getOrderById(order.getId().toString());
+	public boolean updateOrder(String id, Order order) {
+		Order target = this.getOrderById(id);
 		target.setOrderDate(order.getOrderDate());
 		return (orepo.save(target) != null);
 	}
 
 	@Override
-	public boolean deleteOrder(Order order) {
-		orepo.delete(order);
+	public boolean deleteOrder(UUID id) {
+		orepo.deleteById(id);
 		return true;
+	}
+
+	@Override
+	public List<Order> getOrderByCustomerId(String customerId) {
+		UUID uuid = UUID.fromString(customerId);
+		return orepo.findByCustomerId(uuid);
 	}
 
 }
