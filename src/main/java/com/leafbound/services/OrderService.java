@@ -15,6 +15,8 @@ public interface OrderService {
 
 	List<Order> getAllOrders();
 
+	List<Order> getOrderByCustomerId(String customerId);
+
 	boolean updateOrder(String id, Order order);
 
 	boolean deleteOrder(UUID id);

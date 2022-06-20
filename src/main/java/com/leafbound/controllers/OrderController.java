@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,6 +56,16 @@ public class OrderController {
 		log.info("finding order by date in controller...");
 
 		return oserv.getOrderByDate(orderDate);
+	}
+
+	@GetMapping(path = "/order/customer/{customerId}")
+	@ApiOperation(value = "Getting order by customer")
+	public @ResponseBody List<Order> getByCustomer(@PathVariable String customerId,
+			@RequestHeader("Authorization") String token) {
+		log.info("finding order by customer in controller...");
+
+		// TODO: Check if token is valid
+		return oserv.getOrderByCustomerId(customerId);
 	}
 
 	@GetMapping(path = "/order/all")
