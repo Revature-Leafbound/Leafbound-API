@@ -70,4 +70,10 @@ public class OrderServiceImpl implements OrderService {
 		return true;
 	}
 
+	@Override
+	public List<Order> getOrderByCustomerId(String customerId) {
+		UUID uuid = UUID.fromString(customerId);
+		return orepo.findByCustomerId(uuid);
+	}
+
 }
