@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.leafbound.models.ClientMessage;
 import com.leafbound.models.Order;
 import com.leafbound.models.UserDTO;
 import com.leafbound.services.JwtServiceImpl;
 import com.leafbound.services.OrderService;
+import com.leafbound.util.ClientMessageUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,29 +44,70 @@ public class OrderController {
 	// Lock the order
 	@PostMapping(path = "/order")
 	@ApiOperation(value = "Create a new order", notes = "Create a new order")
-	public @ResponseBody boolean createOrder(@RequestBody Order order) {
+	public ResponseEntity<ClientMessage> createOrder(@RequestBody Order order,
+			@RequestHeader("Authorization") String token) {
 		log.info("Creating order");
-		return oserv.add(order);
+
+		// Remove the "Bearer " from the token
+		token = token.substring(7);
+
+		// Check the token
+		UserDTO userDTO = jwtService.getDTO(token);
+
+		if (userDTO == null) {
+			return invalidUserError();
+		}
+		ClientMessage clientMessage = oserv.add(order) ? ClientMessageUtil.CREATION_SUCCESSFUL
+				: ClientMessageUtil.CREATION_FAILED;
+		return ResponseEntity.ok(clientMessage);
 	}
 
 	// Lock this one
 	@GetMapping(path = "/order/{id}")
 	@ApiOperation(value = "Getting order by Id")
-	public @ResponseBody Order getById(@PathVariable String id) {
+	public ResponseEntity<Order> getById(@PathVariable String id, @RequestHeader("Authorization") String token) {
 
 		log.info("finding order by Id in controller...");
 
-		return oserv.getOrderById(id);
+		// Remove the "Bearer " from the token
+		token = token.substring(7);
+
+		// Check the token
+		UserDTO userDTO = jwtService.getDTO(token);
+
+		if (userDTO == null) {
+			// Set header for the response
+			HttpHeaders responseHeader = new HttpHeaders();
+			log.info("Invalid token");
+			responseHeader.add("message", "Invalid token");
+			return ResponseEntity.status(401).headers(responseHeader).build();
+		}
+		return ResponseEntity.ok(oserv.getOrderById(id));
 
 	}
 
 	@GetMapping(path = "/order/date/{orderDate}")
 	@ApiOperation(value = "Getting order by date")
-	public @ResponseBody List<Order> getByDate(@PathVariable String orderDate) {
+	public ResponseEntity<List<Order>> getByDate(@PathVariable String orderDate,
+			@RequestHeader("Authorization") String token) {
 		// TODO: Are we using this route?
 		log.info("finding order by date in controller...");
+		
+		// Remove the "Bearer " from the token
+				token = token.substring(7);
 
-		return oserv.getOrderByDate(orderDate);
+				// Check the token
+				UserDTO userDTO = jwtService.getDTO(token);
+
+				if (userDTO == null) {
+					// Set header for the response
+					HttpHeaders responseHeader = new HttpHeaders();
+					log.info("Invalid token");
+					responseHeader.add("message", "Invalid token");
+					return ResponseEntity.status(401).headers(responseHeader).build();
+				}
+
+		return ResponseEntity.ok(oserv.getOrderByDate(orderDate));
 	}
 
 	// The example of how to use the JWT token
@@ -74,9 +117,6 @@ public class OrderController {
 			@RequestHeader("Authorization") String token) {
 		log.info("finding order by customer in controller...");
 
-		// Set header for the response
-		HttpHeaders responseHeader = new HttpHeaders();
-
 		// Remove the "Bearer " from the token
 		token = token.substring(7);
 
@@ -84,6 +124,8 @@ public class OrderController {
 		UserDTO userDTO = jwtService.getDTO(token);
 
 		if (userDTO == null) {
+			// Set header for the response
+			HttpHeaders responseHeader = new HttpHeaders();
 			log.info("Invalid token");
 			responseHeader.add("message", "Invalid token");
 			return ResponseEntity.status(401).headers(responseHeader).build();
@@ -95,31 +137,76 @@ public class OrderController {
 	// Lock this one
 	@GetMapping(path = "/order/all")
 	@ApiOperation(value = "Getting all orders")
-	public @ResponseBody List<Order> getAll() {
+	public ResponseEntity<List<Order>> getAll(@RequestHeader("Authorization") String token) {
 
 		log.info("finding all orders by Id in controller...");
 
-		return oserv.getAllOrders();
+		// Remove the "Bearer " from the token
+		token = token.substring(7);
+
+		// Check the token
+		UserDTO userDTO = jwtService.getDTO(token);
+
+		if (userDTO == null) {
+			// Set header for the response
+			HttpHeaders responseHeader = new HttpHeaders();
+			log.info("Invalid token");
+			responseHeader.add("message", "Invalid token");
+			return ResponseEntity.status(401).headers(responseHeader).build();
+		}
+
+		return ResponseEntity.ok(oserv.getAllOrders());
 
 	}
 
 	// Lock this one
 	@PatchMapping("/order/{id}")
 	@ApiOperation(value = "Update order entity")
-	public @ResponseBody boolean updateOrder(@PathVariable String id, @RequestBody Order order) {
-
+	public ResponseEntity<ClientMessage> updateOrder(@PathVariable String id, @RequestBody Order order,
+			@RequestHeader("Authorization") String token) {
 		log.info("updating an order in controller...");
 
-		return oserv.updateOrder(id, order);
+		// Remove the "Bearer " from the token
+		token = token.substring(7);
+
+		// Check the token
+		UserDTO userDTO = jwtService.getDTO(token);
+
+		if (userDTO == null) {
+			return invalidUserError();
+		}
+		ClientMessage clientMessage = oserv.updateOrder(id, order) ? ClientMessageUtil.UPDATE_SUCCESSFUL
+				: ClientMessageUtil.UPDATE_FAILED;
+		return ResponseEntity.ok(clientMessage);
 	}
 
 	// Lock this one Check if ADMIN or CUSTOMER
 	@DeleteMapping("/order/{id}")
 	@ApiOperation(value = "Remove order entity")
-	public @ResponseBody boolean deleteOrder(@PathVariable UUID id) {
+	public ResponseEntity<ClientMessage> deleteOrder(@PathVariable UUID id,
+			@RequestHeader("Authorization") String token) {
+		log.info("updating an order in controller...");
 
-		log.info("deleting an order in controller...");
-		return oserv.deleteOrder(id);
+		// Remove the "Bearer " from the token
+		token = token.substring(7);
+
+		// Check the token
+		UserDTO userDTO = jwtService.getDTO(token);
+
+		if (userDTO == null) {
+			return invalidUserError();
+		}
+		ClientMessage clientMessage = oserv.deleteOrder(id) ? ClientMessageUtil.DELETION_SUCCESSFUL
+				: ClientMessageUtil.DELETION_FAILED;
+		return ResponseEntity.ok(clientMessage);
+	}
+
+	protected ResponseEntity<ClientMessage> invalidUserError() {
+		// Set header for the response
+		HttpHeaders responseHeader = new HttpHeaders();
+		log.info("Invalid token");
+		responseHeader.add("message", "Invalid token");
+		return ResponseEntity.status(401).headers(responseHeader).build();
 	}
 
 }
