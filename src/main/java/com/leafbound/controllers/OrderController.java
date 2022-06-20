@@ -77,6 +77,9 @@ public class OrderController {
 		// Set header for the response
 		HttpHeaders responseHeader = new HttpHeaders();
 
+		// Remove the "Bearer " from the token
+		token = token.substring(7);
+
 		// Check the token
 		UserDTO userDTO = jwtService.getDTO(token);
 
