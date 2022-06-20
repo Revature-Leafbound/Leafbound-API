@@ -49,7 +49,7 @@ public class UserController {
 		return service.getUserById(id);
 	}
 
-	@GetMapping("/users")
+	@GetMapping("/user/all")
 	public @ResponseBody List<User> readAllUsers() {
 		log.info("Getting all users");
 		return service.getAllUsers();

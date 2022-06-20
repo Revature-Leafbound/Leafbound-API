@@ -16,7 +16,7 @@ import lombok.Data;
 @Entity
 @Table(name = "carts")
 @Data
-@ApiModel(value = "carts", description = "This model serves as the basic model for all carts entity API operations.")
+@ApiModel(value = "Carts", description = "This model serves as the basic model for all carts entity API operations.")
 public class Cart {
 
     @Id
