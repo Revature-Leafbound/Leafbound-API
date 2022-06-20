@@ -1,11 +1,17 @@
-# Declare the base image - here is a light weight JDK 8 environment setup
+# Declare the base image - here is a light weight JDK 8 environment setup.
 FROM openjdk:8-jdk-alpine
 
-# Copy the jar produced from the mvn clean package phase from the target to the inside of the container
-COPY /target/leafbound-0.0.1-SNAPSHOT.jar leafbound-0.0.1-SNAPSHOT.jar
+# This sets the environmental variable.
+ENV APP_HOME=/usr/app/
 
-# Expose port 5000 of the container
-EXPOSE 5000
+# This is the directory where the output of CMD should run.
+WORKDIR $APP_HOME
 
-# Run the JAR when you run the container, thus executing the app
-ENTRYPOINT ["java", "-jar", "/leafbound-0.0.1-SNAPSHOT.jar"]
+# This copies the file or a directory to the container’s directory.
+COPY /target/leafbound-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose port 8080 of the container.
+EXPOSE 8080
+
+# This is the command that runs the application.
+CMD ["java", "-jar", "app.jar"]
