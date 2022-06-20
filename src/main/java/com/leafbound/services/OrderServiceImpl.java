@@ -38,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order getOrderByDate(String orderDate) {
+	public List<Order> getOrderByDate(String orderDate) {
 		log.info("finding order by date in service...");
 
 		// Parse the date
@@ -65,10 +65,15 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public boolean deleteOrder(int id) {
-		UUID uuid = UUID.fromString(String.valueOf(id));
-		orepo.deleteById(uuid);
+	public boolean deleteOrder(UUID id) {
+		orepo.deleteById(id);
 		return true;
+	}
+
+	@Override
+	public List<Order> getOrderByCustomerId(String customerId) {
+		UUID uuid = UUID.fromString(customerId);
+		return orepo.findByCustomerId(uuid);
 	}
 
 }
