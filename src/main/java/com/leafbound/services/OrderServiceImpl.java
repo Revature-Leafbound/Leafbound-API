@@ -38,6 +38,12 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public List<Order> getOrderByCustomerId(String customerId) {
+		UUID uuid = UUID.fromString(customerId);
+		return orepo.findByCustomerId(uuid);
+	}
+
+	@Override
 	public Order getOrderByDate(String orderDate) {
 		log.info("finding order by date in service...");
 
