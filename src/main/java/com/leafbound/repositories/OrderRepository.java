@@ -17,7 +17,7 @@ import com.leafbound.models.Order;
 public interface OrderRepository extends JpaRepository<Order, UUID> {
 
 	@Query(value = "SELECT * FROM orders where order_date=?1", nativeQuery = true)
-	public Order findByDate(LocalDate orderDate);
+	public List<Order> findByDate(LocalDate orderDate);
 
 	@Query(value = "SELECT * FROM orders where user_id=?1", nativeQuery = true)
 	public List<Order> findByCustomerId(UUID customerId);
