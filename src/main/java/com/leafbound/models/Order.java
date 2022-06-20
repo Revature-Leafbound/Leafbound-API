@@ -16,11 +16,21 @@ import org.hibernate.annotations.GenericGenerator;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+<<<<<<< Updated upstream
 import lombok.Data;
 
 @Entity
 @Table(name = "orders")
 @Data
+=======
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "orders")
+@AllArgsConstructor
+@NoArgsConstructor
+>>>>>>> Stashed changes
 @ApiModel(value = "Orders", description = "This model serves as model for Order entyty")
 public class Order {
 
@@ -38,5 +48,31 @@ public class Order {
 	@Column(name = "oder_date")
 	@ApiModelProperty(name = "order date", notes = "A date value that serves as a date for orders", required = true, value = "order date")
 	private Date orderDate;
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public LocalDate getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(LocalDate orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	
 
 }

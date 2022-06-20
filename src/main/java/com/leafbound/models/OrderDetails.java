@@ -11,11 +11,9 @@ import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 @Entity
 @Table(name = "order_details")
-@Data
 @ApiModel(value = "OrderDetails", description = "This model serves as the basic model for all OrderDetails entity API operations.")
 public class OrderDetails {
 
@@ -56,11 +54,45 @@ public class OrderDetails {
         this.order = order;
     }
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
     /**
      * @param id
      * @param product
      * @param quantity
      * @param order
      */
+    
+    
 
 }

@@ -9,11 +9,9 @@ import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 @Entity
 @Table(name = "roles")
-@Data
 @ApiModel(value = "User_Roles", description = "This class serves as a model for the User Role entity")
 public class UserRole {
 
@@ -30,5 +28,31 @@ public class UserRole {
     @Column(name = "description", unique = true, nullable = false)
     @ApiModelProperty(name = "description", value = "A String value describing a specific user role.", required = true)
     private String description;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+    
+    
 
 }
