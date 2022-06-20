@@ -1,17 +1,13 @@
 package com.leafbound.models;
 
-import java.util.UUID;
-
 public class OrderDetailsDTO {
     private int id;
-    private UUID orderId;
+    private String orderId;
     private int productId;
     private int quantity;
 
-    /**
-     * 
-     */
     public OrderDetailsDTO() {
+        super();
     }
 
     /**
@@ -19,7 +15,8 @@ public class OrderDetailsDTO {
      * @param productId
      * @param quantity
      */
-    public OrderDetailsDTO(UUID orderId, int productId, int quantity) {
+    public OrderDetailsDTO(String orderId, int productId, int quantity) {
+        super();
         this.orderId = orderId;
         this.productId = productId;
         this.quantity = quantity;
@@ -31,7 +28,8 @@ public class OrderDetailsDTO {
      * @param productId
      * @param quantity
      */
-    public OrderDetailsDTO(int id, UUID orderId, int productId, int quantity) {
+    public OrderDetailsDTO(int id, String orderId, int productId, int quantity) {
+        super();
         this.id = id;
         this.orderId = orderId;
         this.productId = productId;
@@ -55,14 +53,14 @@ public class OrderDetailsDTO {
     /**
      * @return the orderId
      */
-    public UUID getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
     /**
      * @param orderId the orderId to set
      */
-    public void setOrderId(UUID orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

@@ -11,24 +11,16 @@ import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-<<<<<<< Updated upstream
 import lombok.Data;
+
+
 
 @Entity
 @Table(name = "products")
 @Data
-@ApiModel(value = "products", description = "book_description")
-=======
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-@Entity
-@Table(name = "products")
-@NoArgsConstructor
-@AllArgsConstructor
 @ApiModel(value = "Products", description = "book_description")
->>>>>>> Stashed changes
 public class Product {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -36,27 +28,15 @@ public class Product {
 	private int id;
 
 	@Column(name = "author", nullable = false)
-	@ApiModelProperty(name = "author", notes = "an String value that serves as the author name of the product", required = true, value = "1") // may
-																																				// need
-																																				// to
-																																				// change
-																																				// value
+	@ApiModelProperty(name = "author", notes = "an String value that serves as the author name of the product", required = true, value = "1")
 	private String author;
 
 	@Column(name = "publisher", nullable = false)
-	@ApiModelProperty(name = "publisher", notes = "an String value that serves as the publisher name of the product", required = true, value = "1") // may
-																																					// need
-																																					// to
-																																					// change
-																																					// value
+	@ApiModelProperty(name = "publisher", notes = "an String value that serves as the publisher name of the product", required = true, value = "1")
 	private String publisher;
 
 	@Column(name = "isbn", nullable = false)
-	@ApiModelProperty(name = "isbn", notes = "a String that serves as the ISBN for the product", required = true, value = "1") // may
-																																// need
-																																// to
-																																// change
-																																// value
+	@ApiModelProperty(name = "isbn", notes = "a String that serves as the ISBN for the product", required = true, value = "1")
 	private String isbn;
 
 	@Column(name = "genre", nullable = false)
@@ -87,7 +67,7 @@ public class Product {
 	@ApiModelProperty(name = "list_price", notes = "a double precision floating point that serves as the list price of the product", required = true, value = "1")
 	private double list_price;
 
-<<<<<<< Updated upstream
+
 	public Product() {
 		super();
 	}
@@ -122,7 +102,7 @@ public class Product {
 		this.description = description;
 		this.list_price = list_price;
 	}
-=======
+
 	public int getId() {
 		return id;
 	}
@@ -211,7 +191,5 @@ public class Product {
 		this.list_price = list_price;
 	}
 	
-	
->>>>>>> Stashed changes
 
 }

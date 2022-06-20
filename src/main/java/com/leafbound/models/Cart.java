@@ -11,15 +11,12 @@ import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 @Entity
 @Table(name = "carts")
-<<<<<<< Updated upstream
 @Data
-@ApiModel(value = "carts", description = "This model serves as the basic model for all carts entity API operations.")
-=======
 @ApiModel(value = "Carts", description = "This model serves as the basic model for all carts entity API operations.")
->>>>>>> Stashed changes
 public class Cart {
 
     @Id

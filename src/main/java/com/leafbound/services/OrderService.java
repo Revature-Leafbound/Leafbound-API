@@ -1,6 +1,5 @@
 package com.leafbound.services;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -8,14 +7,18 @@ import com.leafbound.models.Order;
 
 public interface OrderService {
 
+	public boolean add(Order order);
+
 	Order getOrderById(String id);
 
-	Order getOrderByDate(LocalDate orderDate);
+	List<Order> getOrderByDate(String orderDate);
 
 	List<Order> getAllOrders();
 
-	boolean updateOrder(Order order);
+	List<Order> getOrderByCustomerId(String customerId);
 
-	boolean deleteOrder(Order order);
+	boolean updateOrder(String id, Order order);
+
+	boolean deleteOrder(UUID id);
 
 }
