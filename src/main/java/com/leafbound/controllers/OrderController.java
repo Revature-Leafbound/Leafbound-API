@@ -1,6 +1,7 @@
 package com.leafbound.controllers;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class OrderController {
 
 	@GetMapping(path = "/order/date/{orderDate}")
 	@ApiOperation(value = "Getting order by date")
-	public @ResponseBody Order getByDate(@PathVariable String orderDate) {
+	public @ResponseBody List<Order> getByDate(@PathVariable String orderDate) {
 		// TODO: Are we using this route?
 		log.info("finding order by date in controller...");
 
@@ -77,7 +78,7 @@ public class OrderController {
 
 	@DeleteMapping("/order/{id}")
 	@ApiOperation(value = "Remove order entity")
-	public @ResponseBody boolean deleteOrder(@PathVariable int id) {
+	public @ResponseBody boolean deleteOrder(@PathVariable UUID id) {
 
 		log.info("deleting an order in controller...");
 		return oserv.deleteOrder(id);
