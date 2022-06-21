@@ -30,7 +30,7 @@ public class OrderController {
 	@Autowired
 	private OrderService oserv;
 
-	@GetMapping(path = "/orderid/{id}")
+	@GetMapping(path = "/order/{id}")
 	@ApiOperation(value = "Getting order by Id")
 	public @ResponseBody Order getById(@PathVariable String id) {
 
@@ -40,7 +40,7 @@ public class OrderController {
 
 	}
 
-	@GetMapping(path = "/orderdate")
+	@GetMapping(path = "/order/date")
 	@ApiOperation(value = "Getting order by date")
 	public @ResponseBody Order getByDate() {
 

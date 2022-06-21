@@ -1,5 +1,6 @@
 package com.leafbound.services;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -21,14 +22,27 @@ public class OrderServiceImpl implements OrderService {
 
 	private static Logger log = Logger.getLogger(OrderServiceImpl.class);
 
+	@Autowired
+	public OrderServiceImpl(OrderRepository orepo) {
+		this.orepo = orepo;
+	}
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public Order getOrderById(String id) {
 		
 		log.info("In service layer, getting order by ID:" + id);
 		
-		UUID uuid = UUID.fromString(id);
+		String Id = id.replace("-", "");
+		UUID uuid = new UUID(
+		        new BigInteger(Id.substring(0, 16), 16).longValue(),
+		        new BigInteger(Id.substring(16), 16).longValue());
 
-		return orepo.findById(uuid).orElseThrow(() -> new RuntimeException("Order not found"));
+		return orepo.getById(uuid);
+	
+//		UUID uuid = UUID.fromString(id);
+//
+//		return orepo.findById(uuid).orElseThrow(() -> new RuntimeException("Order not found"));
 		
 	}
 
