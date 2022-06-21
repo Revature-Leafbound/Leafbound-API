@@ -49,7 +49,7 @@ public class OrderController {
 		log.info("Creating order");
 
 		// Remove the "Bearer " from the token
-		token = token.substring(7);
+		//token = token.substring(7);
 
 		// Check the token
 		UserDTO userDTO = jwtService.getDTO(token);
@@ -70,7 +70,7 @@ public class OrderController {
 		log.info("finding order by Id in controller...");
 
 		// Remove the "Bearer " from the token
-		token = token.substring(7);
+		//token = token.substring(7);
 
 		// Check the token
 		UserDTO userDTO = jwtService.getDTO(token);
@@ -94,7 +94,7 @@ public class OrderController {
 		log.info("finding order by date in controller...");
 		
 		// Remove the "Bearer " from the token
-				token = token.substring(7);
+		//		token = token.substring(7);
 
 				// Check the token
 				UserDTO userDTO = jwtService.getDTO(token);
@@ -118,7 +118,7 @@ public class OrderController {
 		log.info("finding order by customer in controller...");
 
 		// Remove the "Bearer " from the token
-		token = token.substring(7);
+	//	token = token.substring(7);
 
 		// Check the token
 		UserDTO userDTO = jwtService.getDTO(token);
@@ -142,7 +142,7 @@ public class OrderController {
 		log.info("finding all orders by Id in controller...");
 
 		// Remove the "Bearer " from the token
-		token = token.substring(7);
+	//	token = token.substring(7);
 
 		// Check the token
 		UserDTO userDTO = jwtService.getDTO(token);
@@ -167,7 +167,7 @@ public class OrderController {
 		log.info("updating an order in controller...");
 
 		// Remove the "Bearer " from the token
-		token = token.substring(7);
+	//	token = token.substring(7);
 
 		// Check the token
 		UserDTO userDTO = jwtService.getDTO(token);
@@ -188,7 +188,7 @@ public class OrderController {
 		log.info("updating an order in controller...");
 
 		// Remove the "Bearer " from the token
-		token = token.substring(7);
+		//token = token.substring(7);
 
 		// Check the token
 		UserDTO userDTO = jwtService.getDTO(token);
