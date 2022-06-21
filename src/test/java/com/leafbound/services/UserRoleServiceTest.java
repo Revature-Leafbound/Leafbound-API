@@ -1,6 +1,7 @@
 package com.leafbound.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -70,6 +71,7 @@ public class UserRoleServiceTest {
 
 		dummyDb = new ArrayList<UserRole>();
 		dummyDb.add(mockUserRole1);
+		dummyDb.add(mockUserRole2);
 	}
 
 	@Test
@@ -80,36 +82,44 @@ public class UserRoleServiceTest {
 		assertThat(userRoleRepo).isNotNull();
 		assertThat(userRoleService).isNotNull();
 	}
-
+	
 	@Test
 	@Order(2)
-	@DisplayName("1. getById() test")
+	@DisplayName("2. getById() test")
 	public void getById() throws Exception {
 		
 		when(userRoleRepo.findById(1)).thenReturn(Optional.of(mockUserRole1));
 		assertEquals(userRoleService.getById(1), mockUserRole1);
 
 	}
-
 	@Test
 	@Order(3)
-	@DisplayName("2. add() test")
+	@DisplayName("3. getById() failure test")
+	public void getByIdFail() throws Exception {
+	
+		when(userRoleRepo.findById(1)).thenReturn(Optional.of(mockUserRole1));
+		assertNotEquals(mockUserRole2, userRoleRepo.findById(1));
+
+	}
+
+	@Test
+	@Order(4)
+	@DisplayName("4. add() test")
 	public void add() throws Exception {
 		mockUserRole3 = mockUserRole2;
 		mockUserRole3.setId(3);
 
 		when(userRoleRepo.save(mockUserRole3)).thenReturn(mockUserRole3);
-
 		assertEquals(true, userRoleService.add(mockUserRole3));
 
 	}
 
 	@Test
-	@Ignore
-	@Order(4)
-	@DisplayName("3. remove() test")
+	@Order(5)
+	@DisplayName("5. remove() test")
 	public void remove() throws Exception {
-
+		userRoleRepo.deleteById(mockUserRole2.getId());
+	    assertEquals(true, userRoleService.remove(mockUserRole2.getId()));
 	}
 
 }
