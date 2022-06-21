@@ -1,5 +1,7 @@
 # STARTUP DOCUMENTATION
 
+(add something about how this is a part of the overall feature)
+
 ## Cloning the project repository
 
 1. Navigate to the main page of the repository here: https://github.com/Revature-Leafbound/Leafbound-API
