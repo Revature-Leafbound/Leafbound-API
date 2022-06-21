@@ -14,9 +14,13 @@ import org.hibernate.annotations.GenericGenerator;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
+@AllArgsConstructor
+@NoArgsConstructor
 @ApiModel(value = "User", description = "This model serves as a model for the User entity")
 public class User {
 	@Id
