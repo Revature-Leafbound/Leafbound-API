@@ -45,9 +45,8 @@ Please check out our Startup Documentation for more information.
 |               | Dhruv Patel - Engineering                     |                         |
 |               | Levi Choi - DevOps                            |                         |
 
-| Engineers      |                |                    |               |
-| :------------- | :------------- | :----------------- | :------------ |
-| Jacob Shaw     | Patrick Miller | Adam Lucas         | Yugal Subedi  |
-| Vidya Bineesh  | Jorge Ayestas  | Jose E. Fuentes    | Enock Lee     |
-| Patrick Yaegar | Markus Grier   | Santiago Garcia II | Jorge Galeana |
-| Julian Mercado | Joachim Ogodi  | Michael Bornhoft   |               |
+| Engineers      |                |                    |               |                  |
+| :------------- | :------------- | :----------------- | :------------ | ---------------- |
+| Jacob Shaw     | Patrick Miller | Adam Lucas         | Yugal Subedi  | Julian Mercado   |
+| Vidya Bineesh  | Jorge Ayestas  | Jose E. Fuentes    | Enock Lee     | Joachim Ogodi    |
+| Patrick Yaegar | Markus Grier   | Santiago Garcia II | Jorge Galeana | Michael Bornhoft |
