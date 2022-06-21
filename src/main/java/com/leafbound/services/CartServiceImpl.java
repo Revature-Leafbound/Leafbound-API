@@ -15,6 +15,10 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private CartRepository repository;
 
+	public CartServiceImpl(CartRepository crepo) {
+		this.repository = crepo;
+	}
+
 	@Override
 	public boolean addtoCart(Cart cart) {
 		int pk = repository.save(cart).getId();

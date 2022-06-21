@@ -2,6 +2,7 @@ package com.leafbound.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -21,18 +22,16 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.leafbound.models.Cart;
 import com.leafbound.models.Product;
@@ -41,103 +40,67 @@ import com.leafbound.repositories.CartRepository;
 import com.leafbound.services.CartService;
 import com.leafbound.services.CartServiceImpl;
 
-@SpringBootTest
-@RunWith(SpringRunner.class)
+
+@ExtendWith(MockitoExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CartServiceTest {
-
-    // @TestConfiguration
-    // static class CartServiceImplTestContextConfiguaration {
-    // @Bean
-    // public CartService cartService() {
-    // return new CartServiceImpl();
-    // }
-    // }
-
-    @MockBean
-    @Autowired
-    private static CartRepository cartRepo;
-
-    @Autowired
-    private static CartServiceImpl cartService;
-
-    private static Cart mockCart1, mockCart2, mockCart3, mockCartDeletion;
-    private static Product mockProd1, mockProd2, mockProd3;
-    private static User mockUser1, mockUser2, mockUser3;
-    private static List<Cart> dummyDB;
-
-    @BeforeAll
-    static void setUpBeforeClass() throws Exception {
-        cartRepo = Mockito.mock(CartRepository.class);
-        // cartService = new CartServiceImpl(cartRepo);
-
-        Random rand = new Random();
-        int maxNumber = 100_000_000;
-        int id1 = rand.nextInt(maxNumber) + 1;
-        int id2 = rand.nextInt(maxNumber) + 1;
-        int id3 = rand.nextInt(maxNumber) + 1;
-        int prodId1 = rand.nextInt(maxNumber) + 1;
-        int prodId2 = rand.nextInt(maxNumber) + 1;
-        int custId1 = rand.nextInt(maxNumber) + 1;
-        int custId2 = rand.nextInt(maxNumber) + 1;
-
-        mockCart1 = new Cart(1, mockProd1, 3, mockUser1);
-        mockCart2 = new Cart(2, mockProd2, 20, mockUser2);
-        mockCart3 = new Cart(3, mockProd3, 27, mockUser3);
-
-        mockCartDeletion = new Cart(567, mockProd3, 5, mockUser3);
-
-        dummyDB = new ArrayList<>();
-        dummyDB.add(mockCart1);
-        dummyDB.add(mockCart2);
-    }
-
-    @Test
-    @Order(1)
-    @DisplayName("1. Mock Validation Test")
-    public void checkMockInjection() {
-        assertThat(cartRepo).isNotNull();
-        assertThat(cartService).isNotNull();
-    }
-
-    @Test
-    @Order(2)
-    @DisplayName("2. Create Cart Test - success")
-    public void addCartTest_success() {
-        mockCart3 = mockCart2;
-        mockCart3.setId(3);
-
-        when(cartRepo.save(mockCart3)).thenReturn(mockCart3);
-
-        assertEquals(true, cartService.addtoCart(mockCart3));
-    }
-
-    @Test
-    @Order(3)
-    @DisplayName("3. Create Cart Test - failure")
-    public void addCartTest_failure() {
-        mockCart3 = new Cart();
-        mockCart3.setId(3);
-
-        when(cartRepo.save(mockCart3)).thenReturn(mockCart3);
-
-        assertEquals(false, cartService.addtoCart(mockCart3));
-    }
-
-    @Test
-    @Order(4)
-    @DisplayName("4. Delete Cart Test - success")
-    public void deleteCartById_success() {
-        when(cartRepo.deleteById(999)).thenReturn(true);
-        assertEquals(true, cartService.remove(mockCart2.getById(999)));
-    }
-
-    @Test
-    @Order(5)
-    @DisplayName("5. Delete Cart Test - failure")
-    public void deleteCartById_failure() {
-        when(cartRepo.deleteById(999)).thenReturn(false);
-        assertNotNull(cartService.getById(999));
-    }
-
+	
+	@Mock
+	private static CartRepository crepo;
+	
+	@InjectMocks
+	private static CartServiceImpl cserv;
+	
+	private static Cart c1, c2;
+	private static User u1, u2, u3;
+	private static Product p1, p2, p3;
+	static List<Cart> dummyDb;
+	
+	@BeforeAll
+	public static void setUpBeforeClass() throws Exception {
+		crepo = Mockito.mock(CartRepository.class);
+		cserv = new CartServiceImpl(crepo);
+		
+		c1 = new Cart(1, p1, 1, u1);
+		c2 = new Cart(2, p2, 2, u2);
+		
+		dummyDb = new ArrayList<Cart>();
+		dummyDb.add(c1);
+		dummyDb.add(c2);
+	}
+	
+	@Test
+	@Order(1)
+	@DisplayName("1. Mock Validation Sanity Test")
+	public void checkMockInjection() {
+		assertThat(crepo).isNotNull();
+		assertThat(cserv).isNotNull();
+	}
+	
+	@Test
+	@Order(2)
+	@DisplayName("2. Add to Cart - Success")
+	public void testAddCart_Success() throws Exception {
+		Cart c3 = new Cart(p3, 3, u3);
+		c3.setId(3);
+		when(crepo.save(c3)).thenReturn(c3);
+		assertEquals(true, cserv.addtoCart(c3));
+	}
+	
+	@Order(3)
+	@DisplayName("3. Add to Cart - Failure")
+	public void testAddCart_Failure() throws Exception {
+		Cart c3 = new Cart(p3, 3, u3);
+		c3.setId(3);
+		when(crepo.save(c3)).thenReturn(c3);
+		assertNotEquals(false, cserv.addtoCart(c3));
+	}
+	
+//	@Order(4)
+//	@DisplayName("4. Delete Cart - Success")
+//	public void testDeleteCart_Success() throws Exception {
+//		when(crepo.delete(c2)).thenReturn(2);
+//		assertEquals(true, cserv.deleteCart(2));
+//	}
+	
 }
