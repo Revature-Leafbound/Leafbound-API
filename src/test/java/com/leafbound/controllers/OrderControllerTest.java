@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -26,12 +28,14 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.leafbound.models.Order;
 import com.leafbound.models.User;
+import com.leafbound.services.JwtServiceImpl;
 import com.leafbound.services.OrderService;
 import com.leafbound.util.ClientMessageUtil;
 
@@ -62,9 +66,26 @@ public class OrderControllerTest {
 	private MockMvc mockMvc;
 	
 	@MockBean
+	private JwtServiceImpl jserv;
+	
+	@MockBean
 	private OrderService oserv;
 	
-
+	@SuppressWarnings("deprecation")
+	public boolean isValidJSON (final String json) {
+		boolean valid = false;
+		try {
+			final JsonParser parser = new ObjectMapper().getJsonFactory().createJsonParser(json);
+			while (parser.nextToken() != null) {
+			}
+			valid = true;
+		} catch (JsonParseException jpe) {
+			jpe.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+		return valid;
+	}
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -99,12 +120,18 @@ public class OrderControllerTest {
 		uuid3=Uuid3;
 		uuid4=Uuid4;
 		
+		LocalDate date1 =  LocalDate.of(2021, 4, 16); 
+		LocalDate date2 =  LocalDate.of(2021, 6, 4);
+		LocalDate date3 =  LocalDate.of(2022, 4, 11);
+		date1.toString();
+		date2.toString();
+		date3.toString();
 		
 		
-		mockO1 = new Order(uuid1, mockUser1, LocalDate.of(2021, 4, 16));
-		mockO2 = new Order(uuid2, mockUser2, LocalDate.of(2021, 6, 14));
+		mockO1 = new Order(uuid1, mockUser1,date1);
+		mockO2 = new Order(uuid2, mockUser2, date2);
 		
-		mockOCre = new Order(mockUser3, LocalDate.of(2022, 4, 11));
+		mockOCre = new Order(uuid3, mockUser3, date3);
 		mockOMod = mockOCre;
 		mockOMod.setId(uuid3);
 		mockOMod.setUser(mockUser3);
@@ -142,29 +169,31 @@ public class OrderControllerTest {
 		assertEquals(om.writeValueAsString(mockO1), result.getResponse().getContentAsString());
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	@DisplayName("4. Get Order by Date")
 	public void GetByOrderDate_Success() throws Exception {
-		when(oserv.getOrderByDate(LocalDate.of(2021, 6, 14))).thenReturn(mockO2);
+		when(((OngoingStubbing<Order>) oserv.getOrderByDate("2021-6-14")).thenReturn(mockO2));
 		RequestBuilder request = MockMvcRequestBuilders.get("/api/v1/order/date/2021-06-14");
 		MvcResult result = mockMvc.perform(request).andReturn();
 		assertEquals(om.writeValueAsString(mockO2), result.getResponse().getContentAsString());
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	@DisplayName("5. Get Order by Date - Fail")
 	public void getByOrderDate_Fail() throws Exception {
-		when(oserv.getOrderByDate(LocalDate.of(2021, 3, 14))).thenReturn(mockO2);
+		when(((OngoingStubbing<Order>) oserv.getOrderByDate("2021-3-14")).thenReturn(mockO2));
 		RequestBuilder request = MockMvcRequestBuilders.get("/api/v1/order/date/2021-03-14");
 		MvcResult result = mockMvc.perform(request).andReturn();
 		assertEquals(om.writeValueAsString(mockO2), result.getResponse().getContentAsString());
 	}
 	
 	@Test
-	@DisplayName("6. Get All Order by Date")
+	@DisplayName("6. Get All Order")
 	public void getAllOrders() throws Exception {
 		when(oserv.getAllOrders()).thenReturn(dummyDb);
-		RequestBuilder request = MockMvcRequestBuilders.get("/api/v1/orderall");
+		RequestBuilder request = MockMvcRequestBuilders.get("/api/v1/order/all");
 		MvcResult result = mockMvc.perform(request).andReturn();
 		assertEquals(om.writeValueAsString(dummyDb), result.getResponse().getContentAsString());
 	}
@@ -172,8 +201,8 @@ public class OrderControllerTest {
 	@Test
 	@DisplayName("7. Update Order")
 	public void updateOrder_Success() throws Exception {
-		when(oserv.updateOrder(mockOMod)).thenReturn(true);
-		RequestBuilder request = MockMvcRequestBuilders.put("/api/vl/orderupdate")
+		when(oserv.updateOrder("2f14d0ab-9605-4a62-a9e4-5ed26688389b", mockOMod)).thenReturn(true);
+		RequestBuilder request = MockMvcRequestBuilders.put("/api/vl/order/2f14d0ab-9605-4a62-a9e4-5ed26688389b")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockOMod))
 				.contentType(MediaType.APPLICATION_JSON);
@@ -185,8 +214,8 @@ public class OrderControllerTest {
 	@Test
 	@DisplayName("8. Update Order - Faile")
 	public void updateOrder_Fail() throws Exception {
-		when(oserv.updateOrder(mockOMod)).thenReturn(false);
-		RequestBuilder request = MockMvcRequestBuilders.put("/api/vl/orderupdate")
+		when(oserv.updateOrder("2f14d0ab-9605-4a62-a9e4-5ed26688389b", mockOMod)).thenReturn(false);
+		RequestBuilder request = MockMvcRequestBuilders.put("/api/vl/order/2f14d0ab-9605-4a62-a9e4-5ed26688389b")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockOMod))
 				.contentType(MediaType.APPLICATION_JSON);
@@ -198,8 +227,8 @@ public class OrderControllerTest {
 	@Test
 	@DisplayName("9. Delete Order")
 	public void DeleteOrder_Success() throws Exception {
-		when(oserv.deleteOrder(mockODel)).thenReturn(true);
-		RequestBuilder request = MockMvcRequestBuilders.delete("/api/vl/orderdelete")
+		when(oserv.deleteOrder(uuid4)).thenReturn(true);
+		RequestBuilder request = MockMvcRequestBuilders.delete("/api/vl/order/3f14d0ab-9605-4a62-a9e4-5ed26688389b")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockODel))
 				.contentType(MediaType.APPLICATION_JSON);
@@ -211,8 +240,8 @@ public class OrderControllerTest {
 	@Test
 	@DisplayName("10. Delete Order - Fail")
 	public void DeleteOrder_Fail() throws Exception {
-		when(oserv.deleteOrder(mockODel)).thenReturn(false);
-		RequestBuilder request = MockMvcRequestBuilders.delete("/api/vl/orderdelete")
+		when(oserv.deleteOrder(uuid4)).thenReturn(false);
+		RequestBuilder request = MockMvcRequestBuilders.delete("/api/vl/order/3f14d0ab-9605-4a62-a9e4-5ed26688389b")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.content(om.writeValueAsString(mockODel))
 				.contentType(MediaType.APPLICATION_JSON);

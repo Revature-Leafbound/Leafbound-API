@@ -27,6 +27,12 @@ public class OrderServiceImpl implements OrderService {
 		this.orepo = orepo;
 	}
 
+	@Override
+	public boolean add(Order order) {
+		log.info("Adding order");
+		return orepo.save(order) != null;
+	}
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public Order getOrderById(String id) {
@@ -47,40 +53,48 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public Order getOrderByDate(LocalDate orderDate) {
-		
-		log.info("In service layer, getting order by LocalDate");
+	public List<Order> getOrderByDate(String orderDate) {
+		log.info("finding order by date in service...");
 
-		return orepo.findByDate(orderDate);
+		// Parse the date
+		LocalDate date = LocalDate.parse(orderDate);
+
+		//
+		log.info("Returning order by date: " + date);
+
+		// Find the order
+		return orepo.findByDate(date);
 	}
 
 	@Override
 	public List<Order> getAllOrders() {
-		
-		log.info("In service layer, getting all order");
 
 		return orepo.findAll();
 	}
 
 	@Override
-	public boolean updateOrder(Order order) {
-		
-		log.info("In service layer, updating order");
-		
-		Order target = this.getOrderById(order.getId().toString());
+	public boolean updateOrder(String id, Order order) {
+		Order target = this.getOrderById(id);
 		target.setOrderDate(order.getOrderDate());
 		return (orepo.save(target) != null);
 	}
 
 	@Override
-	public boolean deleteOrder(Order order) {
-		
-		log.info("In service layer, deleting order");
-		
-		orepo.delete(order);
+	public boolean deleteOrder(UUID id) {
+		orepo.deleteById(id);
 		return true;
 	}
 
-	
+
+//	@Override
+//	public List<Order> getOrderByCustomerId(String customerId) {
+//		
+//		customerId.replace("-", "");
+//		UUID uuid = new UUID(
+//		        new BigInteger(customerId.substring(0, 16), 16).longValue(),
+//		        new BigInteger(customerId.substring(16), 16).longValue());
+//		return orepo.findByCustomerId(uuid);
+//	}
+
 
 }

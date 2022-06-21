@@ -23,6 +23,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.leafbound.models.Order;
@@ -76,9 +77,14 @@ public class OrderServiceTest {
 		uuid2=Uuid2;
 		uuid3=Uuid3;
 		
+		LocalDate date1 =  LocalDate.of(2011, 1, 1); 
+		LocalDate date2 =  LocalDate.of(2022, 2, 2);
+		date1.toString();
+		date2.toString();
+
 		
-		o1 = new Order(uuid1, u1, LocalDate.of(2011, 1, 1));
-		o2 = new Order(uuid2, u2, LocalDate.of(2022, 2, 2));
+		o1 = new Order(uuid1, u1, date1);
+		o2 = new Order(uuid2, u2, date2);
 		
 		dummyDb = new ArrayList<Order>();
 		dummyDb.add(o1);
@@ -106,18 +112,20 @@ public class OrderServiceTest {
 		assertNotEquals(o2, oserv.getOrderById("1f14d0ab-9605-4a62-a9e4-5ed26688389b"));
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	@DisplayName("4. Get Order By Date - Success")
 	public void testGetByOrderDate_Success() throws Exception {
-		when(oserv.getOrderByDate(LocalDate.of(2011, 1, 1))).thenReturn(o1);
-		assertEquals(o1, oserv.getOrderByDate(LocalDate.of(2011, 1,1)));
+		when(oserv.getOrderByDate("2011-1-1")).thenReturn((List<Order>) o1);
+		assertEquals(o1, oserv.getOrderByDate("2011-1-1"));
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	@DisplayName("5. Get Order By Date - Failure")
 	public void testGetByOrderDate_Failure() throws Exception {
-		when(oserv.getOrderByDate(LocalDate.of(2022, 2, 2))).thenReturn(o1);
-		assertNotEquals(o2, oserv.getOrderByDate(LocalDate.of(2022, 2,2)));
+		when(((OngoingStubbing<Order>) oserv.getOrderByDate("2022-2-2")).thenReturn((Order) o1));
+		assertNotEquals(o1, oserv.getOrderByDate("2022-2-2"));
 	}
 	
 	@Test
@@ -138,36 +146,34 @@ public class OrderServiceTest {
 	@DisplayName("8. Update Order - Success")
 	public void testUpdateOrder_Success() throws Exception {
 		o2.setId(uuid3);
-		o2.setOrderDate(LocalDate.of(2002, 2, 2));
 		o2.setUser(u3);
 		
 		when(oserv.getOrderById("2f14d0ab-9605-4a62-a9e4-5ed26688389b")).thenReturn(o2);
-		assertEquals(true, oserv.updateOrder(o2));
+		assertEquals(true, oserv.updateOrder("2f14d0ab-9605-4a62-a9e4-5ed26688389b", o2));
 	}
 	
 	@Test
 	@DisplayName("9. Update Order - Failure")
 	public void testUpdateOrder_Failure() throws Exception {
 		o2.setId(uuid3);
-		o2.setOrderDate(LocalDate.of(2002, 2, 2));
 		o2.setUser(u3);
 		
 		when(oserv.getOrderById("2f14d0ab-9605-4a62-a9e4-5ed26688389b")).thenReturn(o2);
-		assertFalse(oserv.updateOrder(o2));
+		assertFalse(oserv.updateOrder("2f14d0ab-9605-4a62-a9e4-5ed26688389b",o2));
 	}
 	
 	@Test
 	@DisplayName("10. Delete Order - Success")
 	public void testDeleteOrder_Success() throws Exception {
-		doNothing().when(orepo).delete(o2);
-		assertEquals(true, oserv.deleteOrder(o2));
+		when(oserv.deleteOrder(uuid2)).thenReturn(true);
+		assertEquals(true, oserv.deleteOrder(uuid2));
 	}
 	
 	@Test
 	@DisplayName("11. Delete Order - Failure")
 	public void testDeleteOrder_Failure() throws Exception {
-		when(oserv.deleteOrder(o2)).thenReturn(false);
-		assertFalse(oserv.deleteOrder(o2));
+		when(oserv.deleteOrder(uuid2)).thenReturn(false);
+		assertFalse(oserv.deleteOrder(uuid2));
 	}	
 	
 }
