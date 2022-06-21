@@ -27,7 +27,6 @@ _The Leafbound online e-commerce platform is a full stack application where user
 - A customer can load products (books) into their cart
 - A customer can checkout
 - A customer can view previous orders
-- A customer can
 
 ### Getting Started
 

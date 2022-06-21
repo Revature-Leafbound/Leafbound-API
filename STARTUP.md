@@ -1,8 +1,8 @@
 # STARTUP DOCUMENTATION
 
-(add something about how this is a part of the overall feature)
+Github repository: [Leafbound-API](https://github.com/Revature-Leafbound/Leafbound-API.git)
 
-## Cloning the project repository
+## 1. Clone the project repository
 
 1. Navigate to the main page of the repository here: https://github.com/Revature-Leafbound/Leafbound-API
 2. Above the list of files, click on the green “**Code**” button.
@@ -27,7 +27,7 @@
 
 10. Once complete, open the project in your desired IDE. We now have to set up the system environment variables in order to connect to a database.
 
-## Set system environment variables – go into depth here with steps
+## 2. Set system environment variables
 
 1. To create or modify environment variables on Windows 10:
 
@@ -46,8 +46,12 @@
 3. Now that those are entered, click okay and close all windows. You must restart your device for the changes to the system environment variables to take effect.
 4. Okay, now that you have restarted your device, it is time to proceed with launching the application.
 
-## Connect to the backend and run the application
+## 3. Connect to the backend and run the application
 
 1. Return to your IDE where you first cloned the project. Navigate through the file structure until locating the “_LeafboundApplication.java_” file as shown below.
 2. Now right click on the “_LeafboundApplication.java_” file and select, “**Run As**” and then click, “**Spring Boot App**”
 3. After the project has finished loading, it is now live and running.
+
+## 4. Clone the Leafbound repository and start the Development server to check out the full functionality of the Leafbound E-commerce site.
+
+For further details on connecting to the backend, click [here]()
