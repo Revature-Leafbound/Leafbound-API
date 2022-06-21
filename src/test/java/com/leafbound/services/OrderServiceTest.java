@@ -168,5 +168,7 @@ public class OrderServiceTest {
 	public void testDeleteOrder_Failure() throws Exception {
 		when(oserv.deleteOrder(o2)).thenReturn(false);
 		assertFalse(oserv.deleteOrder(o2));
-	}
+	}	
+	
 }
+
