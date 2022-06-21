@@ -1,4 +1,4 @@
-# STARTUP DOCUMENTATION
+# LEAFBOUND-API STARTUP DOCUMENTATION
 
 Github repository: [Leafbound-API](https://github.com/Revature-Leafbound/Leafbound-API.git)
 
