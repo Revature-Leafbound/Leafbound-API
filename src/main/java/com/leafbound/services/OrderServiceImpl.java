@@ -1,7 +1,7 @@
 package com.leafbound.services;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,7 +48,10 @@ public class OrderServiceImpl implements OrderService {
 		log.info("Returning order by date: " + date);
 
 		// Find the order
-		return orepo.findByDate(date);
+		List<Order> order = orepo.findByDate(date);
+
+		return order;
+
 	}
 
 	@Override

@@ -22,7 +22,8 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = { "http://localhost:5500/", "http://127.0.0.1:5500/", "http://127.0.0.1:5501/",
-		"http://localhost:8080/", "http://127.0.0.1:8080/", "http://localhost:5502/", "http://127.0.0.1:5502/" })
+		"http://localhost:8080/", "http://127.0.0.1:8080/", "http://localhost:5502/", "http://127.0.0.1:5502/",
+		"http://localhost:4200" })
 @Api(value = "ProductRestController", tags = { "PRODUCTS COLLECTION" })
 public class ProductController {
 
