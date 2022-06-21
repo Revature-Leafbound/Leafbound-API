@@ -11,17 +11,16 @@ import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+
 
 @Entity
 @Table(name = "products")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @ApiModel(value = "Products", description = "book_description")
 public class Product {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -67,5 +66,130 @@ public class Product {
 	@Column(name = "list_price", nullable = false)
 	@ApiModelProperty(name = "list_price", notes = "a double precision floating point that serves as the list price of the product", required = true, value = "1")
 	private double list_price;
+
+
+	public Product() {
+		super();
+	}
+
+	public Product(String author, String publisher, String isbn, String genre, String title, String language,
+			LocalDate published_date, String edition, String description, double list_price) {
+		super();
+		this.author = author;
+		this.publisher = publisher;
+		this.isbn = isbn;
+		this.genre = genre;
+		this.title = title;
+		this.language = language;
+		this.published_date = published_date;
+		this.edition = edition;
+		this.description = description;
+		this.list_price = list_price;
+	}
+
+	public Product(int id, String author, String publisher, String isbn, String genre, String title, String language,
+			LocalDate published_date, String edition, String description, double list_price) {
+		super();
+		this.id = id;
+		this.author = author;
+		this.publisher = publisher;
+		this.isbn = isbn;
+		this.genre = genre;
+		this.title = title;
+		this.language = language;
+		this.published_date = published_date;
+		this.edition = edition;
+		this.description = description;
+		this.list_price = list_price;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public LocalDate getPublished_date() {
+		return published_date;
+	}
+
+	public void setPublished_date(LocalDate published_date) {
+		this.published_date = published_date;
+	}
+
+	public String getEdition() {
+		return edition;
+	}
+
+	public void setEdition(String edition) {
+		this.edition = edition;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public double getList_price() {
+		return list_price;
+	}
+
+	public void setList_price(double list_price) {
+		this.list_price = list_price;
+	}
+	
 
 }
