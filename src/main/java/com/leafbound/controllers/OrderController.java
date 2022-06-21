@@ -182,11 +182,15 @@ public class OrderController {
 		if (userDTO == null) {
 			return invalidUserError();
 		}
+<<<<<<< HEAD
 		
 		// Convert DTO object to entity object using ModelMapper
 		Order order = modelMapper.map(orderDto, Order.class);
 		
 		ClientMessage clientMessage = oserv.updateOrder(id, order) ? ClientMessageUtil.UPDATE_SUCCESSFUL
+=======
+		ClientMessage clientMessage = oserv.updateOrder(order.getId().toString(), order) ? ClientMessageUtil.UPDATE_SUCCESSFUL
+>>>>>>> 98ae767962955c6ba73dccdac6c681cd212c369b
 				: ClientMessageUtil.UPDATE_FAILED;
 		return ResponseEntity.ok(clientMessage);
 	}
