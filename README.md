@@ -38,12 +38,12 @@ Please check out our Startup Documentation for more information.
 
 ### Contributors
 
-| Scrum Masters | Team Leads                                    | DevOps & Git Organizers |
-| :------------ | :-------------------------------------------- | :---------------------- |
-| Calvin Raines | Calvin Raines - Engineering                   | Jose E. Fuentes         |
-| Levi Choi     | Chris Osborne & Jose E. Fuentes - Engineering | Jorge Ayestas           |
-|               | Dhruv Patel - Engineering                     |                         |
-|               | Levi Choi - DevOps                            |                         |
+| Scrum Masters | Team Leads                                      | DevOps & Git Organizers |
+| :------------ | :---------------------------------------------- | :---------------------- |
+| Calvin Raines | Calvin Raines - _Engineering_                   | Jose E. Fuentes         |
+| Levi Choi     | Chris Osborne & Jose E. Fuentes - _Engineering_ | Jorge Ayestas           |
+|               | Dhruv Patel - _Engineering_                     |                         |
+|               | Levi Choi - DevOps                              |                         |
 
 | Engineers      |                |                    |               |                  |
 | :------------- | :------------- | :----------------- | :------------ | ---------------- |
