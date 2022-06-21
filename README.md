@@ -12,6 +12,8 @@ _The Leafbound online e-commerce platform is a full stack application where user
 - Java 8
 - Spring Boot
 - Angular 13.3.7
+- Angular Bootstrap 12.1.2
+- Angular Material UI 14.0.2
 - Node Package Manager
 - AWS RDS and PostgreSQL for persistence
 - Maven for dependencies and project management
