@@ -175,7 +175,7 @@ public class OrderController {
 		if (userDTO == null) {
 			return invalidUserError();
 		}
-		ClientMessage clientMessage = oserv.updateOrder(id, order) ? ClientMessageUtil.UPDATE_SUCCESSFUL
+		ClientMessage clientMessage = oserv.updateOrder(order.getId().toString(), order) ? ClientMessageUtil.UPDATE_SUCCESSFUL
 				: ClientMessageUtil.UPDATE_FAILED;
 		return ResponseEntity.ok(clientMessage);
 	}
