@@ -33,7 +33,7 @@ _The Leafbound online e-commerce platform is a full stack application where user
 Please check out our Startup Documentation for more information.
 
 - For backend, click [here](/STARTUP.md)
-- For frontend, click [here]()
+- For frontend, click [here](https://github.com/Revature-Leafbound/Leafbound/blob/dev/STARTUP.md)
 
 ### Contributors
 

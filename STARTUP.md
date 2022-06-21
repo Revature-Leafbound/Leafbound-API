@@ -54,4 +54,4 @@ Github repository: [Leafbound-API](https://github.com/Revature-Leafbound/Leafbou
 
 ## 4. Clone the Leafbound repository and start the Development server to check out the full functionality of the Leafbound E-commerce site.
 
-For further details on connecting to the backend, click [here]()
+For further details on connecting to the frontend, click [here](https://github.com/Revature-Leafbound/Leafbound/blob/dev/STARTUP.md)
