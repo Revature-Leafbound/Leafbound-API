@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +16,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.leafbound.models.ClientMessage;
 import com.leafbound.models.Order;
+import com.leafbound.models.OrderDTO;
 import com.leafbound.models.UserDTO;
 import com.leafbound.services.JwtServiceImpl;
 import com.leafbound.services.OrderService;
 import com.leafbound.util.ClientMessageUtil;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -34,6 +34,9 @@ import io.swagger.annotations.ApiOperation;
 public class OrderController {
 
 	private static Logger log = Logger.getLogger(OrderController.class);
+	
+	@Autowired
+	private ModelMapper modelMapper; 
 
 	@Autowired
 	private JwtServiceImpl jwtService;
@@ -44,7 +47,7 @@ public class OrderController {
 	// Lock the order
 	@PostMapping(path = "/order")
 	@ApiOperation(value = "Create a new order", notes = "Create a new order")
-	public ResponseEntity<ClientMessage> createOrder(@RequestBody Order order,
+	public ResponseEntity<ClientMessage> createOrder(@RequestBody OrderDTO orderDto,
 			@RequestHeader("Authorization") String token) {
 		log.info("Creating order");
 
@@ -57,6 +60,10 @@ public class OrderController {
 		if (userDTO == null) {
 			return invalidUserError();
 		}
+		
+		// Convert DTO object to entity object using ModelMapper
+		Order order = modelMapper.map(orderDto, Order.class);
+		
 		ClientMessage clientMessage = oserv.add(order) ? ClientMessageUtil.CREATION_SUCCESSFUL
 				: ClientMessageUtil.CREATION_FAILED;
 		return ResponseEntity.ok(clientMessage);
@@ -162,7 +169,7 @@ public class OrderController {
 	// Lock this one
 	@PatchMapping("/order/{id}")
 	@ApiOperation(value = "Update order entity")
-	public ResponseEntity<ClientMessage> updateOrder(@PathVariable String id, @RequestBody Order order,
+	public ResponseEntity<ClientMessage> updateOrder(@PathVariable String id, @RequestBody OrderDTO orderDto,
 			@RequestHeader("Authorization") String token) {
 		log.info("updating an order in controller...");
 
@@ -175,6 +182,10 @@ public class OrderController {
 		if (userDTO == null) {
 			return invalidUserError();
 		}
+		
+		// Convert DTO object to entity object using ModelMapper
+		Order order = modelMapper.map(orderDto, Order.class);
+		
 		ClientMessage clientMessage = oserv.updateOrder(id, order) ? ClientMessageUtil.UPDATE_SUCCESSFUL
 				: ClientMessageUtil.UPDATE_FAILED;
 		return ResponseEntity.ok(clientMessage);

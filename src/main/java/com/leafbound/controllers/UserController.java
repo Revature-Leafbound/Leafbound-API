@@ -27,7 +27,7 @@ import com.leafbound.services.UserServiceImpl;
 
 import io.swagger.annotations.Api;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/v1")
 @Api(value = "UserController", tags = "USER COLLECTION")

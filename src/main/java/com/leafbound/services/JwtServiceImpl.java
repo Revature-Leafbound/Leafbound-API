@@ -7,6 +7,7 @@ import java.security.Key;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +19,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
 @Service
+@Transactional
 public class JwtServiceImpl implements JwtService {
 
     private Logger logger = Logger.getLogger(JwtServiceImpl.class);
