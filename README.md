@@ -42,7 +42,7 @@ Please check out our Startup Documentation for more information.
 | Calvin Raines | Calvin Raines - _Engineering_                   | Jose E. Fuentes         |
 | Levi Choi     | Chris Osborne & Jose E. Fuentes - _Engineering_ | Jorge Ayestas           |
 |               | Dhruv Patel - _Engineering_                     |                         |
-|               | Levi Choi - DevOps                              |                         |
+|               | Levi Choi - _DevOps_                              |                         |
 
 | Engineers      |                |                    |               |                  |
 | :------------- | :------------- | :----------------- | :------------ | ---------------- |
