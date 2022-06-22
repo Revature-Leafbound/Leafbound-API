@@ -14,11 +14,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 
 @Entity
 @Table(name = "users")
-@Data
 @ApiModel(value = "User", description = "This model serves as a model for the User entity")
 public class User {
 	@Id
@@ -48,5 +46,55 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name = "role_id", nullable = false)
 	@ApiModelProperty(name = "role id", notes = "An integer value that serves as the role id for the user", required = true, value = "role id")
-	private int roleId;
+	private UserRole userRole;
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public UserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
+	}
+	
+	
 }

@@ -6,15 +6,19 @@ import java.util.UUID;
 import com.leafbound.models.Order;
 
 public interface OrderService {
-	
-	Order getOrderById(UUID id);
-	
-	Order getOrderByDate(Order order);
-	
+
+	public boolean add(Order order);
+
+	Order getOrderById(String id);
+
+	List<Order> getOrderByDate(String orderDate);
+
 	List<Order> getAllOrders();
-	
-	boolean updateOrder(Order order);
-	
-	boolean deleteOrder(Order order);
+
+	List<Order> getOrderByCustomerId(String customerId);
+
+	boolean updateOrder(String id, Order order);
+
+	boolean deleteOrder(UUID id);
 
 }

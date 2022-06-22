@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.leafbound.models.User;
 import com.leafbound.models.UserDTO;
+import com.leafbound.models.UserRole;
 import com.leafbound.repositories.UserRepository;
 
 @Service
@@ -20,6 +21,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository repository;
+
+	@Autowired
+	private UserRoleServiceImpl userRoleService;
 
 	@Override
 	public UserDTO createUser(UserDTO userDTO) {
@@ -32,7 +36,7 @@ public class UserServiceImpl implements UserService {
 		user.setLastName(userDTO.getLastName());
 		user.setPassword(userDTO.getPassword());
 		user.setEmail(userDTO.getEmail());
-		user.setRoleId(userDTO.getRoleId());
+		user.setUserRole(userRoleService.getById(userDTO.getRoleId()));
 
 		// Save the user to the DB
 		UUID pk = repository.save(user).getId();
@@ -42,9 +46,15 @@ public class UserServiceImpl implements UserService {
 		return userDTO;
 	}
 
+	/**
+	 * Update the user with the given ID.
+	 * 
+	 * @param id The ID of the user to update.
+	 */
 	@Override
-	public User getUserById(UUID id) {
-		return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+	public User getUserById(String id) {
+		UUID uuid = UUID.fromString(id);
+		return repository.findById(uuid).orElseThrow(() -> new IllegalArgumentException("User not found"));
 	}
 
 	@Override
@@ -53,13 +63,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean updateUser(User user) {
-		User target = this.getUserById(user.getId());
-		target.setFirstName(user.getFirstName());
-		target.setLastName(user.getLastName());
-		target.setPassword(user.getPassword());
-		target.setEmail(user.getEmail());
-		target.setRoleId(user.getRoleId());
+	public boolean updateUser(UserDTO userDTO) {
+
+		// Get the user from the DB
+		User target = this.getUserById(userDTO.getId().toString());
+
+		UserRole userRole = userRoleService.getById(userDTO.getRoleId());
+
+		// Update the user
+		target.setFirstName(userDTO.getFirstName());
+		target.setLastName(userDTO.getLastName());
+		target.setPassword(userDTO.getPassword());
+		target.setEmail(userDTO.getEmail());
+		target.setUserRole(userRole);
+
+		// Save the user to the DB
 		return (repository.save(target) != null);
 	}
 
@@ -80,7 +98,6 @@ public class UserServiceImpl implements UserService {
 
 		// Get the user from the DB
 		User user = repository.findByEmail(userDTO.getEmail());
-
 		// Check if the user exists
 		if (user == null) {
 			throw new IllegalArgumentException("User not found");
@@ -93,6 +110,9 @@ public class UserServiceImpl implements UserService {
 
 		// Set the userDTO id
 		userDTO.setId(user.getId());
+		userDTO.setFirstName(user.getFirstName());
+		userDTO.setLastName(user.getLastName());
+		userDTO.setRoleId(user.getUserRole().getId());
 
 		// Return the userDTO
 		return userDTO;

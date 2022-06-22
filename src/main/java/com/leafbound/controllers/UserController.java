@@ -2,7 +2,6 @@ package com.leafbound.controllers;
 
 import java.security.InvalidKeyException;
 import java.util.List;
-import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +27,15 @@ import com.leafbound.services.UserServiceImpl;
 
 import io.swagger.annotations.Api;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/v1")
-@Api(value = "UserRollController", tags = "USER COLLECTIONS")
+@Api(value = "UserController", tags = "USER COLLECTION")
 public class UserController {
 
 	private static Logger log = Logger.getLogger(UserController.class);
+
+	private String X_AUTH_TOKEN = "X-Auth-Token";
 
 	@Autowired
 	private UserServiceImpl service;
@@ -42,26 +43,26 @@ public class UserController {
 	@Autowired
 	private JwtServiceImpl jwtService;
 
-	@GetMapping("/GetUser")
-	public @ResponseBody User readById(UUID id) {
+	@GetMapping("/user/{id}")
+	public @ResponseBody User readById(@PathVariable String id) {
 		log.info("Getting user with id: " + id);
 		return service.getUserById(id);
 	}
 
-	@GetMapping("/GetUsers")
+	@GetMapping("/user/all")
 	public @ResponseBody List<User> readAllUsers() {
 		log.info("Getting all users");
 		return service.getAllUsers();
 	}
 
-	@PatchMapping("/UpdateUser")
-	public @ResponseBody String updateUser(@RequestBody User user) {
+	@PatchMapping("/user")
+	public @ResponseBody String updateUser(@RequestBody UserDTO userDTO) {
 		log.info("Updating user");
 
-		return (service.updateUser(user)) ? "Update successful" : "Update failed";
+		return (service.updateUser(userDTO)) ? "Update successful" : "Update failed";
 	}
 
-	@DeleteMapping("/DeleteUser/{id}")
+	@DeleteMapping("/user/{id}")
 	public @ResponseBody String deleteUser(@RequestHeader("Authorization") String authorization,
 			@PathVariable String id) {
 		log.info("Deleting user");
@@ -72,7 +73,7 @@ public class UserController {
 		return service.deleteUser(id) ? "DELETION_SUCCESSFUL" : "DELETION_FAILED";
 	}
 
-	@GetMapping("/Login")
+	@PostMapping("/user/login")
 	public ResponseEntity<String> login(@RequestBody UserDTO userDTO) {
 
 		// Create a new HttpHeader object
@@ -94,8 +95,8 @@ public class UserController {
 			String jwt = jwtService.createJWT(userDTO);
 
 			// Set Headers
-			responseHeaders.set("X-Auth-Token", "Bearer " + jwt);
-			responseHeaders.set("Access-Control-Expose-Headers", "X-Auth-Token");
+			responseHeaders.set(X_AUTH_TOKEN, "Bearer " + jwt);
+			responseHeaders.set("Access-Control-Expose-Headers", X_AUTH_TOKEN);
 		} catch (InvalidKeyException e) {
 			log.debug("Error in login: " + e.getMessage());
 		}
@@ -106,7 +107,7 @@ public class UserController {
 				.body("Login successful");
 	}
 
-	@PostMapping("/Register")
+	@PostMapping("/user/register")
 	public ResponseEntity<String> register(@RequestBody UserDTO userDTO) {
 		log.info("Register user");
 
@@ -119,8 +120,8 @@ public class UserController {
 		// Create a jwt to send back
 		try {
 			String jwt = jwtService.createJWT(userDTO);
-			responseHeaders.set("X-Auth-Token", "Bearer " + jwt);
-			responseHeaders.set("Access-Control-Expose-Headers", "X-Auth-Token");
+			responseHeaders.set(X_AUTH_TOKEN, "Bearer " + jwt);
+			responseHeaders.set("Access-Control-Expose-Headers", X_AUTH_TOKEN);
 		} catch (InvalidKeyException e) {
 			log.debug("Register JWT threw an error " + e.getMessage());
 
