@@ -4,7 +4,7 @@
 
 ### Project Description
 
-_The Leafbound online e-commerce platform is a full stack application where users can purchase books, view their profile, and view order details._
+_The Leafbound e-commerce platform is a full stack application where users can purchase books, view their profile, and view order details._
 
 ### Technologies Used
 
