@@ -50,4 +50,4 @@ Please check out our Startup Documentation for more information.
 | :------------- | :------------- | :----------------- | :------------ | ---------------- |
 | Jacob Shaw     | Patrick Miller | Adam Lucas         | Yugal Subedi  | Julian Mercado   |
 | Vidya Bineesh  | Jorge Ayestas  | Jose E. Fuentes    | Enock Lee     | Joachim Ogodi    |
-| Patrick Yaegar | Markus Grier   | Santiago Garcia II | Jorge Galeana | Michael Bornhoft |
+| Patrick Yaeger | Markus Grier   | Santiago Garcia II | Jorge Galeana | Michael Bornhoft |
